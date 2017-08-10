@@ -2,7 +2,6 @@
 title: Comment on paper "Unsupervised Learning by Predicting Noise"
 author: Rafael S. Calsaverini
 date: 2017-04-21
-permalink: /posts/2017/04/comment-unsupervised-learning-by-predicting-noise
 tags:
   - Unsupervised Learning
   - Density Learning
