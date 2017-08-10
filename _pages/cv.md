@@ -15,12 +15,12 @@ Education
 ======
 * B.S. in Physcis, Instituto de Física de São Carlos, Universidade de São Paulo at São Carlos, 2004
 * M.S. in Physics, Instituto de Física de São Carlos, Universidade de São Paulo at São Carlos, 2007
-  Title: Inter-subband spin-orbit coupling in semiconductor heterostructures.
-  The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/76/76131/tde-05122007-160519/pt-br.php).
+  - Title: Inter-subband spin-orbit coupling in semiconductor heterostructures.
+  - The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/76/76131/tde-05122007-160519/pt-br.php).
 
 * Ph.D in Physics, Instituto de Física, Universidade de São Paulo, 2013
-  Title: Topics in statistical physics of complex systems: a statistical mechanical approach to two topics of interest in finance, economics and sociology.
-  The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/43/43134/tde-23092014-155823/pt-br.php)
+  - Title: Topics in statistical physics of complex systems: a statistical mechanical approach to two topics of interest in finance, economics and sociology.
+  - The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/43/43134/tde-23092014-155823/pt-br.php)
 
 Work experience
 ======
