@@ -46,7 +46,7 @@ Running this on ghci would give you, for example:
 
 So we can make the loose correspondence: dynamical system ↔ state monad.
 
-On the other hand, stochastic processes are compositions of random variables, and this is done with the Rand monad (found in `Control.Monad.Random`). As an example, the Box-Muller formula tells us that, if I have two inpendent random variables \\(x\\) and \\(y\\), distributed uniformly between in the \\([0, 1]\\) interval, then, the expression:
+On the other hand, stochastic processes are compositions of random variables, and this is done with the Rand monad (found in `Control.Monad.Random`). As an example, the Box-Muller formula tells us that, if I have two inpendent random variables $x$ and $y$, distributed uniformly between in the \\([0, 1]\\) interval, then, the expression:
 
 $$\sqrt{-2\log(x)}\cos(2\pi y)$$
 
