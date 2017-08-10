@@ -9,51 +9,29 @@ redirect_from:
 
 {% include base_path %}
 
+For a fuller CV checkout [my LinkedIn profile](https://www.linkedin.com/in/rafael-s-calsaverini/).
+
 Education
 ======
-* B.S. in Github, Github University, 2012
-* M.S. in Jekyll, Github University, 2014
-* Ph.D in Version Control Theory, Github University, 2018 (expected)
+* B.S. in Physcis, Instituto de Física de São Carlos, Universidade de São Paulo at São Carlos, 2004
+* M.S. in Physics, Instituto de Física de São Carlos, Universidade de São Paulo at São Carlos, 2007
+  Title: Inter-subband spin-orbit coupling in semiconductor heterostructures.
+  The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/76/76131/tde-05122007-160519/pt-br.php).
+
+* Ph.D in Physics, Instituto de Física, Universidade de São Paulo, 2013
+  Title: Topics in statistical physics of complex systems: a statistical mechanical approach to two topics of interest in finance, economics and sociology.
+  The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/43/43134/tde-23092014-155823/pt-br.php)
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* April/2012 - July/2013: Data Scientist at [Apontador](https://apontador.com.br) & [MapLink](https://maplink.com)
+* July/2013 - April/2015: Data Scientist at [Catho Online](https://www.catho.com.br)
+* April/2015 - October/2015: Data Scientist at [GuiaBolso](https://www.guiabolso.com.br)
+* October/2015: Senior Data Scientist at [LatAm Experian DataLabs](https://www.serasaexperian.com.br/datalabs/) @ [Serasa Experian](https://www.serasaexperian.com.br/)
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-  
-Skills
-======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
 
 Publications
 ======
   <ul>{% for post in site.publications %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
-  
-Talks
-======
-  <ul>{% for post in site.talks %}
-    {% include archive-single-talk-cv.html %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
