@@ -3,7 +3,12 @@ title: Stochastic Processes as Monad Transformers
 author: Rafael S. Calsaverini
 date: 2010-08-03
 permalink: /posts/2010/08/stochastic-processes-as-monad-transformers
-tags: Haskell, Monad Transformers, Monads, Tutorial, Stochastic Processes
+tags:
+  - Haskell
+  - Monad Transformers
+  - Monads
+  - Stochastic Processes
+  - Probability Monad
 ---
 **Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.**
 
