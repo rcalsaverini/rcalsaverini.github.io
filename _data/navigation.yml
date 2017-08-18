@@ -1,10 +1,14 @@
 # main links links
 main:
-  - title: "Publications"
-    url: /publications/
 
-  - title: "Blog Posts"
+  - title: "Technical Posts"
     url: /year-archive/
+
+  - title: "Posts on politics"
+    url: /politics/
 
   - title: "CV"
     url: /cv/
+
+  - title: "Publications"
+    url: /publications/

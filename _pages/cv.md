@@ -9,10 +9,10 @@ redirect_from:
 
 {% include base_path %}
 
-For a fuller CV checkout [my LinkedIn profile](https://www.linkedin.com/in/rafael-s-calsaverini/).
+This is a brief _curriculum vitae_. For a fuller CV checkout [my LinkedIn profile](https://www.linkedin.com/in/rafael-s-calsaverini/) or solicit by e-mail.
 
-Education
-======
+Academic Education
+==================
 * Ph.D in Physics, Instituto de Física, Universidade de São Paulo, 2013
   - Title: Topics in statistical physics of complex systems: a statistical mechanical approach to two topics of interest in finance, economics and sociology.
   - The full text (in Portuguese) can be [downloaded here](http://www.teses.usp.br/teses/disponiveis/43/43134/tde-23092014-155823/pt-br.php)
@@ -33,6 +33,8 @@ Work experience
 
 Publications
 ======
-  <ul>{% for post in site.publications %}
+  <ul>
+  {% for post in site.publications %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+  {% endfor %}
+  </ul>

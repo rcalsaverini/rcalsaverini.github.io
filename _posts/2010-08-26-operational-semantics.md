@@ -3,6 +3,7 @@ title: Operational Semantics for Monads
 author: Rafael S. Calsaverini
 date: 2010-08-26
 permalink: /posts/2010/08/operational-semantics-for-monads
+category: programming
 tags:
   - Haskell
   - Monads
