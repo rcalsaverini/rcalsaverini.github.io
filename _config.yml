@@ -8,10 +8,9 @@
 # Site Settings
 locale                   : "en-US"
 title                    : "Entropic ramblings by a Random Agent."
-description              : "Climbing my utility gradient with a fixed Free Energy budget."
-title_separator          : "-"
+description              : &description "Climbing my utility gradient with a fixed Free Energy budget."
 name                     : &name "Rafael S. Calsaverini"
-description              : &description "Father, physicist and Data Scientist"
+title_separator          : "-"
 url                      : https://rcalsaverini.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "rcalsaverini/rcalsaverini.github.io"
