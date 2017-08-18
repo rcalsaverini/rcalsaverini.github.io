@@ -8,6 +8,7 @@
 # Site Settings
 locale                   : "en-US"
 title                    : "Entropic ramblings by a Random Agent."
+description              : "Climbing my utility gradient with a fixed Free Energy budget."
 title_separator          : "-"
 name                     : &name "Rafael S. Calsaverini"
 description              : &description "Father, physicist and Data Scientist"
@@ -25,9 +26,9 @@ comments:
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
-    appid                : 1824870274510284
-    num_posts            : 5 # 5 (default)
-    colorscheme          : "light" # "light" (default), "dark"
+    appid                : #1824870274510284
+    num_posts            : # 5 (default)
+    colorscheme          : # "light" (default), "dark"
 staticman:
   allowedFields          : ['name', 'email', 'url', 'message']
   branch                 : "master" # "master", "gh-pages"
@@ -60,7 +61,7 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 :  # Open Graph/Twitter default site image
+og_image                 :# Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -73,7 +74,7 @@ social:
 analytics:
   provider               :  "google-universal" # false (default), "google", "google-universal", "custom"
   google:
-    tracking_id          :
+    tracking_id          : UA-53013610-1
 
 
 # Site Author
@@ -90,15 +91,15 @@ author:
   codepen          :
   dribbble         :
   flickr           :
-  facebook         :
+  facebook         : "rafael.calsaverini"
   foursquare       :
   github           : "rcalsaverini"
-  google_plus      :
-  keybase          :
+  google_plus      : "https://plus.google.com/+RafaelSCalsaverini"
+  keybase          : "rcalsaverini"
   instagram        :
   lastfm           :
   linkedin         : "rafael-s-calsaverini"
-  orcid            :
+  orcid            : "orcid.org/0000-0002-7224-478X"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
