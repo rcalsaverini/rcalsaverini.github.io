@@ -1,0 +1,9 @@
+_id: 49750770-8461-11e7-8166-5b37e0343af8
+message: "Let's test Staticman!\r\n\r\nLet's put a markdown table here:\r\n\r\n| Header1 | Header2 | Header3 |\r\n|:--------|:-------:|--------:|\r\n| cell1   | cell2   | cell3   |\r\n| cell4   | cell5   | cell6   |\r\n|-----------------------------|\r\n| cell1   | cell2   | cell3   |\r\n| cell4   | cell5   | cell6   |\r\n|=============================|\r\n| Foot1   | Foot2   | Foot3   |\r\n\r\nAnd try some latex: $\\int x^{n-1} e^{x} dx = \\Gamma(n)$"
+name: Rafael S. Calsaverini
+email: 66f472593bf8634fdba76f888602cc1d
+url: 'https://rcalsaverini.github.io'
+hidden: ''
+date: '2017-08-18T22:05:04.119Z'
+timestamp: 1503093904
+layout: post
