@@ -1,0 +1,7 @@
+_id: d0dd5700-46e2-11e8-9a03-0366902bc948
+message: "> how to create records whose type’s are aware of the fields contained in the records and their types?\r\n\r\nmy first thought was: wait why is this not just `data Record = Record { getName :: Text, getAge :: Int }` ?\r\nBut then at the bottom we get\r\n`myRecord :: Dict '[String, Int]\r\nmyRecord = Entry \"name\" \"Rafael\" :> Entry \"age\" 35 :> Nil\r\n` – the use-case should have been at the top of the post!\r\n\r\nAlways start from examples, lead to generalities, never the other way around."
+name: omghaskell
+email: 784837b3baddbc301e830caaa9a15c11
+url: ''
+hidden: ''
+date: '2018-04-23T10:41:02.003Z'
