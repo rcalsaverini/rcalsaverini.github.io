@@ -3,7 +3,7 @@ title: Einstein's racist diaries
 author: Rafael S. Calsaverini
 date: 2018-06-13
 permalink: /posts/2010/08/einstein-racist-diary
-category: programming
+category: politics
 tags:
   - Racism
   - Ethics
