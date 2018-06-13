@@ -12,7 +12,7 @@ tags:
   - Moral growth
 ---
 
-*This is a thought motivated by the current story about racist and xenophobic remarks found in Albert Einstein’s personal diaries.*
+*This is a thought motivated by the [current story](https://www.theguardian.com/books/2018/jun/12/einsteins-travel-diaries-reveal-shocking-xenophobia) about racist and xenophobic remarks found in Albert Einstein’s personal diaries.*
 
 People are shit. There’s no real morally superior hero that escape this fact. Every hero of the past has shitty secrets to be uncovered. I bet if we found Jesus’ or Gautama Buddha’s personal diaries we would be shocked by their contents.
 
