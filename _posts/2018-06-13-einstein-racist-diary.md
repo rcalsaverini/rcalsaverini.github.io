@@ -25,4 +25,4 @@ Of course, this doesn’t mean that we are wrong to praise them for the things w
 
 Those failures remind us that no human is intrinsically morally superior. That any of our moral heroes are, like any one of us, flawed and in need of improvement. And that’s why we have to try to be better. And though it is useful to have models for our behaviors, we should avoid to exalt them in moral apotheosis.
 
-If you think you are already good enough, don’t fool yourself: if you don’t constantly try to be better you will slowly become worse. It takes effort and focused purpose to be the shitty bastards we are, let alone to be better people.
+If you think you are already good enough, don’t fool yourself: if you don’t constantly try to be better you will slowly become worse. It takes effort and focused purpose simply to be the shitty bastards we are, let alone to be better people.
