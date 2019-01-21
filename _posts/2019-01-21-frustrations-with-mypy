@@ -1,0 +1,61 @@
+---
+title: A few frustrations with Python's type annotation system
+date: 2019-01-21
+permalink: /posts/2019/01/frustrations-with-python-types
+category: programming
+tags:
+  - Python
+  - Type safety
+  - Mypy
+---
+
+I have on and off again tried to use [mypy] to type check my python code, but some shortcomings of Python's type annotation 
+system really get in the way. This came now because I needed to write code involving trees that had to change the types of 
+values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type 
+systems:
+
+1. Python's type annotations have no support for higher-kinded types. All type variables in a class that inherit from 
+   Generic must be of kind `*`. This means you can't write things like:
+
+  ```python      
+      class CoFree(NamedTuple, Generic[F, A]):
+           value: A
+           continuations: F["Cofree[F, A]"]
+  ```
+  
+  This requires F to be of kind `* -> *`. Other fixed point types, which are awfully useful for dealing with 
+  tree-like structures (see for example [this talk from Rob Norris]) would similarly fail to type check on [mypy].
+
+2. Python's type annotations can't deal with generic tuples at all. Which prevents one to write very lightweight tree types like:
+
+  ```python
+
+      class BinaryTree(NamedTuple, Generic[A]):
+           value: A
+           left: "BinaryTree[A]"
+           right: "BinaryTree[A]"       
+  ```
+
+3. Python's type annotations often have problems with recursive types unless you're dealing with a full fledged class. For example, 
+   recursive NamedTuples are forbidden, and so are recursive `Union`s (which wouldn't be possible given the restriction on
+   higher-kinded types anyway). This further prevents fast and lightweight types like:
+   
+   ```python 
+     class BinaryTree(NamedTuple):
+         left: "BinaryTree"
+         right: "BinaryTree"
+   ```
+   
+   and requires you to use the full (and heavy) Python classes:
+   
+   ```python
+   class BinaryTree(object):
+        def __init__(self, left: "BinaryTree", right: "BinaryTree"):
+             self.left = left
+             self.right = right
+   ```
+
+4. In general, most useful python libraries simply don't come with type annotations and writing stub files is a pain.
+
+[mypy]: http://mypy-lang.org/
+[this talk from Rob Norris]: https://www.youtube.com/watch?v=7xSfLPD6tiQ
