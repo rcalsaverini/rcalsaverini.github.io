@@ -14,19 +14,21 @@ system really get in the way. This came now because I needed to write code invol
 values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type 
 systems:
 
-1. Python's type annotations have no support for higher-kinded types. All type variables in a class that inherit from 
-   Generic must be of kind `*`. This means you can't write things like:
+1. In general, most useful python libraries simply don't come with type annotations and writing stub files is a pain.
 
-  ```python      
-      class CoFree(NamedTuple, Generic[F, A]):
-           value: A
-           continuations: F["Cofree[F, A]"]
-  ```
-  
-  This requires F to be of kind `* -> *`. Other fixed point types, which are awfully useful for dealing with 
-  tree-like structures (see for example [this talk from Rob Norris]) would similarly fail to type check on [mypy].
+2. The only way to do ad hoc polymorphism is with structural subtyping (using `Protocol`). This isn't so bad, since the 
+   language embraces duck typing so thoroughly. But it's somewhat annoying.
+   
+   First, admitedly a lesser problem, there's no clear indication in the code that a given class implements a particular 
+   `Protocol`. There's no explicit inheritance, nor explicit instancing of the `Protocol`. If you don't know the protocol
+   exists, you would have no guidance.
+   
+   Second, there's no "post facto" instancing of `Protocol` like it's possible to do with Haskell's or Scala's typeclasses,
+   or Go's interfaces. You have one chance to instanciate a class as a particular Protocol: when you write that classes code.
+   If the class belongs to a third party library you can't change, you have to write wrappers (which are terribly annoying,
+   because the language offers no syntax sugar for them). 
 
-2. Python's type annotations can't deal with generic tuples at all. Which prevents one to write very lightweight tree types like:
+3. Python's type annotations can't deal with generic tuples at all. Which prevents one to write very lightweight tree types like:
 
   ```python
 
@@ -36,9 +38,9 @@ systems:
            right: "BinaryTree[A]"       
   ```
 
-3. Python's type annotations often have problems with recursive types unless you're dealing with a full fledged class. For example, 
+4. Python's type annotations often have problems with recursive types unless you're dealing with a full fledged class. For example, 
    recursive NamedTuples are forbidden, and so are recursive `Union`s (which wouldn't be possible given the restriction on
-   higher-kinded types anyway). This further prevents fast and lightweight types like:
+   higher-kinded types anyway, see below). This further prevents fast and lightweight types like:
    
    ```python 
      class BinaryTree(NamedTuple):
@@ -54,8 +56,44 @@ systems:
              self.left = left
              self.right = right
    ```
+  
+5. Python's type annotations have no support for higher-kinded types. All type variables in a class that inherit from 
+   Generic must be of kind `*`. This means that you can't use classes to simulate typeclass instances for generic types 
+   like you do in Scala.
+   
+   For example, you can't write:
+   
+   ```python
+   
+      class FunctorInstance(Generic[F]):
+          
+          @staticmethod
+          def map(value: F[A], function: Callable[[A], B]) -> F[B]:
+              pass
+      
+      def as_functor(value: F[A], instance: FunctorInstance[F]):
+          value.map = partial(intance.map)(value)
+          return value
+   ```
+   
+   And then inject this instance somehow when you need it. This prevents you from circumventing the problem of not being 
+   able to implement systematically this kind of post-facto ad hoc polymorphism for generic types.
 
-4. In general, most useful python libraries simply don't come with type annotations and writing stub files is a pain.
+
+6. This means also that you can't use fixed point types like:
+
+  ```python      
+      class CoFree(NamedTuple, Generic[F, A]):
+           value: A
+           continuations: F["Cofree[F, A]"]
+  ```
+  
+  because this requires F to be of kind `* -> *`. Fixed point types are awfully useful for dealing with tree-like 
+  structures (see for example [this talk from Rob Norris]) would similarly fail to type check on [mypy].
+
+There are more problems, but those are the main ones that prevented me from really using [mypy] or type annotations in Python. 
+This haven't prevented me from writing good and useful Python code, and I still love to write Python. But it certainly increases
+the attrition. 
 
 [mypy]: http://mypy-lang.org/
 [this talk from Rob Norris]: https://www.youtube.com/watch?v=7xSfLPD6tiQ
