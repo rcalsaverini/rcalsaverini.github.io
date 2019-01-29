@@ -1,7 +1,7 @@
 ---
 title: Operational Semantics for Monads
 author: Rafael S. Calsaverini
-date: 2010-08-26
+date: 2010-08-26T00:00:00.000Z
 permalink: /posts/2010/08/operational-semantics-for-monads
 category: programming
 tags:
@@ -12,8 +12,6 @@ tags:
   - Free Vector Space
   - Categories
 ---
-
-
 
 **Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.**
 
@@ -38,7 +36,7 @@ singleton :: m a -> Program m a
 singleton i = i `Then` Return
 ```
 
-Note that the types of the data constructors Then and Return are very similar (but not equal…) to the types of the monadic operations (>>=) and return. This identification of class functions with data constructors is recurring throughout this post. This data type is instanciated as a traditional monad as follows:
+Note that the types of the data constructors Then and Return are very similar (but not equal...) to the types of the monadic operations (>>=) and return. This identification of class functions with data constructors is recurring throughout this post. This data type is instanciated as a traditional monad as follows:
 
 ```haskell
 instance Monad (Program m) where
@@ -48,7 +46,6 @@ instance Monad (Program m) where
 ```
 
 This is all we need! As an example let's describe the implementation of the State Monad within this approach. This is exactly the first example given by Apfelmus on his post, disguised as a stack machine.
-
 
 # Example: implementing the State Monad
 
@@ -68,14 +65,14 @@ type State st retVal = Program (StateOp st) retVal
 
 Note that the type synonym State st is a monad already and satisfy all the monad laws by construction. We don't need to worry about implementing return and `(>>=)` correctly: they are already defined.
 
-So far, so good but… how do we use this monad in practice? This types define a kind of Domain Specific Language: we have operations represented by Get and Put and we can compose them in little programs by using Then and Return. Now we need to write an interpreter for this language. I find this is greatly simplified if you notice that the construct
+So far, so good but... how do we use this monad in practice? This types define a kind of Domain Specific Language: we have operations represented by Get and Put and we can compose them in little programs by using Then and Return. Now we need to write an interpreter for this language. I find this is greatly simplified if you notice that the construct
 
 ```haskell
 do x <- singleton foo
    bar x
 ```
 
-can be translated as *foo `Then` bar* in this context. Thus, to define how you'll interpret the later, just think what's the effect you want to have when you write the former.
+can be translated as _foo `Then` bar_ in this context. Thus, to define how you'll interpret the later, just think what's the effect you want to have when you write the former.
 
 Our interpreter will take a `State st retVal` and a state st as input and return a pair: the next state and the returned value `(st, retVal)`:
 
@@ -89,15 +86,15 @@ First of all, how should we interpret the program `Return val` ? This program ju
 interpret (Return val) st = (st, val)
 ```
 
-The next step is to interpret the program *foo `Then` bar*. Looking at the type of things always helps: Then, in this context, have type `StateOp st a -> (a -> State st b) -> State st b`. So, in the expression *foo `Then` bar*, foo is of type `StateOp st a`, that is, it's a stateful computation with state of type `st` and returned value of type `a`. The rest of the expression, `bar`, is of type `a -> State st b`, that is, it expects to receive something of the type of the returned value of foo and return the next computation to be executed. We have two options for `foo`: `Get` and `Put x`.
+The next step is to interpret the program _foo `Then` bar_. Looking at the type of things always helps: Then, in this context, have type `StateOp st a -> (a -> State st b) -> State st b`. So, in the expression _foo `Then` bar_, foo is of type `StateOp st a`, that is, it's a stateful computation with state of type `st` and returned value of type `a`. The rest of the expression, `bar`, is of type `a -> State st b`, that is, it expects to receive something of the type of the returned value of foo and return the next computation to be executed. We have two options for `foo`: `Get` and `Put x`.
 
-When executing *Get `Then` bar*, we want this program to return the current state as the returned value. But we also want it to call the execution of `bar val`, the rest of the code. And if `val` is the value returned by the last computation, `Get`, it must be the current state:
+When executing _Get `Then` bar_, we want this program to return the current state as the returned value. But we also want it to call the execution of `bar val`, the rest of the code. And if `val` is the value returned by the last computation, `Get`, it must be the current state:
 
 ```haskell
 interpret (Get `Then` bar) st = interpret (bar st) st
 ```
 
-The program *Put x `Then` bar* is suposed to just insert `x` as the new state and call `bar val`. But if you look at the type of `Put x`, it's returned value is empty: `()`. So we must call `bar ()`. The current state is then discarded and substituted by `x`.
+The program _Put x `Then` bar_ is suposed to just insert `x` as the new state and call `bar val`. But if you look at the type of `Put x`, it's returned value is empty: `()`. So we must call `bar ()`. The current state is then discarded and substituted by `x`.
 
 ```haskell
 interpret (Put x `Then` bar) _  = interpret (bar ()) x
@@ -166,7 +163,7 @@ runVector (Sum u v `Then` foo) = let uVec = (runVector (u >>= foo))
 runVector (Mul x u `Then` foo) = fmap (x*) (runVector (u >>= foo))
 ```
 
-The interpreter ```runVector``` takes a vector and returns it's representation as a ```Map```. As an example, we could do the following:
+The interpreter `runVector` takes a vector and returns it's representation as a `Map`. As an example, we could do the following:
 
 ```haskell
 infixr 3 <*>
@@ -192,7 +189,7 @@ reflectXY vecU = do cp <- vecU
 
 and test this on ghci:
 
-```
+```ghci
 *Main> runVector $ x <+> y
 fromList [(X,1.0),(Y,1.0)]
 
@@ -200,10 +197,9 @@ fromList [(X,1.0),(Y,1.0)]
 fromList [(Y,1.0),(Z,1.0)]
 ```
 
+As Dan Piponi points out in his talk, any function acting on the base `f :: Base -> Base` is lifted to a linear map on the vector space Space field Base by doing (because this is the Free Vector Space over `Base`):
 
-As Dan Piponi points out in his talk, any function acting on the base f :: Base -> Base is lifted to a linear map on the vector space Space field Base by doing (because this is the Free Vector Space over `Base`):
-
-```
+```haskell
 linearTrans f u = do vec <- u
                   return (f vec)
 ```

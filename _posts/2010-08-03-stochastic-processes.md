@@ -15,7 +15,6 @@ tags:
 
 I have a difficulty to understand functional programming concepts that I can’t put to some very simple and natural use (natural for me, of course). I need to find the perfect simple example to implement to finally understand something. And I’m not a computer scientist, so things like parsers and compilers have very little appeal to me (probably because I don’t understand them…). I’m a physicist, so this drives me to look for physical problems that can be implemented in Haskell so I can understand some concepts.
 
-
 Monad transformers still eludes me. But I think I finally got the perfect subject were I can understand them: stochastic processes! First some book keeping:
 
 ```haskell
@@ -101,7 +100,6 @@ In this case, `t` is itself a monad, and can be treated like one through the cod
 So, suppose we want to simulate this very simple process:
 
 $$x_{t+1} = x_t + \eta_t$$
-
 
 where \\(\eta_t\\) is drawn from a normal distribution. We would do:
 
