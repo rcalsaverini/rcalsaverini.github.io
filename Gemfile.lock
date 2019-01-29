@@ -113,7 +113,7 @@ GEM
       gemoji (~> 2.0)
       html-pipeline (~> 2.2)
       jekyll (>= 3.0)
-    json (1.8.3)
+    json (1.8.6)
     kramdown (1.11.1)
     latex-decode (0.2.2)
       unicode (~> 0.4)
@@ -169,4 +169,4 @@ DEPENDENCIES
   jekyll-sitemap
 
 BUNDLED WITH
-   1.12.5
+   1.16.6
