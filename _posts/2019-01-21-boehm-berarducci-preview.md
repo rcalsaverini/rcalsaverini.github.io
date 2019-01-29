@@ -10,7 +10,7 @@ tags:
 ---
 
 A few years ago I was very impressed for learning the [Boehm-Berarducci encoding], which is a way for encoding 
-[Algebraic Data Types] (ADTs) into a kind of [lambda calculus] that is well [typed] called [System F. 
+[Algebraic Data Types] (ADTs) into a kind of [lambda calculus] that is well [typed] called [System F]. 
 The first thing I asked myself was in which languages I would be able to use this encoding to represent ADTs, 
 with python being the most critical one for me. 
 
