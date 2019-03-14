@@ -1,6 +1,6 @@
 ---
 title: Type safe records as an excuse to learn type level programming in Haskell
-date: 2018-02-13
+date: 2018-02-13T00:00:00.000Z
 permalink: /posts/2018/02/type-level-excuse
 category: programming
 tags:
@@ -14,7 +14,7 @@ I've been recently trying to learn more advanced type-level constructs in Haskel
 
 # Type Safe Records
 
-The *record problem* is an old problem in Haskell. Succintly, Haskell's traditional native records have lots of problems -- you couldn't reuse record names, updating record fields lead to dull boilerplate code, etc. Many of those problems [are attacked](http://www.parsonsmatt.org/overcoming-records/#/) by the idea of [lenses](https://hackage.haskell.org/package/lens) (see this [talk by Simon Peyton Jones](https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation) to get the basics of it) and many [other libraries](http://hackage.haskell.org/packages/#cat:Records) as well as the [OverloadedRecordFields](https://hackage.haskell.org/package/base-4.10.1.0/docs/GHC-Records.html) extension.
+The _record problem_ is an old problem in Haskell. Succintly, Haskell's traditional native records have lots of problems -- you couldn't reuse record names, updating record fields lead to dull boilerplate code, etc. Many of those problems [are attacked](http://www.parsonsmatt.org/overcoming-records/#/) by the idea of [lenses](https://hackage.haskell.org/package/lens) (see this [talk by Simon Peyton Jones](https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation) to get the basics of it) and many [other libraries](http://hackage.haskell.org/packages/#cat:Records) as well as the [OverloadedRecordFields](https://hackage.haskell.org/package/base-4.10.1.0/docs/GHC-Records.html) extension.
 
 Though there are many solutions attacking parts of the record problem, there's one particular aspect of it which offers a nice opportunity to learn type level programming techniques in Haskel and are worth working out from scratch: how to create records whose type's are aware of the fields contained in the records and their types?
 
@@ -26,7 +26,7 @@ That means, how to create a record type such that the when we try to access a no
 
 we get an actual type error in compile time. This allows us to completely rule out a whole class of bugs from our programs: we don't need to worry about users acessing unexisting fields type of errors because this code wouldn't even compile.
 
-## First attempt: a list of named entries.
+## First attempt: a list of named entries
 
 Our first attempt will be to model our records as lists of named-entries:
 
@@ -41,12 +41,13 @@ getField name (Cons (Entry name' x) dict') =  case (name == name') of
     False -> getField name dict'
 ```
 
-This compiles alright, but it's not a solution to our problem. First of all, it has no information about the entry field names in the type. The type of `Dict a` only carries information about the type of the values. Second, all fields must be of the same type. If you try to build something like:
-''
+This compiles alright, but it's not a solution to our problem. First of all, it has no information about the entry field names in the type. The type of `Dict a` only carries information about the type of the values. Second, all fields must be of the same type. If you try to build something like: ''
+
 ```haskell
 -- this raises a type error
 myRecord = Cons (Entry "name" "Rafael") (Cons (Entry "age" (35::Int)) Nil)
 ```
+
 You'll get an obvious type error since `Cons (Entry "age" 35::Int) Nil` is a `Dict Int` and `Entry "name" "Rafael"` is an `Entry String`, and `Cons` type signature is `Entry a -> Dict a -> Dict a`.
 
 So, it seems that this is not a very useful record (:P).
@@ -54,14 +55,16 @@ So, it seems that this is not a very useful record (:P).
 Let's try to solve the second problem first and make the type of each entry more flexible. For that we need GADTs and existential types.
 
 ## Using GADTs and existential types
+
 The second problem is caused by the fact the we have a explicit reference to the type of the entry in the `Dict` type constructor. We could try to make it more flexible like this:
 
 ```haskell
 data Dict a = Nil | Cons (Entry a) (Dict b)
 ```
+
 But of course this doesn't work because the type variable `b` is not defined in this scope. There is no way for the type checker to fix it:
 
-```
+```ghci
 /.../Post.hs:5:42: error:
     Not in scope: type variable ‘b’
   |
@@ -73,7 +76,6 @@ For this to work, we need to put `b` in scope, without adding it as argument to 
 `GADTs` is an extension that allows us to give more generic types to the data constructors of an algebraic data type. It also allows a nicer syntax for data constructors with a long type signature. With `GADTs` and `RankNTypes` enabled we can do this:
 
 ```haskell
-
 {-# LANGUAGE GADTs, RankNTypes  #-}
 
 data Entry a = Entry String a
@@ -112,13 +114,12 @@ data Dict a b c = Nil | Cons (Entry a) (Dict b c ???)
 You get it, right? There's always a new type to keep track of. The type of the record must know not only the type of the head entry, but also all the types of all entries in its tail. This looks a hell like a linked list of types, doesn't it? If we had a way to create **a type level list** we could have the following GADT:
 
 ```haskell
-
 data Dict (types :: (TypeLevelList Type)) where
     Nil :: Dict TypeLevelEmptyList
     Cons :: (Entry a) -> Dict (tail :: TypeLevelList) -> Dict (a `TypeLevelCons` tail)
 ```
 
-Wait, what the hell is this? First of all, what are those type signatures in the wrong place? Those are *kind signatures*. Kind is the "type of a type constructor". For example, type constructors that have no parameters, like `Bool` or `String` have kind `Type` (or `*`). Type constructors that take a single parameter, like `Maybe` have kind `Type -> Type`. Single parameter Typeclasses like `Functor` or `Monad` have kind `Type -> Constraint`, etc. 
+Wait, what the hell is this? First of all, what are those type signatures in the wrong place? Those are _kind signatures_. Kind is the "type of a type constructor". For example, type constructors that have no parameters, like `Bool` or `String` have kind `Type` (or `*`). Type constructors that take a single parameter, like `Maybe` have kind `Type -> Type`. Single parameter Typeclasses like `Functor` or `Monad` have kind `Type -> Constraint`, etc.
 
 Here I'm supposing that there exists a kind called `TypeLevelList`, and that there exists two type constructors:
 
@@ -182,7 +183,7 @@ data Dict (a :: (List Type)) where
     Cons :: Entry a -> Dict t -> Dict ('ListCons a t)
 ```
 
-So, what's happening here? First of all we have the declaration `data List a  = EmptyList | ListCons a (List a)`. This is a simple *list type*, but since we used the `Data.Kinds` extension, we get a new **list kind** for free:
+So, what's happening here? First of all we have the declaration `data List a = EmptyList | ListCons a (List a)`. This is a simple _list type_, but since we used the `Data.Kinds` extension, we get a new **list kind** for free:
 
 - `'List` is a "kind constructor" which takes a kind and return another kind (`* -> *`)
 - `'EmptyList :: forall a . List a` is a type constructor
@@ -211,7 +212,7 @@ Now to the data constructors - which are the things that allows us to actually b
 Also we have `Cons`, which takes a parameter of type `Entry a` and a parameter of type `Dict t` (remember, here `t` is a type of kind `'List Type`) and builds a value of type `Dict ('ListCons a t)`. So, `Cons` does two things:
 
 - it concatenates a new entry with an existing record,
-- it also concatenates the *type* of the value stored in this entry into an *existing list of types* that describes the types of the entries in the existing record.
+- it also concatenates the _type_ of the value stored in this entry into an _existing list of types_ that describes the types of the entries in the existing record.
 
 Wow. If that's too much to grasp, let's see this in action:
 
@@ -253,11 +254,14 @@ We made a few changes to make the types nicer:
   > :k Dict
   Dict :: [Type] -> Type
   ```
+
   This is completely equivalent to the previous signature `List Type -> Type` the only difference is that we're using the built-in type instead of our custom list type.
 
 - We're using the `TypeInType` extension to allow for the syntax `[Type]`
-- We're using the `TypeOperators` extension to allow for two things: 
-  1. using the promoted type constructor `(:) :: a -> [a] -> [a]` which concatenates a type on the head of a type level list; 
+
+- We're using the `TypeOperators` extension to allow for two things:
+
+  1. using the promoted type constructor `(:) :: a -> [a] -> [a]` which concatenates a type on the head of a type level list;
   2. renaming the ugly `Cons` data constructor to a nicer `(:>)` infix type operator so that the expressions are nicer looking.
 
 With this modifications, instead of this ugly monster:
@@ -266,15 +270,17 @@ With this modifications, instead of this ugly monster:
 myRecord :: Dict ('ListCons String ('ListCons Int 'EmptyList))
 myRecord = Cons (Entry "name" "Rafael") (Cons (Entry "age" 35) Nil)
 ```
+
 we can write this:
 
 ```haskell
 myRecord :: Dict '[String, Int]
 myRecord = Entry "name" "Rafael" :> Entry "age" 35 :> Nil
 ```
+
 Much better, right?
 
-### This is already too long and you didn't get to the point you promised!!!
+### This is already too long and you didn't get to the point you promised
 
 Well, yep. This post is already big and we still don't know:
 
