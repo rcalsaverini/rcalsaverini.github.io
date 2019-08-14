@@ -27,6 +27,8 @@ Now, stochastic processes have characteristics related to two different monads. 
 
 $$x_{t+1} = \alpha x_t\left(1-x_t\right)$$
 
+$$ teste = teste $$
+
 I could do the following:
 
 ```haskell
