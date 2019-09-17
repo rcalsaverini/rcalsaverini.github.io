@@ -1,12 +1,13 @@
 ---
 title: A few frustrations with Python's type annotation system
-date: 2019-01-21T00:00:00.000Z
-permalink: /posts/2019/01/frustrations-with-python-types
-category: programming
+date: 2019-01-20 22:00:00 -02:00
+permalink: "/posts/2019/01/frustrations-with-python-types"
+categories:
+- programming
 tags:
-  - Python
-  - Type safety
-  - Mypy
+- Python
+- Type safety
+- Mypy
 ---
 
 I have on and off again tried to use [mypy] to type check my python code, but some shortcomings of Python's type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.

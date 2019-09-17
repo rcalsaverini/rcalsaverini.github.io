@@ -1,15 +1,16 @@
 ---
 title: Einstein's racist diaries
-author: Rafael S. Calsaverini
-date: 2018-06-13T00:00:00.000Z
-permalink: /posts/2010/08/einstein-racist-diary
-category: politics
+date: 2018-06-12 21:00:00 -03:00
+permalink: "/posts/2010/08/einstein-racist-diary"
+categories:
+- politics
 tags:
-  - Racism
-  - Ethics
-  - Humanism
-  - Xenophobia
-  - Moral growth
+- Racism
+- Ethics
+- Humanism
+- Xenophobia
+- Moral growth
+author: Rafael S. Calsaverini
 ---
 
 _This is a thought motivated by the [current story](https://www.theguardian.com/books/2018/jun/12/einsteins-travel-diaries-reveal-shocking-xenophobia) about racist and xenophobic remarks found in Albert Einstein's personal diaries._

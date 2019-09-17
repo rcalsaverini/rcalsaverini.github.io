@@ -1,16 +1,18 @@
 ---
 title: Stochastic Processes as Monad Transformers
-author: Rafael S. Calsaverini
-date: 2010-08-03
-permalink: /posts/2010/08/stochastic-processes-as-monad-transformers
-category: programming
+date: 2010-08-03 00:00:00 -03:00
+permalink: "/posts/2010/08/stochastic-processes-as-monad-transformers"
+categories:
+- programming
 tags:
-  - Haskell
-  - Monad Transformers
-  - Monads
-  - Stochastic Processes
-  - Probability Monad
+- Haskell
+- Monad Transformers
+- Monads
+- Stochastic Processes
+- Probability Monad
+author: Rafael S. Calsaverini
 ---
+
 **Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.**
 
 I have a difficulty to understand functional programming concepts that I can’t put to some very simple and natural use (natural for me, of course). I need to find the perfect simple example to implement to finally understand something. And I’m not a computer scientist, so things like parsers and compilers have very little appeal to me (probably because I don’t understand them…). I’m a physicist, so this drives me to look for physical problems that can be implemented in Haskell so I can understand some concepts.

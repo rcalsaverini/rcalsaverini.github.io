@@ -1,12 +1,15 @@
 ---
-title: "An information-theoretic approach to statistical dependence: Copula information"
+title: 'An information-theoretic approach to statistical dependence: Copula information'
+date: 2009-12-22 00:00:00 -02:00
+permalink: "/publication/2009-12-22-an-information-theoretic-approach-to-statistical-dependence"
 collection: publications
-permalink: /publication/2009-12-22-an-information-theoretic-approach-to-statistical-dependence
-venue: 'EPL (Europhysics Letters)'
-date: 2009-12-22
-paperurl: 'http://iopscience.iop.org/article/10.1209/0295-5075/88/68003/meta'
-citation: 'Calsaverini, R. S., & Vicente, R. (2009). An information-theoretic approach to statistical dependence: Copula information. EPL (Europhysics Letters), 88(6), 68003.'
+venue: EPL (Europhysics Letters)
+paperurl: http://iopscience.iop.org/article/10.1209/0295-5075/88/68003/meta
+citation: 'Calsaverini, R. S., & Vicente, R. (2009). An information-theoretic approach
+  to statistical dependence: Copula information. EPL (Europhysics Letters), 88(6),
+  68003.'
 ---
+
 This paper is a result of my Ph.D. studies.
 
 - [Arxiv Version](https://arxiv.org/abs/0911.4207)

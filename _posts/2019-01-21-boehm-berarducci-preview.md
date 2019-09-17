@@ -1,12 +1,13 @@
 ---
 title: Boehm-Beraducci encoding for trees in python - a preview
-date: 2019-01-21
-permalink: /posts/2019/01/boehm-berarducci-preview
-category: programming
+date: 2019-01-21 00:00:00 -02:00
+permalink: "/posts/2019/01/boehm-berarducci-preview"
+categories:
+- programming
 tags:
-  - Python
-  - Functional programming
-  - Type encodings
+- Python
+- Functional programming
+- Type encodings
 ---
 
 A few years ago I was very impressed for learning the [Boehm-Berarducci encoding], which is a way for encoding

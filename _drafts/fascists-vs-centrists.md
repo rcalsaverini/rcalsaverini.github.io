@@ -1,13 +1,14 @@
 ---
-title: "Nazis in Charlottesville and the role of 'centrists'."
-author: Rafael S. Calsaverini
-permalink: /politics/2017/08/fascists-vs-centrists
-date: 2017-08-18
-category: politics
+title: Nazis in Charlottesville and the role of 'centrists'.
+date: 2017-08-18 00:00:00 -03:00
+permalink: "/politics/2017/08/fascists-vs-centrists"
+categories:
+- politics
 tags:
-  - Fascism
-  - Centrism
-  - Liberalism
+- Fascism
+- Centrism
+- Liberalism
+author: Rafael S. Calsaverini
 ---
 
 The recent disgusting display in Charlottesville, where thousands of *fascists* and *nazis*[^nazis] where demonstrating their hatred and bigotry, triggered a lot of bashing against centrists, libertarians and people from the *liberal* camp[^liberals]. At first that made me a little puzzled. I frequently identify myself as a centrist liberal and I was trying to understand why people were blaming people like me for what happened. Than I understood what happened: there were actually a lot of self styled centrists and libertarians defending the Nazis from Charlottesville! This prompted me to write about why anyone who calls himself liberal absolutely can't stand in the sidelines when Nazis are marching.

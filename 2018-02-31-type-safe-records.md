@@ -1,13 +1,13 @@
 ---
 title: Type Safe Records in Haskell
-date: 2018-02-13
-permalink: /posts/2018/02/type-safe-records-haskell
+date: 2018-02-13 00:00:00 -02:00
+permalink: "/posts/2018/02/type-safe-records-haskell"
 category: programming
 tags:
-  - Haskell
-  - Type safety
-  - Records
-  - Type-level programming
+- Haskell
+- Type safety
+- Records
+- Type-level programming
 ---
 
 I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find [this amazing talk](https://www.youtube.com/watch?v=wNa3MMbhwS4) by [Prof. Stephanie Weirich](http://www.seas.upenn.edu/~sweirich/) about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC's extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof. Weirich uses in her talk. She does a lot more than this, in the talk, but I'm going slowly to understand every bit of it.

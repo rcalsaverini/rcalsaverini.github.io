@@ -1,12 +1,14 @@
 ---
-title: "Intersubband-induced spin-orbit interaction in quantum wells"
+title: Intersubband-induced spin-orbit interaction in quantum wells
+date: 2008-10-16 00:00:00 -03:00
+permalink: "/publication/2008-10-16-intersubband-induced-spin-orbit-interaction-in-quantum-wells"
 collection: publications
-permalink: /publication/2008-10-16-intersubband-induced-spin-orbit-interaction-in-quantum-wells
-date: 2008-10-16
-venue: 'Physical Review B'
-paperurl: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.78.155313'
-citation: 'Rafael S. Calsaverini, Esmerindo Bernardes, J. Carlos Egues, and Daniel Loss Phys. Rev. B 78, 155313'
+venue: Physical Review B
+paperurl: https://journals.aps.org/prb/abstract/10.1103/PhysRevB.78.155313
+citation: Rafael S. Calsaverini, Esmerindo Bernardes, J. Carlos Egues, and Daniel
+  Loss Phys. Rev. B 78, 155313
 ---
+
 This paper is the result of my M.Sc. dissertation.
 
 - [Arxiv Version](https://arxiv.org/abs/0807.0771)

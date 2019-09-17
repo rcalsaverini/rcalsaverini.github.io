@@ -1,16 +1,17 @@
 ---
 title: Operational Semantics for Monads
-author: Rafael S. Calsaverini
-date: 2010-08-26T00:00:00.000Z
-permalink: /posts/2010/08/operational-semantics-for-monads
-category: programming
+date: 2010-08-25 21:00:00 -03:00
+permalink: "/posts/2010/08/operational-semantics-for-monads"
+categories:
+- programming
 tags:
-  - Haskell
-  - Monads
-  - Operational Monads
-  - Free Monads
-  - Free Vector Space
-  - Categories
+- Haskell
+- Monads
+- Operational Monads
+- Free Monads
+- Free Vector Space
+- Categories
+author: Rafael S. Calsaverini
 ---
 
 **Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.**
