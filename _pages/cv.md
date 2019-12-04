@@ -26,7 +26,8 @@ Academic Education
 
 Work experience
 ======
-* October/2018: Reseach Engineer / Data Scientist at [Dafiti](https://www.dafiti.com.br/)
+* December/2019 - Current: AI Manager at [Nubank](https://www.nubank.com.br)
+* October/2018 - November/2019: Reseach Engineer / Data Scientist at [Dafiti](https://www.dafiti.com.br/)
 * September/2017 - September 2008: Data Science Manager at [SEEK](https://www.seek.com.au/)
 * November/2015 - August/2017: Senior Data Scientist at [LatAm Experian DataLabs](https://www.serasaexperian.com.br/datalabs/) @ [Serasa Experian](https://www.serasaexperian.com.br/)
 * April/2015 - October/2015: Data Scientist at [GuiaBolso](https://www.guiabolso.com.br)
