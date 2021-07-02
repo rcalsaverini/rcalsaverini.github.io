@@ -222,6 +222,12 @@ $$</p>
 <p>$$
 \ell(\theta_E, \theta_D, \theta_V) = \sum_{k=1}^N\left[d(e_k, D(\theta_D, E(\theta_E, e_k))) + (V(\theta_V, E(\theta_E, e)) - f(e))^2\right]
 $$</p>
+<p>Once we learn the best parameters $\theta_E^\star$, $\theta_D^\star$, $\theta_V^\star$, finding the best expression $e$ that maximizes $f(e)$ can be done by:</p>
+<ul>
+<li>find the vector $\mathbf{x}^\star$ that maximizes $V(\theta_V^\star, $\mathbf{x}$)$;</li>
+<li>decode it to find the optimal expression associated with it: $e^\star = D(\theta_Dˆ\star, \mathbf{x}^\star)$.</li>
+</ul>
+<p>This will probably not be an exact solution, but hopefully one that is good enough.</p>
 <h3 id="problems-and-conclusions">Problems and conclusions</h3>
 <p>That’s a nice story, but is it actually possible to do? That’s a great question. I tried attacking the regex problem with this idea before and I hit several brick walls (that mainly stem from my lack of knowledge in symbolic computation since my focus is 100% in ML and not in Computer Science in general).</p>
 <p>The first one is how to define the parametric family of encoders $E(\theta, e)$. Those functions must take values in the set of possible expressions $\mathrm{Exp}_G$ (the set of all regular expressions in our toy example). We could work with a string representation of the expression and use whatever fancy architecture kids are using for processing strings nowadays. But it would be nice to be able to feed the Abstract Syntax Tree (AST) of the expression and process this. I wonder if that would add significant amounts of inductive bias about the problem and help the model to learn. I tried using TreeLSTMs<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> for this problem the past and the result was interesting.</p>
