@@ -22,18 +22,45 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
     rel="stylesheet">
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+  integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+  integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+  integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+  crossorigin="anonymous"
+></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true },
+      ],
+      
+      throwOnError: false,
+    });
+  });
+</script>
 
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
 
   <link href="https://rcalsaverini.github.io/css/resume.css" rel="stylesheet">
   <link href="https://rcalsaverini.github.io/css/tweaks.css" rel="stylesheet">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.83.1" />
   
   
   
@@ -102,9 +129,34 @@
       
 <div class="resume-item d-flex flex-column flex-md-row">
   <div class="publication-content col-auto">
+    <h3 class="mb-0"><a href="https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization/">Neural Nets for Symbolic Optimization</a></h3>
+    <div class="summary">What&rsquo;s Symbolic Optimization A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &ldquo;optimal&rdquo; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let’s call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The problem I want do discuss in finding expressions that minizes that function:</div>
+    <p><ul class="tags">
+    
+      <li><a class="tag" href="/tags/machine-learning">Machine Learning</a></li>
+    
+      <li><a class="tag" href="/tags/neural-networks">Neural Networks</a></li>
+    
+      <li><a class="tag" href="/tags/deep-learning">Deep Learning</a></li>
+    
+      <li><a class="tag" href="/tags/symbolic-optimization">Symbolic Optimization</a></li>
+    
+</ul>
+</p>
+  </div>
+  <div class="resume-date col-auto">
+    <span class="text-primary">July 2, 2021</span>
+    <img src="" style="max-width:250px;padding:5px;"/>
+  </div>
+</div>
+
+    
+      
+<div class="resume-item d-flex flex-column flex-md-row">
+  <div class="publication-content col-auto">
     <h3 class="mb-0"><a href="https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes/">Negative Harmony inverts brightness of modes</a></h3>
-    <div class="summary">Intro Recently I've been listening to a 12tone video on YouTube about negative harmony, a concept recently popularized by musician Jacob Collier. On the related links I found a bunch of videos from this channel with &ldquo;negative harmony&rdquo; versions of many popular songs.
-The change in sonority of those songs clearly indicated for me a change in the mode of the song, which kind of go against the grain of what I've been told about the action of those transformations.</div>
+    <div class="summary">Intro Recently I&rsquo;ve been listening to a 12tone video on YouTube about negative harmony, a concept recently popularized by musician Jacob Collier. On the related links I found a bunch of videos from this channel with &ldquo;negative harmony&rdquo; versions of many popular songs.
+The change in sonority of those songs clearly indicated for me a change in the mode of the song, which kind of go against the grain of what I&rsquo;ve been told about the action of those transformations.</div>
     <p><ul class="tags">
     
       <li><a class="tag" href="/tags/music-theory">Music Theory</a></li>
@@ -127,7 +179,7 @@ The change in sonority of those songs clearly indicated for me a change in the m
 <div class="resume-item d-flex flex-column flex-md-row">
   <div class="publication-content col-auto">
     <h3 class="mb-0"><a href="https://rcalsaverini.github.io/blog/2019-01-20-frustrations-with-mypy/">A few frustrations with Python&#39;s type annotation system</a></h3>
-    <div class="summary">I have on and off again tried to use mypy to type check my python code, but some shortcomings of Python's type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.
+    <div class="summary">I have on and off again tried to use mypy to type check my python code, but some shortcomings of Python&rsquo;s type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.
 The ugly syntax for function types is annoying but there are worse problems Yes, writing Callable[[Callable[[A], B], F[A]], F[B]] instead of (a -&gt; b) -&gt; f a -&gt; f b as in Haskell or (A =&gt; B, F[A]) =&gt; F[B] (or maybe the uncurried (A =&gt; B) =&gt; (F[A] =&gt; F[B]) version) as in Scala is really annoying.</div>
     <p><ul class="tags">
     
@@ -151,7 +203,7 @@ The ugly syntax for function types is annoying but there are worse problems Yes,
 <div class="resume-item d-flex flex-column flex-md-row">
   <div class="publication-content col-auto">
     <h3 class="mb-0"><a href="https://rcalsaverini.github.io/blog/2018-02-12-type-safe-records/">Type safe records as an excuse to learn type level programming in Haskell</a></h3>
-    <div class="summary">I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find this amazing talk by Prof. Stephanie Weirich about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC's extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof.</div>
+    <div class="summary">I&rsquo;ve been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find this amazing talk by Prof. Stephanie Weirich about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC&rsquo;s extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof.</div>
     <p><ul class="tags">
     
       <li><a class="tag" href="/tags/haskell">Haskell</a></li>
@@ -177,7 +229,7 @@ The ugly syntax for function types is annoying but there are worse problems Yes,
   <div class="publication-content col-auto">
     <h3 class="mb-0"><a href="https://rcalsaverini.github.io/blog/2010-08-25-operational-semantics/">Operational Semantics for Monads</a></h3>
     <div class="summary">Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.
-While randomly browsing around on Planet Haskell I've found a post on Heinrich Apfelmus&rsquo; blog about something called &ldquo;operational semantics&rdquo; for monads. Found it very iluminating. Basically it's a form to implement monads focusing not on defining the bind and return operators, but on what the monad is really supposed to do.</div>
+While randomly browsing around on Planet Haskell I&rsquo;ve found a post on Heinrich Apfelmus' blog about something called &ldquo;operational semantics&rdquo; for monads. Found it very iluminating. Basically it&rsquo;s a form to implement monads focusing not on defining the bind and return operators, but on what the monad is really supposed to do.</div>
     <p><ul class="tags">
     
       <li><a class="tag" href="/tags/haskell">Haskell</a></li>

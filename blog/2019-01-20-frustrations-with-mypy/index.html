@@ -22,18 +22,45 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
     rel="stylesheet">
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+  integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+  integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+  integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+  crossorigin="anonymous"
+></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true },
+      ],
+      
+      throwOnError: false,
+    });
+  });
+</script>
 
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
 
   <link href="https://rcalsaverini.github.io/css/resume.css" rel="stylesheet">
   <link href="https://rcalsaverini.github.io/css/tweaks.css" rel="stylesheet">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.83.1" />
   
   
   
@@ -124,24 +151,24 @@
     <h2 class="mb-0"><span class="text-primary">A few frustrations with Python&#39;s type annotation system</span></h2>
     <div class="textual-content">
       <span class="text-primary">January 20, 2019</span>
-      <p>I have on and off again tried to use <a href="http://mypy-lang.org/">mypy</a> to type check my python code, but some shortcomings of Python's type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.</p>
+      <p>I have on and off again tried to use <a href="http://mypy-lang.org/">mypy</a> to type check my python code, but some shortcomings of Python&rsquo;s type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.</p>
 <h3 id="the-ugly-syntax-for-function-types-is-annoying-but-there-are-worse-problems">The ugly syntax for function types is annoying but there are worse problems</h3>
 <p>Yes, writing <code>Callable[[Callable[[A], B], F[A]], F[B]]</code> instead of <code>(a -&gt; b) -&gt; f a -&gt; f b</code> as in Haskell or <code>(A =&gt; B, F[A]) =&gt; F[B]</code> (or maybe the uncurried <code>(A =&gt; B) =&gt; (F[A] =&gt; F[B])</code> version) as in Scala is really annoying.</p>
-<p>But that's neither here nor there. One can get accostumed to it. On the other hand, it is certainly symptomatic of the philosophy chosen for the type system: passing functions around is not an idea on the forefront of this design.</p>
+<p>But that&rsquo;s neither here nor there. One can get accostumed to it. On the other hand, it is certainly symptomatic of the philosophy chosen for the type system: passing functions around is not an idea on the forefront of this design.</p>
 <h3 id="people-are-not-using-it">People are not using it</h3>
-<p>In general, the overwhelming majority of the python libraries I use simply don't have type annotations or stub files and don't plan to add them in the near future. Writing stub files on your own is a pain. This by itself prevents the adoption of type annotations without a lot of effort in providing stub files yourself.</p>
+<p>In general, the overwhelming majority of the python libraries I use simply don&rsquo;t have type annotations or stub files and don&rsquo;t plan to add them in the near future. Writing stub files on your own is a pain. This by itself prevents the adoption of type annotations without a lot of effort in providing stub files yourself.</p>
 <h3 id="the-ad-hoc-polymorphism-mechanism-chosen-is-annoying">The ad hoc polymorphism mechanism chosen is annoying</h3>
-<p>The only way to do ad hoc polymorphism is with structural subtyping (using <code>Protocol</code>). This isn't so bad, since the language embraces duck typing so thoroughly. But it's somewhat annoying for two reasons:</p>
+<p>The only way to do ad hoc polymorphism is with structural subtyping (using <code>Protocol</code>). This isn&rsquo;t so bad, since the language embraces duck typing so thoroughly. But it&rsquo;s somewhat annoying for two reasons:</p>
 <ol>
 <li>
-<p>First, admitedly a lesser problem, there's no clear indication in the code that a given class implements a particular <code>Protocol</code>. There's no explicit inheritance, nor explicit instancing of the <code>Protocol</code>. If you don't know the protocol exists, when you see the code of a class, you have no clue that there is a more general pattern that this class implements.</p>
+<p>First, admitedly a lesser problem, there&rsquo;s no clear indication in the code that a given class implements a particular <code>Protocol</code>. There&rsquo;s no explicit inheritance, nor explicit instancing of the <code>Protocol</code>. If you don&rsquo;t know the protocol exists, when you see the code of a class, you have no clue that there is a more general pattern that this class implements.</p>
 </li>
 <li>
-<p>Second, there's no &ldquo;post facto&rdquo; instancing of <code>Protocol</code> like it's possible to do with Haskell's or Scala's typeclasses, or Go's interfaces. You have one chance to instanciate a class as a particular Protocol: when you write that classes code. If the class belongs to a third party library you can't change, you have to write wrappers (which are terribly annoying, because the language offers no syntax sugar for them).</p>
+<p>Second, there&rsquo;s no &ldquo;post facto&rdquo; instancing of <code>Protocol</code> like it&rsquo;s possible to do with Haskell&rsquo;s or Scala&rsquo;s typeclasses, or Go&rsquo;s interfaces. You have one chance to instanciate a class as a particular Protocol: when you write that classes code. If the class belongs to a third party library you can&rsquo;t change, you have to write wrappers (which are terribly annoying, because the language offers no syntax sugar for them).</p>
 </li>
 </ol>
 <h3 id="no-support-for-lightweight-parametrically-polymorphic-product-types">No support for lightweight parametrically polymorphic product types</h3>
-<p>Python's type annotations don't allow you to write generic named tuples. This prevents one to write very lightweight types like:</p>
+<p>Python&rsquo;s type annotations don&rsquo;t allow you to write generic named tuples. This prevents one to write very lightweight types like:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Foo</span>(NamedTuple, Generic[A]):
     a_value: A
     a_list: List[A]
@@ -151,39 +178,39 @@
     <span style="color:#a2f;font-weight:bold">def</span> __init__(self, a_value: A, a_list: List[A]):
         self<span style="color:#666">.</span>a_value <span style="color:#666">=</span> a_value
         self<span style="color:#666">.</span>a_list <span style="color:#666">=</span> a_list
-</code></pre></div><p>This discourages me to use it for many applications, since Python's classes are not exactly lightweight things and I'd rather not have a class if I don't really need one. You could use a type synonym for an untagged tuple, but this would be a serious documentation hazard:</p>
+</code></pre></div><p>This discourages me to use it for many applications, since Python&rsquo;s classes are not exactly lightweight things and I&rsquo;d rather not have a class if I don&rsquo;t really need one. You could use a type synonym for an untagged tuple, but this would be a serious documentation hazard:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Foo <span style="color:#666">=</span> Tuple[A, List[A]]
 </code></pre></div><h3 id="no-support-for-lightweight-recursive-product-types">No support for lightweight recursive product types</h3>
-<p>Similarly, Python's type annotations don't allow recursive types unless you're dealing with a full fledged class. Recursive <code>NamedTuples</code> are forbidden, and so are recursive <code>Union</code>s (which wouldn't be possible given the restriction on higher-kinded types anyway, see below). This further prevents fast and lightweight types like:</p>
+<p>Similarly, Python&rsquo;s type annotations don&rsquo;t allow recursive types unless you&rsquo;re dealing with a full fledged class. Recursive <code>NamedTuples</code> are forbidden, and so are recursive <code>Union</code>s (which wouldn&rsquo;t be possible given the restriction on higher-kinded types anyway, see below). This further prevents fast and lightweight types like:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">BinaryTree</span>(NamedTuple):
-    left: <span style="color:#b44"></span><span style="color:#b44">&#34;</span><span style="color:#b44">BinaryTree</span><span style="color:#b44">&#34;</span>
-    right: <span style="color:#b44"></span><span style="color:#b44">&#34;</span><span style="color:#b44">BinaryTree</span><span style="color:#b44">&#34;</span>
+    left: <span style="color:#b44">&#34;BinaryTree&#34;</span>
+    right: <span style="color:#b44">&#34;BinaryTree&#34;</span>
 </code></pre></div><p>and requires you to use the full (and heavy) Python classes:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">BinaryTree</span>(<span style="color:#a2f">object</span>):
-    <span style="color:#a2f;font-weight:bold">def</span> __init__(self, left: <span style="color:#b44"></span><span style="color:#b44">&#34;</span><span style="color:#b44">BinaryTree</span><span style="color:#b44">&#34;</span>, right: <span style="color:#b44"></span><span style="color:#b44">&#34;</span><span style="color:#b44">BinaryTree</span><span style="color:#b44">&#34;</span>):
+    <span style="color:#a2f;font-weight:bold">def</span> __init__(self, left: <span style="color:#b44">&#34;BinaryTree&#34;</span>, right: <span style="color:#b44">&#34;BinaryTree&#34;</span>):
             self<span style="color:#666">.</span>left <span style="color:#666">=</span> left
             self<span style="color:#666">.</span>right <span style="color:#666">=</span> right
 </code></pre></div><h3 id="no-higher-kinded-types">No higher kinded types</h3>
-<p>Python's type annotations have no support for <a href="https://stackoverflow.com/questions/6246719/what-is-a-higher-kinded-type-in-scala">higher-kinded</a> types. All type variables in a class that inherit from Generic must be of kind <code>*</code>. This is kind of a catastrophe for any kind of more advanced use of the type system to improve correctness garantees. It also prevents some uses of higher kinded patterns like functors, monads, etc.</p>
-<p>For example, you can't use the finally tagless or <a href="http://okmij.org/ftp/tagless-final/index.html">tagless-final</a> pattern. At least not like this:</p>
+<p>Python&rsquo;s type annotations have no support for <a href="https://stackoverflow.com/questions/6246719/what-is-a-higher-kinded-type-in-scala">higher-kinded</a> types. All type variables in a class that inherit from Generic must be of kind <code>*</code>. This is kind of a catastrophe for any kind of more advanced use of the type system to improve correctness garantees. It also prevents some uses of higher kinded patterns like functors, monads, etc.</p>
+<p>For example, you can&rsquo;t use the finally tagless or <a href="http://okmij.org/ftp/tagless-final/index.html">tagless-final</a> pattern. At least not like this:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">DataAccessMonad</span>(Generic[M]):
-    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_user</span>(self, user_id: UserId) <span style="color:#666">-</span><span style="color:#666">&gt;</span> M[User]
+    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_user</span>(self, user_id: UserId) <span style="color:#666">-&gt;</span> M[User]
         <span style="color:#a2f;font-weight:bold">pass</span>
-</code></pre></div><p>Also, this makes it difficult to implement &ldquo;post-facto&rdquo; ad hoc polymorphism using something like <a href="https://typelevel.org/cats/typeclasses.html">Scala's typeclass instance</a> mechanisms to escape <code>Protocol</code>s. For this, one would need to write:</p>
+</code></pre></div><p>Also, this makes it difficult to implement &ldquo;post-facto&rdquo; ad hoc polymorphism using something like <a href="https://typelevel.org/cats/typeclasses.html">Scala&rsquo;s typeclass instance</a> mechanisms to escape <code>Protocol</code>s. For this, one would need to write:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">FunctorInstance</span>(Generic[F]):
 
     <span style="color:#a2f">@staticmethod</span>
-    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">map</span>(value: F[A], function: Callable[[A], B]) <span style="color:#666">-</span><span style="color:#666">&gt;</span> F[B]:
+    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">map</span>(value: F[A], function: Callable[[A], B]) <span style="color:#666">-&gt;</span> F[B]:
         <span style="color:#a2f;font-weight:bold">pass</span>
-</code></pre></div><p>My original plan for a type class library involved creating a way to inject the instance, wrap the <code>F[A]</code> value and monkey patch it to call <code>value.map</code> when you need it. The fact that one can't use higher kinded types prevents the code above to type check.</p>
+</code></pre></div><p>My original plan for a type class library involved creating a way to inject the instance, wrap the <code>F[A]</code> value and monkey patch it to call <code>value.map</code> when you need it. The fact that one can&rsquo;t use higher kinded types prevents the code above to type check.</p>
 <h3 id="and-so-no-fixed-point-functors-and-other-niceties">And so&hellip; no fixed point functors and other niceties</h3>
-<p>This means also that you can't use fixed point types like:</p>
+<p>This means also that you can&rsquo;t use fixed point types like:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">CoFree</span>(NamedTuple, Generic[F, A]):
     value: A
-    continuations: F[<span style="color:#b44"></span><span style="color:#b44">&#34;</span><span style="color:#b44">Cofree[F, A]</span><span style="color:#b44">&#34;</span>]
+    continuations: F[<span style="color:#b44">&#34;Cofree[F, A]&#34;</span>]
 </code></pre></div><p>because this requires F to be of kind <code>* -&gt; *</code>. Fixed point types are awfully useful for dealing with tree-like structures (see for example <a href="https://www.youtube.com/watch?v=7xSfLPD6tiQ">this talk from Rob Norris</a>) and would similarly fail to type check on <a href="http://mypy-lang.org/">mypy</a>.</p>
 <h3 id="conclusion">Conclusion</h3>
-<p>There are more problems, but those are the main ones that prevented me from really using <a href="http://mypy-lang.org/">mypy</a> or type annotations in Python. This haven't prevented me from writing good and useful Python code, and I still love to write Python. But it certainly increases the attrition.</p>
+<p>There are more problems, but those are the main ones that prevented me from really using <a href="http://mypy-lang.org/">mypy</a> or type annotations in Python. This haven&rsquo;t prevented me from writing good and useful Python code, and I still love to write Python. But it certainly increases the attrition.</p>
 
       
       <ul class="tags">

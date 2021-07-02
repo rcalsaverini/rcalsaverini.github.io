@@ -1,177 +1,127 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://rcalsaverini.github.io/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/blog/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://rcalsaverini.github.io/categories/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/deep-learning/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/machine-learning/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/categories/machine-learning/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/neural-networks/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/symbolic-optimization/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/</loc>
+    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/music-theory/</loc>
     <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/categories/music-theory/</loc>
     <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/negative-harmony/</loc>
     <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes/</loc>
     <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/set-theory-music/</loc>
     <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://rcalsaverini.github.io/tags/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/blog/2019-01-20-frustrations-with-mypy/</loc>
     <lastmod>2019-01-20T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/mypy/</loc>
     <lastmod>2019-01-20T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/categories/programming/</loc>
     <lastmod>2019-01-20T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/python/</loc>
     <lastmod>2019-01-20T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/type-safety/</loc>
     <lastmod>2019-01-20T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/haskell/</loc>
     <lastmod>2018-02-12T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/records/</loc>
     <lastmod>2018-02-12T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/blog/2018-02-12-type-safe-records/</loc>
     <lastmod>2018-02-12T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/type-level-programming/</loc>
     <lastmod>2018-02-12T22:00:00-02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/publications/2016-hierarchy/</loc>
     <lastmod>2016-08-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/publications/</loc>
     <lastmod>2016-08-11T00:00:00+00:00</lastmod>
     <priority>0.6</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/publications/2013-phd/</loc>
     <lastmod>2013-04-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/category-theory/</loc>
     <lastmod>2010-08-25T21:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/free-monads/</loc>
     <lastmod>2010-08-25T21:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/free-vector-space/</loc>
     <lastmod>2010-08-25T21:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/monads/</loc>
     <lastmod>2010-08-25T21:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/operational-monads/</loc>
     <lastmod>2010-08-25T21:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/blog/2010-08-25-operational-semantics/</loc>
     <lastmod>2010-08-25T21:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/monad-transformers/</loc>
     <lastmod>2010-08-03T00:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/probability-monad/</loc>
     <lastmod>2010-08-03T00:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/tags/stochastic-processes/</loc>
     <lastmod>2010-08-03T00:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/blog/2010-08-03-stochastic-processes/</loc>
     <lastmod>2010-08-03T00:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/publications/2009-copula/</loc>
     <lastmod>2009-12-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/publications/2008-intersubband-copy/</loc>
     <lastmod>2008-10-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://rcalsaverini.github.io/publications/2007-masters/</loc>
     <lastmod>2007-10-26T00:00:00+00:00</lastmod>
   </url>
-  
 </urlset>

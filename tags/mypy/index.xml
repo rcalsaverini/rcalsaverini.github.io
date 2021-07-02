@@ -6,18 +6,14 @@
     <description>Recent content in Mypy on Blog s</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 22:00:00 -0200</lastBuildDate>
-    
-	<atom:link href="https://rcalsaverini.github.io/tags/mypy/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 20 Jan 2019 22:00:00 -0200</lastBuildDate><atom:link href="https://rcalsaverini.github.io/tags/mypy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A few frustrations with Python&#39;s type annotation system</title>
       <link>https://rcalsaverini.github.io/blog/2019-01-20-frustrations-with-mypy/</link>
       <pubDate>Sun, 20 Jan 2019 22:00:00 -0200</pubDate>
       
       <guid>https://rcalsaverini.github.io/blog/2019-01-20-frustrations-with-mypy/</guid>
-      <description>I have on and off again tried to use mypy to type check my python code, but some shortcomings of Python&#39;s type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.
+      <description>I have on and off again tried to use mypy to type check my python code, but some shortcomings of Python&amp;rsquo;s type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.
 The ugly syntax for function types is annoying but there are worse problems Yes, writing Callable[[Callable[[A], B], F[A]], F[B]] instead of (a -&amp;gt; b) -&amp;gt; f a -&amp;gt; f b as in Haskell or (A =&amp;gt; B, F[A]) =&amp;gt; F[B] (or maybe the uncurried (A =&amp;gt; B) =&amp;gt; (F[A] =&amp;gt; F[B]) version) as in Scala is really annoying.</description>
     </item>
     

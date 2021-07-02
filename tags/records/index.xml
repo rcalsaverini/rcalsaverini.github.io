@@ -6,18 +6,14 @@
     <description>Recent content in Records on Blog s</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Feb 2018 22:00:00 -0200</lastBuildDate>
-    
-	<atom:link href="https://rcalsaverini.github.io/tags/records/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 12 Feb 2018 22:00:00 -0200</lastBuildDate><atom:link href="https://rcalsaverini.github.io/tags/records/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Type safe records as an excuse to learn type level programming in Haskell</title>
       <link>https://rcalsaverini.github.io/blog/2018-02-12-type-safe-records/</link>
       <pubDate>Mon, 12 Feb 2018 22:00:00 -0200</pubDate>
       
       <guid>https://rcalsaverini.github.io/blog/2018-02-12-type-safe-records/</guid>
-      <description>I&#39;ve been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find this amazing talk by Prof. Stephanie Weirich about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC&#39;s extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof.</description>
+      <description>I&amp;rsquo;ve been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find this amazing talk by Prof. Stephanie Weirich about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC&amp;rsquo;s extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof.</description>
     </item>
     
   </channel>

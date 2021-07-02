@@ -22,18 +22,45 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
     rel="stylesheet">
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+  integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+  integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+  integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+  crossorigin="anonymous"
+></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true },
+      ],
+      
+      throwOnError: false,
+    });
+  });
+</script>
 
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
 
   <link href="https://rcalsaverini.github.io/css/resume.css" rel="stylesheet">
   <link href="https://rcalsaverini.github.io/css/tweaks.css" rel="stylesheet">
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.83.1" />
   
   
   
@@ -124,13 +151,13 @@
     <h2 class="mb-0"><span class="text-primary">Type safe records as an excuse to learn type level programming in Haskell</span></h2>
     <div class="textual-content">
       <span class="text-primary">February 12, 2018</span>
-      <p>I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find <a href="https://www.youtube.com/watch?v=wNa3MMbhwS4">this amazing talk</a> by <a href="http://www.seas.upenn.edu/~sweirich/">Prof. Stephanie Weirich</a> about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC's extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof. Weirich uses in her talk. She does a lot more than this, in the talk, but I'm going slowly to understand every bit of it.</p>
+      <p>I&rsquo;ve been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find <a href="https://www.youtube.com/watch?v=wNa3MMbhwS4">this amazing talk</a> by <a href="http://www.seas.upenn.edu/~sweirich/">Prof. Stephanie Weirich</a> about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC&rsquo;s extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof. Weirich uses in her talk. She does a lot more than this, in the talk, but I&rsquo;m going slowly to understand every bit of it.</p>
 <h3 id="type-safe-records">Type Safe Records</h3>
-<p>The <em>record problem</em> is an old problem in Haskell. Succintly, Haskell's traditional native records have lots of problems &ndash; you couldn't reuse record names, updating record fields lead to dull boilerplate code, etc. Many of those problems <a href="http://www.parsonsmatt.org/overcoming-records/#/">are attacked</a> by the idea of <a href="https://hackage.haskell.org/package/lens">lenses</a> (see this <a href="https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation">talk by Simon Peyton Jones</a> to get the basics of it) and many <a href="http://hackage.haskell.org/packages/#cat:Records">other libraries</a> as well as the <a href="https://hackage.haskell.org/package/base-4.10.1.0/docs/GHC-Records.html">OverloadedRecordFields</a> extension.</p>
-<p>Though there are many solutions attacking parts of the record problem, there's one particular aspect of it which offers a nice opportunity to learn type level programming techniques in Haskel and are worth working out from scratch: how to create records whose type's are aware of the fields contained in the records and their types?</p>
+<p>The <em>record problem</em> is an old problem in Haskell. Succintly, Haskell&rsquo;s traditional native records have lots of problems &ndash; you couldn&rsquo;t reuse record names, updating record fields lead to dull boilerplate code, etc. Many of those problems <a href="http://www.parsonsmatt.org/overcoming-records/#/">are attacked</a> by the idea of <a href="https://hackage.haskell.org/package/lens">lenses</a> (see this <a href="https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation">talk by Simon Peyton Jones</a> to get the basics of it) and many <a href="http://hackage.haskell.org/packages/#cat:Records">other libraries</a> as well as the <a href="https://hackage.haskell.org/package/base-4.10.1.0/docs/GHC-Records.html">OverloadedRecordFields</a> extension.</p>
+<p>Though there are many solutions attacking parts of the record problem, there&rsquo;s one particular aspect of it which offers a nice opportunity to learn type level programming techniques in Haskel and are worth working out from scratch: how to create records whose type&rsquo;s are aware of the fields contained in the records and their types?</p>
 <p>That means, how to create a record type such that the when we try to access a non-existing field:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#666">&gt;</span> getField <span style="color:#b44">&#34;</span><span style="color:#b44">nonExistentFieldName</span><span style="color:#b44">&#34;</span> record
-</code></pre></div><p>we get an actual type error in compile time. This allows us to completely rule out a whole class of bugs from our programs: we don't need to worry about users acessing unexisting fields type of errors because this code wouldn't even compile.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#666">&gt;</span> getField <span style="color:#b44">&#34;nonExistentFieldName&#34;</span> record
+</code></pre></div><p>we get an actual type error in compile time. This allows us to completely rule out a whole class of bugs from our programs: we don&rsquo;t need to worry about users acessing unexisting fields type of errors because this code wouldn&rsquo;t even compile.</p>
 <h3 id="first-attempt-a-list-of-named-entries">First attempt: a list of named entries</h3>
 <p>Our first attempt will be to model our records as lists of named-entries:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Entry</span> a <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#0b0;font-weight:bold">String</span> a
@@ -141,62 +168,62 @@
 <span style="color:#00a000">getField</span> name (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> name&#39; x) dict&#39;) <span style="color:#a2f;font-weight:bold">=</span>  <span style="color:#a2f;font-weight:bold">case</span> (name <span style="color:#666">==</span> name&#39;) <span style="color:#a2f;font-weight:bold">of</span>
     <span style="color:#0b0;font-weight:bold">True</span>  <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Just</span> x
     <span style="color:#0b0;font-weight:bold">False</span> <span style="color:#a2f;font-weight:bold">-&gt;</span> getField name dict&#39;
-</code></pre></div><p>This compiles alright, but it's not a solution to our problem. First of all, it has no information about the entry field names in the type. The type of <code>Dict a</code> only carries information about the type of the values. Second, all fields must be of the same type. If you try to build something like: '&rsquo;</p>
+</code></pre></div><p>This compiles alright, but it&rsquo;s not a solution to our problem. First of all, it has no information about the entry field names in the type. The type of <code>Dict a</code> only carries information about the type of the values. Second, all fields must be of the same type. If you try to build something like: ''</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">-- this raises a type error</span>
-<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">name</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b44">Rafael</span><span style="color:#b44">&#34;</span>) (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">age</span><span style="color:#b44">&#34;</span> (<span style="color:#666">35</span><span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Int</span>)) <span style="color:#0b0;font-weight:bold">Nil</span>)
-</code></pre></div><p>You'll get an obvious type error since <code>Cons (Entry &quot;age&quot; 35::Int) Nil</code> is a <code>Dict Int</code> and <code>Entry &quot;name&quot; &quot;Rafael&quot;</code> is an <code>Entry String</code>, and <code>Cons</code> type signature is <code>Entry a -&gt; Dict a -&gt; Dict a</code>.</p>
+<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;name&#34;</span> <span style="color:#b44">&#34;Rafael&#34;</span>) (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;age&#34;</span> (<span style="color:#666">35</span><span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Int</span>)) <span style="color:#0b0;font-weight:bold">Nil</span>)
+</code></pre></div><p>You&rsquo;ll get an obvious type error since <code>Cons (Entry &quot;age&quot; 35::Int) Nil</code> is a <code>Dict Int</code> and <code>Entry &quot;name&quot; &quot;Rafael&quot;</code> is an <code>Entry String</code>, and <code>Cons</code> type signature is <code>Entry a -&gt; Dict a -&gt; Dict a</code>.</p>
 <p>So, it seems that this is not a very useful record (:P).</p>
-<p>Let's try to solve the second problem first and make the type of each entry more flexible. For that we need GADTs and existential types.</p>
+<p>Let&rsquo;s try to solve the second problem first and make the type of each entry more flexible. For that we need GADTs and existential types.</p>
 <h3 id="using-gadts-and-existential-types">Using GADTs and existential types</h3>
 <p>The second problem is caused by the fact the we have a explicit reference to the type of the entry in the <code>Dict</code> type constructor. We could try to make it more flexible like this:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Dict</span> a <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Nil</span> <span style="color:#666">|</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> a) (<span style="color:#0b0;font-weight:bold">Dict</span> b)
-</code></pre></div><p>But of course this doesn't work because the type variable <code>b</code> is not defined in this scope. There is no way for the type checker to fix it:</p>
+</code></pre></div><p>But of course this doesn&rsquo;t work because the type variable <code>b</code> is not defined in this scope. There is no way for the type checker to fix it:</p>
 <pre><code class="language-ghci" data-lang="ghci">/.../Post.hs:5:42: error:
     Not in scope: type variable ‘b’
   |
 5 | data Dict a = Nil | Cons (Entry a) (Dict b)
-</code></pre><p>For this to work, we need to put <code>b</code> in scope, without adding it as argument to the type constructor or else we'd get an infinite regress of types (I'll get back to this later). For that we need two GHC extensions: <code>GADTs</code> and <code>Rank2Types</code> (or <code>RankNTypes</code>, or other extension providing the <code>forall</code> keyword).</p>
+</code></pre><p>For this to work, we need to put <code>b</code> in scope, without adding it as argument to the type constructor or else we&rsquo;d get an infinite regress of types (I&rsquo;ll get back to this later). For that we need two GHC extensions: <code>GADTs</code> and <code>Rank2Types</code> (or <code>RankNTypes</code>, or other extension providing the <code>forall</code> keyword).</p>
 <p><code>GADTs</code> is an extension that allows us to give more generic types to the data constructors of an algebraic data type. It also allows a nicer syntax for data constructors with a long type signature. With <code>GADTs</code> and <code>RankNTypes</code> enabled we can do this:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">{-</span><span style="color:#080;font-style:italic"># LANGUAGE GADTs, RankNTypes  #</span><span style="color:#080;font-style:italic">-}</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">{-# LANGUAGE GADTs, RankNTypes  #-}</span>
 
 <span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Entry</span> a <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#0b0;font-weight:bold">String</span> a
 <span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Dict</span> a <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Nil</span> <span style="color:#666">|</span> forall b <span style="color:#666">.</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> a) (<span style="color:#0b0;font-weight:bold">Dict</span> b)
 </code></pre></div><p>This compiles correctly and we can try to use it! Now our previous record is well typed:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#0b0;font-weight:bold">String</span>
-<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">name</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b44">Rafael</span><span style="color:#b44">&#34;</span>) (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">age</span><span style="color:#b44">&#34;</span> (<span style="color:#666">35</span><span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Int</span>)) <span style="color:#0b0;font-weight:bold">Nil</span>)
-</code></pre></div><p>But look what happened. The information that there's an <code>Int</code> somewhere inside the structure of the record is gone! Yep. We enclosed it in a <code>forall</code> and all the information <code>Cons</code> have now is that its second argument is some kind of <code>Dict b</code>, whatever <code>b</code> is. This doesn't look like a good sign.</p>
-<p>Let's try to write a <code>getField</code> function. We still didn't solve the problem of letting the type know what fields are possible, so we still need to guard ourselves against the possibility that the user will try to fetch the data from a field that doesn't exist. So the signature of <code>getField</code> still is <code>String -&gt; Dict a -&gt; Maybe</code>&hellip; wait a minute! What's the return type?</p>
-<p>In the record above, if the field name is <code>&quot;name&quot;</code> it should return a <code>String</code>, but if the field name is <code>&quot;age&quot;</code> it should return an <code>Int</code>. But the compiler wouldn't know that because there's no information in the type of the record about the value of the fields in is tail. We only have information about the type of the head entry.</p>
-<p>So, the return type of <code>getField</code> is something like <code>(forall b . Maybe b)</code>? That doesn't look very useful. I can retrieve the value but I loose all the information about its type! This doesn't seem to be working&hellip;</p>
+<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;name&#34;</span> <span style="color:#b44">&#34;Rafael&#34;</span>) (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;age&#34;</span> (<span style="color:#666">35</span><span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Int</span>)) <span style="color:#0b0;font-weight:bold">Nil</span>)
+</code></pre></div><p>But look what happened. The information that there&rsquo;s an <code>Int</code> somewhere inside the structure of the record is gone! Yep. We enclosed it in a <code>forall</code> and all the information <code>Cons</code> have now is that its second argument is some kind of <code>Dict b</code>, whatever <code>b</code> is. This doesn&rsquo;t look like a good sign.</p>
+<p>Let&rsquo;s try to write a <code>getField</code> function. We still didn&rsquo;t solve the problem of letting the type know what fields are possible, so we still need to guard ourselves against the possibility that the user will try to fetch the data from a field that doesn&rsquo;t exist. So the signature of <code>getField</code> still is <code>String -&gt; Dict a -&gt; Maybe</code>&hellip; wait a minute! What&rsquo;s the return type?</p>
+<p>In the record above, if the field name is <code>&quot;name&quot;</code> it should return a <code>String</code>, but if the field name is <code>&quot;age&quot;</code> it should return an <code>Int</code>. But the compiler wouldn&rsquo;t know that because there&rsquo;s no information in the type of the record about the value of the fields in is tail. We only have information about the type of the head entry.</p>
+<p>So, the return type of <code>getField</code> is something like <code>(forall b . Maybe b)</code>? That doesn&rsquo;t look very useful. I can retrieve the value but I loose all the information about its type! This doesn&rsquo;t seem to be working&hellip;</p>
 <h3 id="keeping-track-of-the-field-types">Keeping track of the field types</h3>
-<p>I want to get back to &ldquo;infinite regress of types&rdquo; I refered above. Why couldn't we put the <code>b</code> type variable above as an argument for the type constructor? Well, let's try and see. We could create a data type <code>Dict a b</code> where <code>a</code> is the value of the head <code>Entry</code> and <code>b</code> is the type of the head of the next <code>Dict</code> down the <code>Cons</code> data constructor. So:</p>
+<p>I want to get back to &ldquo;infinite regress of types&rdquo; I refered above. Why couldn&rsquo;t we put the <code>b</code> type variable above as an argument for the type constructor? Well, let&rsquo;s try and see. We could create a data type <code>Dict a b</code> where <code>a</code> is the value of the head <code>Entry</code> and <code>b</code> is the type of the head of the next <code>Dict</code> down the <code>Cons</code> data constructor. So:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Dict</span> a b <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Nil</span> <span style="color:#666">|</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> a) (<span style="color:#0b0;font-weight:bold">Dict</span> b <span style="color:#666">???</span>)
-</code></pre></div><p>Oops. Damn, what about the type of the entry after the next entry? Well&hellip; Let's put it in the constructor too:</p>
+</code></pre></div><p>Oops. Damn, what about the type of the entry after the next entry? Well&hellip; Let&rsquo;s put it in the constructor too:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Dict</span> a b c <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Nil</span> <span style="color:#666">|</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> a) (<span style="color:#0b0;font-weight:bold">Dict</span> b c <span style="color:#666">???</span>)
-</code></pre></div><p>You get it, right? There's always a new type to keep track of. The type of the record must know not only the type of the head entry, but also all the types of all entries in its tail. This looks a hell like a linked list of types, doesn't it? If we had a way to create <strong>a type level list</strong> we could have the following GADT:</p>
+</code></pre></div><p>You get it, right? There&rsquo;s always a new type to keep track of. The type of the record must know not only the type of the head entry, but also all the types of all entries in its tail. This looks a hell like a linked list of types, doesn&rsquo;t it? If we had a way to create <strong>a type level list</strong> we could have the following GADT:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Dict</span> (types <span style="color:#a2f;font-weight:bold">::</span> (<span style="color:#0b0;font-weight:bold">TypeLevelList</span> <span style="color:#0b0;font-weight:bold">Type</span>)) <span style="color:#a2f;font-weight:bold">where</span>
     <span style="color:#0b0;font-weight:bold">Nil</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#0b0;font-weight:bold">TypeLevelEmptyList</span>
     <span style="color:#0b0;font-weight:bold">Cons</span> <span style="color:#a2f;font-weight:bold">::</span> (<span style="color:#0b0;font-weight:bold">Entry</span> a) <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Dict</span> (tail <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">TypeLevelList</span>) <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Dict</span> (a `<span style="color:#0b0;font-weight:bold">TypeLevelCons</span>` tail)
 </code></pre></div><p>Wait, what the hell is this? First of all, what are those type signatures in the wrong place? Those are <em>kind signatures</em>. Kind is the &ldquo;type of a type constructor&rdquo;. For example, type constructors that have no parameters, like <code>Bool</code> or <code>String</code> have kind <code>Type</code> (or <code>*</code>). Type constructors that take a single parameter, like <code>Maybe</code> have kind <code>Type -&gt; Type</code>. Single parameter Typeclasses like <code>Functor</code> or <code>Monad</code> have kind <code>Type -&gt; Constraint</code>, etc.</p>
-<p>Here I'm supposing that there exists a kind called <code>TypeLevelList</code>, and that there exists two type constructors:</p>
+<p>Here I&rsquo;m supposing that there exists a kind called <code>TypeLevelList</code>, and that there exists two type constructors:</p>
 <ul>
 <li><code>TypeLevelEmptyList</code> with kind <code>TypeLevelList</code>,</li>
 <li><code>TypeLevelCons</code> with kind <code>Type -&gt; TypeLevelList -&gt; TypeLevelList</code>.</li>
 </ul>
-<p>When I write <code>data Dict (types :: TypeLevelList)</code> I'm declaring a type constructor <code>Dict</code>with kind <code>TypeLevelList -&gt; Type</code>. This type has two data constructors:</p>
+<p>When I write <code>data Dict (types :: TypeLevelList)</code> I&rsquo;m declaring a type constructor <code>Dict</code>with kind <code>TypeLevelList -&gt; Type</code>. This type has two data constructors:</p>
 <ul>
 <li><code>Nil</code> which is just an empty record with type <code>Dict TypeLevelEmptyList</code></li>
 <li><code>Cons</code> which takes an <code>Entry a</code> and a <code>Dict TypeLevelList</code> and return another <code>Dict TypeLevelList</code> putting <code>a</code> on the head of that <code>TypeLevelList</code> it received.</li>
 </ul>
-<p>In practice we'd have something like this:</p>
+<p>In practice we&rsquo;d have something like this:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#00a000">emptyRecord</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#0b0;font-weight:bold">TypeLevelEmptyList</span>
 <span style="color:#00a000">emptyRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Nil</span>
 
 <span style="color:#00a000">agedRecord</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> (<span style="color:#0b0;font-weight:bold">Int</span> `<span style="color:#0b0;font-weight:bold">TypeLevelCons</span>` <span style="color:#0b0;font-weight:bold">TypeLevelEmptyList</span>)
-<span style="color:#00a000">agedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">age</span><span style="color:#b44">&#34;</span> <span style="color:#666">35</span>) emptyRecord
+<span style="color:#00a000">agedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;age&#34;</span> <span style="color:#666">35</span>) emptyRecord
 
 <span style="color:#00a000">recordWithAStringAndAnInt</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> (<span style="color:#0b0;font-weight:bold">String</span> `<span style="color:#0b0;font-weight:bold">TypeLevelCons</span>` <span style="color:#0b0;font-weight:bold">Int</span> `<span style="color:#0b0;font-weight:bold">TypeLevelCons</span>` <span style="color:#0b0;font-weight:bold">TypeLevelEmptyList</span>)
-<span style="color:#00a000">namedAndAgedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">name</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b44">Rafael</span><span style="color:#b44">&#34;</span>) agedRecord
+<span style="color:#00a000">namedAndAgedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;name&#34;</span> <span style="color:#b44">&#34;Rafael&#34;</span>) agedRecord
 </code></pre></div><p>This is sweet! We can keep track to the types of all fields! But how do we create those type level lists? :O</p>
 <h3 id="type-level-lists">Type Level Lists</h3>
 <p>To create those type level lists we have to use a GHC extension called <code>DataKinds</code>. To understand what <code>DataKinds</code> do lets consider this simple type declaration:</p>
@@ -213,7 +240,7 @@
 <li>a <strong>type constructor</strong> <code>'Succ</code> whose <strong>kind</strong> is <code>'Nat -&gt; 'Nat</code></li>
 </ul>
 <p>Those types constructed with those type constructors are not inhabited by values, but they are very useful for <strong>type computation</strong>. So, how do we create the &ldquo;kind constructor&rdquo; <code>TypeLevelList</code> with type constructor <code>TypeLevelEmptyList</code> and <code>TypeLevelCons</code>? Exactly with the same code that we would use to create a type constructor <code>List</code> with data constructor <code>EmptyList</code> and <code>Cons</code>, but we use the <code>DataKinds</code> extension to lift those objects from the <code>value :: type</code> world to the <code>type :: kind</code> world. We can do:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">{-</span><span style="color:#080;font-style:italic"># LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures #</span><span style="color:#080;font-style:italic">-}</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">{-# LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures #-}</span>
 
 <span style="color:#a2f;font-weight:bold">module</span> <span style="color:#00f;font-weight:bold">Post</span> <span style="color:#a2f;font-weight:bold">where</span>
 
@@ -226,7 +253,7 @@
 <span style="color:#a2f;font-weight:bold">data</span> <span style="color:#0b0;font-weight:bold">Dict</span> (a <span style="color:#a2f;font-weight:bold">::</span> (<span style="color:#0b0;font-weight:bold">List</span> <span style="color:#0b0;font-weight:bold">Type</span>)) <span style="color:#a2f;font-weight:bold">where</span>
     <span style="color:#0b0;font-weight:bold">Nil</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>
     <span style="color:#0b0;font-weight:bold">Cons</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Entry</span> a <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Dict</span> t <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Dict</span> (<span style="color:#0b0;font-weight:bold">&#39;ListCons</span> a t)
-</code></pre></div><p>So, what's happening here? First of all we have the declaration <code>data List a = EmptyList | ListCons a (List a)</code>. This is a simple <em>list type</em>, but since we used the <code>Data.Kinds</code> extension, we get a new <strong>list kind</strong> for free:</p>
+</code></pre></div><p>So, what&rsquo;s happening here? First of all we have the declaration <code>data List a = EmptyList | ListCons a (List a)</code>. This is a simple <em>list type</em>, but since we used the <code>Data.Kinds</code> extension, we get a new <strong>list kind</strong> for free:</p>
 <ul>
 <li><code>'List</code> is a &ldquo;kind constructor&rdquo; which takes a kind and return another kind (<code>* -&gt; *</code>)</li>
 <li><code>'EmptyList :: forall a . List a</code> is a type constructor</li>
@@ -236,27 +263,27 @@
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>
 <span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">Int</span> <span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>
 <span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">String</span> (<span style="color:#0b0;font-weight:bold">Cons</span> <span style="color:#0b0;font-weight:bold">Int</span> <span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>)
-</code></pre></div><p>etc. All those types have kind <code>'List Type</code>. Those types are not inhabited (that is, we can't construct values that have those types), but we can used them to provide compile time information that helps us to avoid bugs, because we can build type constructors that build inhabited types out of them! For example, we can build <code>Dict</code>. Let's check the kind of <code>Dict</code> on GHCi:</p>
+</code></pre></div><p>etc. All those types have kind <code>'List Type</code>. Those types are not inhabited (that is, we can&rsquo;t construct values that have those types), but we can used them to provide compile time information that helps us to avoid bugs, because we can build type constructors that build inhabited types out of them! For example, we can build <code>Dict</code>. Let&rsquo;s check the kind of <code>Dict</code> on GHCi:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#666">&gt;</span> <span style="color:#0b0;font-weight:bold">:</span>k <span style="color:#0b0;font-weight:bold">Dict</span>
 <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">List</span> <span style="color:#0b0;font-weight:bold">Type</span> <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Type</span>
 <span style="color:#080;font-style:italic">-- the actual GHCi output is Dict :: List * -&gt; *, but Type is a nice synonym for *</span>
-</code></pre></div><p>This is what's happening with the declaration <code>data Dict (a :: (List Type))</code>. We used the extension <code>KindSignatures</code> to inform the compiler that the <code>Dict</code> type constructor has a kind which takes an argument of kind <code>List Type</code> and returns a regular <code>Type</code>.</p>
+</code></pre></div><p>This is what&rsquo;s happening with the declaration <code>data Dict (a :: (List Type))</code>. We used the extension <code>KindSignatures</code> to inform the compiler that the <code>Dict</code> type constructor has a kind which takes an argument of kind <code>List Type</code> and returns a regular <code>Type</code>.</p>
 <p>Now to the data constructors - which are the things that allows us to actually build values of type <code>Dict a</code>. The simples one is <code>Nil</code> which builds a value of type <code>Dict 'EmptyList</code>. This is an empty record, with no values stored and thus no types stored in the type level list.</p>
 <p>Also we have <code>Cons</code>, which takes a parameter of type <code>Entry a</code> and a parameter of type <code>Dict t</code> (remember, here <code>t</code> is a type of kind <code>'List Type</code>) and builds a value of type <code>Dict ('ListCons a t)</code>. So, <code>Cons</code> does two things:</p>
 <ul>
 <li>it concatenates a new entry with an existing record,</li>
 <li>it also concatenates the <em>type</em> of the value stored in this entry into an <em>existing list of types</em> that describes the types of the entries in the existing record.</li>
 </ul>
-<p>Wow. If that's too much to grasp, let's see this in action:</p>
+<p>Wow. If that&rsquo;s too much to grasp, let&rsquo;s see this in action:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#00a000">namedRecord</span> <span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Dict</span> (<span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">String</span> <span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>)
-<span style="color:#00a000">namedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">name</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b44">Rafael</span><span style="color:#b44">&#34;</span>) <span style="color:#0b0;font-weight:bold">Nil</span>
+<span style="color:#00a000">namedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;name&#34;</span> <span style="color:#b44">&#34;Rafael&#34;</span>) <span style="color:#0b0;font-weight:bold">Nil</span>
 
 <span style="color:#00a000">namedAndAgedRecord</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> (<span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">Int</span> (<span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">String</span> <span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>))
-<span style="color:#00a000">namedAndAgedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">age</span><span style="color:#b44">&#34;</span> (<span style="color:#666">35</span><span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Int</span>)) namedRecord
-</code></pre></div><p>See how the types of the fields we're creating are concatenated in the type of the record? This allows us to know precisely the types of all the fields in a record!</p>
+<span style="color:#00a000">namedAndAgedRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;age&#34;</span> (<span style="color:#666">35</span><span style="color:#a2f;font-weight:bold">::</span><span style="color:#0b0;font-weight:bold">Int</span>)) namedRecord
+</code></pre></div><p>See how the types of the fields we&rsquo;re creating are concatenated in the type of the record? This allows us to know precisely the types of all the fields in a record!</p>
 <h3 id="making-it-prettier">Making it prettier</h3>
-<p>We didn't have to code our own list type, Haskell already provides one for us and fortunately <code>Data.Kinds</code> works with the built-in types too. So we could have written simply:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">{-</span><span style="color:#080;font-style:italic"># LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures, TypeInType, TypeOperators #</span><span style="color:#080;font-style:italic">-}</span>
+<p>We didn&rsquo;t have to code our own list type, Haskell already provides one for us and fortunately <code>Data.Kinds</code> works with the built-in types too. So we could have written simply:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#080;font-style:italic">{-# LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures, TypeInType, TypeOperators #-}</span>
 
 <span style="color:#a2f;font-weight:bold">module</span> <span style="color:#00f;font-weight:bold">Post</span> <span style="color:#a2f;font-weight:bold">where</span>
 
@@ -272,16 +299,16 @@
 </code></pre></div><p>We made a few changes to make the types nicer:</p>
 <ul>
 <li>
-<p>We are now using Haskel's built-in lists:</p>
+<p>We are now using Haskel&rsquo;s built-in lists:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#666">&gt;</span> <span style="color:#0b0;font-weight:bold">:</span>k <span style="color:#0b0;font-weight:bold">Dict</span>
 <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#a2f;font-weight:bold">::</span> [<span style="color:#0b0;font-weight:bold">Type</span>] <span style="color:#a2f;font-weight:bold">-&gt;</span> <span style="color:#0b0;font-weight:bold">Type</span>
-</code></pre></div><p>This is completely equivalent to the previous signature <code>List Type -&gt; Type</code> the only difference is that we're using the built-in type instead of our custom list type.</p>
+</code></pre></div><p>This is completely equivalent to the previous signature <code>List Type -&gt; Type</code> the only difference is that we&rsquo;re using the built-in type instead of our custom list type.</p>
 </li>
 <li>
-<p>We're using the <code>TypeInType</code> extension to allow for the syntax <code>[Type]</code></p>
+<p>We&rsquo;re using the <code>TypeInType</code> extension to allow for the syntax <code>[Type]</code></p>
 </li>
 <li>
-<p>We're using the <code>TypeOperators</code> extension to allow for two things:</p>
+<p>We&rsquo;re using the <code>TypeOperators</code> extension to allow for two things:</p>
 <ol>
 <li>using the promoted type constructor <code>(:) :: a -&gt; [a] -&gt; [a]</code> which concatenates a type on the head of a type level list;</li>
 <li>renaming the ugly <code>Cons</code> data constructor to a nicer <code>(:&gt;)</code> infix type operator so that the expressions are nicer looking.</li>
@@ -290,13 +317,13 @@
 </ul>
 <p>With this modifications, instead of this ugly monster:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> (<span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">String</span> (<span style="color:#0b0;font-weight:bold">&#39;ListCons</span> <span style="color:#0b0;font-weight:bold">Int</span> <span style="color:#0b0;font-weight:bold">&#39;EmptyList</span>))
-<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">name</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b44">Rafael</span><span style="color:#b44">&#34;</span>) (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">age</span><span style="color:#b44">&#34;</span> <span style="color:#666">35</span>) <span style="color:#0b0;font-weight:bold">Nil</span>)
+<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;name&#34;</span> <span style="color:#b44">&#34;Rafael&#34;</span>) (<span style="color:#0b0;font-weight:bold">Cons</span> (<span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;age&#34;</span> <span style="color:#666">35</span>) <span style="color:#0b0;font-weight:bold">Nil</span>)
 </code></pre></div><p>we can write this:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">::</span> <span style="color:#0b0;font-weight:bold">Dict</span> <span style="color:#0b0;font-weight:bold">&#39;[String, Int]</span>
-<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">name</span><span style="color:#b44">&#34;</span> <span style="color:#b44">&#34;</span><span style="color:#b44">Rafael</span><span style="color:#b44">&#34;</span> <span style="color:#0b0;font-weight:bold">:&gt;</span> <span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;</span><span style="color:#b44">age</span><span style="color:#b44">&#34;</span> <span style="color:#666">35</span> <span style="color:#0b0;font-weight:bold">:&gt;</span> <span style="color:#0b0;font-weight:bold">Nil</span>
+<span style="color:#00a000">myRecord</span> <span style="color:#a2f;font-weight:bold">=</span> <span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;name&#34;</span> <span style="color:#b44">&#34;Rafael&#34;</span> <span style="color:#0b0;font-weight:bold">:&gt;</span> <span style="color:#0b0;font-weight:bold">Entry</span> <span style="color:#b44">&#34;age&#34;</span> <span style="color:#666">35</span> <span style="color:#0b0;font-weight:bold">:&gt;</span> <span style="color:#0b0;font-weight:bold">Nil</span>
 </code></pre></div><p>Much better, right?</p>
-<h3 id="this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised">This is already too long and you didn't get to the point you promised</h3>
-<p>Well, yep. This post is already big and we still don't know:</p>
+<h3 id="this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised">This is already too long and you didn&rsquo;t get to the point you promised</h3>
+<p>Well, yep. This post is already big and we still don&rsquo;t know:</p>
 <ul>
 <li>how to write <code>getField</code></li>
 <li>how to enhance the type <code>Dict</code> to allow for information about field names to be statically checked by the compiler.</li>

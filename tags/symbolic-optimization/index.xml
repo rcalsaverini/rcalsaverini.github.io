@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Symbolic Optimization on Blog s</title>
+    <link>https://rcalsaverini.github.io/tags/symbolic-optimization/</link>
+    <description>Recent content in Symbolic Optimization on Blog s</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://rcalsaverini.github.io/tags/symbolic-optimization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Neural Nets for Symbolic Optimization</title>
+      <link>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization/</guid>
+      <description>What&amp;rsquo;s Symbolic Optimization A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &amp;ldquo;optimal&amp;rdquo; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let’s call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The problem I want do discuss in finding expressions that minizes that function:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,11 +6,7 @@
     <description>Recent content in Operational Monads on Blog s</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Aug 2010 21:00:00 -0300</lastBuildDate>
-    
-	<atom:link href="https://rcalsaverini.github.io/tags/operational-monads/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 25 Aug 2010 21:00:00 -0300</lastBuildDate><atom:link href="https://rcalsaverini.github.io/tags/operational-monads/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Operational Semantics for Monads</title>
       <link>https://rcalsaverini.github.io/blog/2010-08-25-operational-semantics/</link>
@@ -18,7 +14,7 @@
       
       <guid>https://rcalsaverini.github.io/blog/2010-08-25-operational-semantics/</guid>
       <description>Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.
-While randomly browsing around on Planet Haskell I&#39;ve found a post on Heinrich Apfelmus&amp;rsquo; blog about something called &amp;ldquo;operational semantics&amp;rdquo; for monads. Found it very iluminating. Basically it&#39;s a form to implement monads focusing not on defining the bind and return operators, but on what the monad is really supposed to do.</description>
+While randomly browsing around on Planet Haskell I&amp;rsquo;ve found a post on Heinrich Apfelmus&#39; blog about something called &amp;ldquo;operational semantics&amp;rdquo; for monads. Found it very iluminating. Basically it&amp;rsquo;s a form to implement monads focusing not on defining the bind and return operators, but on what the monad is really supposed to do.</description>
     </item>
     
   </channel>
