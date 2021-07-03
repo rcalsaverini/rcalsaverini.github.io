@@ -13,7 +13,7 @@
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization/</guid>
-      <description>What&amp;rsquo;s Symbolic Optimization A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &amp;ldquo;optimal&amp;rdquo; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let&amp;rsquo;s call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The problem I want do discuss is finding expressions that minimizes that function:</description>
+      <description>What&amp;rsquo;s Symbolic Optimization A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &amp;ldquo;optimal&amp;rdquo; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let&amp;rsquo;s call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The problem I want to discuss is finding expressions that minimize that function:</description>
     </item>
     
   </channel>
