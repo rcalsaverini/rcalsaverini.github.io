@@ -195,23 +195,23 @@ $f$ might be expensive to calculate. Even if it isn&rsquo;t, the space of possib
 <p>Let&rsquo;s first focus on the Encoder/Decoder pair. What if we could train functions to learn this bijection? Even if it&rsquo;s not an exact bijection, it could be a start, right?</p>
 <p>So, imagine we have a parametric family of functions we could use to find a suitable encoder:</p>
 <p>$$E: \Theta_E \times \mathrm{Exp}_G \to \mathbb{R}^k$$</p>
-<p>where $\Theta_E$ is some space of parameters. We could try to find an expression that tells us how good an encoding $E(\theta_E, e)$ for a set expressions $e \in \mathrm{Exp}_G$ and find the parameter $\theta_E \in \Theta_E$ that optimizes how good the encoder is. It the parameter space is nice and the function that defines the &ldquo;goodness&rdquo; of the encoder is continuous this could be done by gradient descent.</p>
-<p>If we do the same with the decoder:</p>
+<p>where $\Theta_E$ is some space of parameters. We could try to find a function that evaluates how well the vector $E(\theta_E, e)$ encodes the expression $e \in \mathrm{Exp}_G$ and find the parameter $\theta_E \in \Theta_E$ that optimizes that &ldquo;well-encodability&rdquo; function. If the parameter space is nice and the &ldquo;well-encodability&rdquo; function is continuous this could be done by gradient descent.</p>
+<p>We could do the same with the decoder:</p>
 <p>$$D: \Theta_D \times \mathbb{R}^k \to \mathrm{Exp}_G $$</p>
-<p>Than one good candidate for a measure of &ldquo;goodness of the encoder/decoder pair is the reconstruction loss<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
+<p>If we put the encoder and decoder together, one good candidate for a measure of &ldquo;well-encodability/decodability&rdquo; is the reconstruction loss<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
 <p>$$
 \ell(\theta_E, \theta_D) = \sum_{k=1}^N d(e_k, D(\theta_D, E(\theta_E, e_k)))
 $$</p>
-<p>We could implement</p>
+<p>where $d(e, e')$ is a measure of how distant two expressions are. In summary, we would:</p>
 <ul>
 <li>sample a random expression $e$</li>
 <li>use the encoder to generate it&rsquo;s latent encoding vector $\mathbf{x} = E(\theta_E, e)$;</li>
 <li>use the decoder to recover the a new expression $e' = D(\theta_D, \mathbf{x})$;</li>
-<li>compare the expressions $e$ with $e'$ and adjust the parameters $\theta_E$ and $\theta_D$ to minimize the distance between them.</li>
+<li>adjust the parameters $\theta_E$ and $\theta_D$ to minimize the distance between the expressions $e$ with $e'$.</li>
 </ul>
-<p>Now, if we have $E$ and $D$ learned this way, we could now go back to our original optimization problem and ask: can we do the same with the function $f(D(x))$? Given that $f$ and $D(\theta_D)$ are known, we could try to learn a function:</p>
+<p>Now, after we have learned the encoder and decoder, we could now go back to our original optimization problem. We still want to find the best expression that minimizes $f(e)$ and we want to do that by minimizing $f(D(x, \theta_D))$. Perhaps we can apply the same trick above? We could try to learn a function:</p>
 <p>$$V: \Theta_V \times \mathbb{R}^k \to \mathbb{R} $$</p>
-<p>that given the vector embedding $\mathbf{x} = E(\theta_E, e)$ associated to an expression $e$, learns to estimate the value of $f(e)$. We could:</p>
+<p>that given the vector embedding $\mathbf{x} = E(\theta_E, e)$ associated to an expression $e$, learns to estimate the value of $f(e)$. One possible way would be to:</p>
 <ul>
 <li>sample a random expression $e$</li>
 <li>use the encoder to recover its associated embedding $\mathbf{x} = E(\theta_E, e)$;</li>
@@ -232,9 +232,10 @@ $$</p>
 </ul>
 <p>This will probably not be an exact solution, but hopefully one that is good enough.</p>
 <h3 id="problems-and-conclusions">Problems and conclusions</h3>
-<p>That&rsquo;s a nice story, but is it actually possible to do? That&rsquo;s a great question. I tried attacking the regex problem with this idea before and I hit several brick walls (that mainly stem from my lack of knowledge in symbolic computation since my focus is 100% in ML and not in Computer Science in general).</p>
-<p>The first one is how to define the parametric family of encoders $E(\theta, e)$. Those functions must take values in the set of possible expressions $\mathrm{Exp}_G$ (the set of all regular expressions in our toy example). We could work with a string representation of the expression and use whatever fancy architecture kids are using for processing strings nowadays. But it would be nice to be able to feed the Abstract Syntax Tree (AST) of the expression and process this. I wonder if that would add significant amounts of inductive bias about the problem and help the model to learn. I tried using TreeLSTMs<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> for this problem the past and the result was interesting.</p>
-<p>The parametric family of decoders $D(\theta_D, \mathbf{x})$ is even worse. Those functions have to produce syntatically correct expressions in order for the optimization to make sense. Using simple string generation neural nets to produce a string representation of the expression will probably not garantee syntatically valid expressions for every latent vector we input. One possibility is to build it as a generative process that produces valid ASTs recursively. That can work but on my past tries I had a lot of trouble with performance. Also randomly generating trees is not easy and naive processes tend to produce trees with a very heavily tailed depth distribution.</p>
+<p>That&rsquo;s a nice story, but is it actually possible to do? That&rsquo;s a great question. I have no idea. I tried attacking the regex problem with this idea before and I hit several brick walls (that mainly stem from my lack of knowledge in symbolic computation since my focus is 100% in ML and not in Computer Science in general).</p>
+<p>The first difficulty is how to define the parametric family of encoders $E(\theta, e)$. Those functions must take values in the set of possible expressions $\mathrm{Exp}_G$ (the set of all regular expressions in our toy example). We could work with a string representation of the expression and use whatever fancy architecture kids are using for processing strings nowadays. But it would be nice to be able to feed the Abstract Syntax Tree (AST) of the expression and process this. I wonder if that would add significant amounts of inductive bias about the problem and help the model to learn. I tried using TreeLSTMs<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> for this problem the past and the result was interesting. So I think this part is really feasible.</p>
+<p>The parametric family of decoders $D(\theta_D, \mathbf{x})$ is a much worse problem though. Those functions have to produce syntatically correct expressions in order for the optimization to make sense. Using simple string generation neural nets to produce a string representation of the expression will probably not garantee syntatically valid expressions for every latent vector we input. One possibility is to build it as a generative process that produces valid ASTs recursively. That can work but on my past tries I had a lot of trouble with performance.</p>
+<p>Also randomly generating trees is not easy and naive processes tend to produce trees with a very heavily tailed depth distribution. In my experiments frequently my decode would generate mostly very shallow ASTs but every once in a while it would generate a monstrously deep AST. Manually clipping the maximum depth didn&rsquo;t work very well for me, but I might have done something dumb.</p>
 <p>So, I didn&rsquo;t reach the point where I could test if this idea would work at all, but that looks like a promising idea for someone with actual time to test it.</p>
 <h3 id="references-and-footnotes">References and Footnotes</h3>
 <section class="footnotes" role="doc-endnotes">
