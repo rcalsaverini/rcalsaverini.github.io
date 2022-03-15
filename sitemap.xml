@@ -3,14 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://rcalsaverini.github.io/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
     <priority>0</priority>
   </url><url>
     <loc>https://rcalsaverini.github.io/blog/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
   </url><url>
     <loc>https://rcalsaverini.github.io/categories/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/chord-transformations/</loc>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/blog/preserve-harmonies-swapping-3rds-7ths/</loc>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/music-theory/</loc>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/categories/music-theory/</loc>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/negative-harmony/</loc>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
+  </url><url>
+    <loc>https://rcalsaverini.github.io/tags/</loc>
+    <lastmod>2022-03-15T21:10:09+00:00</lastmod>
   </url><url>
     <loc>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization/</loc>
     <lastmod>2021-07-02T00:00:00+00:00</lastmod>
@@ -29,18 +47,6 @@
   </url><url>
     <loc>https://rcalsaverini.github.io/tags/symbolic-optimization/</loc>
     <lastmod>2021-07-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://rcalsaverini.github.io/tags/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://rcalsaverini.github.io/tags/music-theory/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url><url>
-    <loc>https://rcalsaverini.github.io/categories/music-theory/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
-  </url><url>
-    <loc>https://rcalsaverini.github.io/tags/negative-harmony/</loc>
-    <lastmod>2021-02-20T23:24:31+00:00</lastmod>
   </url><url>
     <loc>https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes/</loc>
     <lastmod>2021-02-20T23:24:31+00:00</lastmod>
