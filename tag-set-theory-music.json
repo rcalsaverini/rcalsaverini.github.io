@@ -1,0 +1,55 @@
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": "Agente Aleatório",
+  "home_page_url": "https://rcalsaverini.github.io/blog",
+  "feed_url": "https://rcalsaverini.github.io/blog/tag-set-theory-music.json",
+  "description": "Constantemente aumentando a entropia do universo.",
+  "items": [
+    {
+      "id": "https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html",
+      "url": "https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html",
+      "title": "Transforming modes",
+      "content_html": "<h2><a href=\"#intro\" aria-hidden=\"true\" class=\"anchor\" id=\"intro\"></a>Intro</h2>\n<p>I want to continue the discussion in the <a href=\"blog-negative-harmony-inverts-brightness-modes.html\">last post</a> about transformations of modes and sets of tones. I want to explore the following question: what are transformations that make sense and what are they effect on scales, tone sets and modes.</p>\n<h3><a href=\"#the-transformations\" aria-hidden=\"true\" class=\"anchor\" id=\"the-transformations\"></a>The Transformations</h3>\n<p>I want to get back to the circle of fifths and define a few transformations and analise their implications. The transformations that I'm interested in are based in the idea of the negative harmony. As defined in the previous post, the negative harmony in a given key is obtained by reflecting the circle of fifths along an axis midway between the key and the its fifth. For example, here's a diagram of the negative harmony in the key of C:</p>\n<p>{{<tikz>}}\n\\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>\n<pre><code>\\def \\n {12}\n\\def \\radius {4 cm}\n\\def \\margin {7}\n\n\\def \\notes {1,...,12}\n\n\\foreach \\s in \\notes {\n  \\def \\start {360 * \\s / \\n + 15}\n  \\def \\end {360 * (\\s - 1) / \\n + 15}\n\n  \\node[block, circle, color=violet] at ({90-\\start}:\\radius) (a\\s) {\\Large $X_{\\s}$};\n  \\draw[vec] ({\\end+\\margin}:\\radius) arc ({\\end+\\margin}:{\\start-\\margin}:\\radius);\n}\n\n\n\\foreach \\x in {1, 2, ..., 6} {\n    \\def \\a {\\x * 30 - 30}\n    \\draw [thick,dashed,color=violet!50] (\\a:-\\radius-20) -- (\\a:\\radius + 20)\n        node[above,sloped,color=purple] at (\\a:\\radius + 20) {$\\mathcal{N}_{\\x}$};\n}\n</code></pre>\n<p>\\end{tikzpicture}</p>\n<p>{{</tikz>}}</p>\n<p>We will identify those transformations by $N_{x}$ where $x \\in {C, D\\flat, \\ldots, B\\flat, B}$</p>\n",
+      "summary": "",
+      "date_published": "2021-02-22T00:00:00-00:00",
+      "image": "",
+      "authors": [
+        {
+          "name": "Rafael S. Calsaverini",
+          "url": "",
+          "avatar": ""
+        }
+      ],
+      "tags": [
+        "Music Theory",
+        "Negative Harmony",
+        "Set Theory (Music)",
+        "Neo-Riemannian Theory",
+        "Chord transformations"
+      ],
+      "language": "en"
+    },
+    {
+      "id": "https://rcalsaverini.github.io/blog/music-theory-negative-harmony-inverts-brightness-modes.html",
+      "url": "https://rcalsaverini.github.io/blog/music-theory-negative-harmony-inverts-brightness-modes.html",
+      "title": "Negative Harmony inverts brightness of modes",
+      "content_html": "<h2><a href=\"#intro\" aria-hidden=\"true\" class=\"anchor\" id=\"intro\"></a>Intro</h2>\n<p>Recently I've been listening to a <a href=\"https://www.youtube.com/watch?v=SF8CdxcdJgw\">12tone video</a> on YouTube about negative harmony, a concept recently popularized by musician Jacob Collier. On the related links I found a bunch of videos from <a href=\"https://www.youtube.com/channel/UCurOAVtqb7kM1siNlDynzFw\">this channel</a> with &quot;negative harmony&quot; versions of many popular songs.</p>\n<p>The change in sonority of those songs clearly indicated for me a change in the <em>mode</em> of the song, which kind of go against the grain of what I've been told about the action of those transformations. In this post I want to explore negative harmony as a transformation not only on chords but on scales, modes and melody.</p>\n<h3><a href=\"#what-is-negative-harmony-anyway\" aria-hidden=\"true\" class=\"anchor\" id=\"what-is-negative-harmony-anyway\"></a>What is Negative Harmony anyway?</h3>\n<p>There are many ways to understand negative harmony and I'm not going to pretend I'm able to give a full historical background. The video by the 12tone channel that I linked above does a much better job than I ever could. Here in this post I'm mainly interested in this as a transformation that can be applied to a particular set of notes, and that's how I'm going to describe and treat it.</p>\n<p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.\n<figure><img src=\"./media/negative_harm_C.svg\" alt=\"The circle of fifths highlighting the negative harmony transformation in the key of C.\" /></figure></p>\n<p>The arrows above indicate the notes that are to be switched. So, to apply the negative harmony transformation in the key of C, one would change C for G, D for F, etc.</p>\n<h3><a href=\"#parameterizing-negative-harmony\" aria-hidden=\"true\" class=\"anchor\" id=\"parameterizing-negative-harmony\"></a>Parameterizing Negative Harmony</h3>\n<p>One aspect that is not often discussed about this transformation is that it is actually a <strong>family of transformations</strong> parameterized by a key center. Note that the reflection axis chosen above is only one chosen from 12 possibilities. To highlight this, notice that in the diagram above the transformation in the key of C takes F to D. In the diagram below we have transformation in the key of A, showing that in this case it takes F to A♭.</p>\n<p><figure><img src=\"./media/negative_harm_A.svg\" alt=\"The circle of fifths highlighting the negative harmony transformation in the key of C.\" /></figure></p>\n<h2><a href=\"#transforming-modes\" aria-hidden=\"true\" class=\"anchor\" id=\"transforming-modes\"></a>Transforming modes</h2>\n<p>Typically negative harmony is discussed <a href=\"https://www.brltheory.com/resources/negative-harmony-chord-chart/\">in the context of chords</a>, with an expectation that transformed chords has similar functions (having &quot;equivalent tonal gravity&quot;). I want to discuss how this transformation behaves when considering melodic elements, scales and modes.</p>\n<p>To start, let's check what happens when we transform the seven modes of the major scale. For example, let's apply the transformation over the major scale. As an ilustration, the sequence of notes [C, D, E, F, G, A, B] (the Ionian mode of C Major), transformed in the key of C, will result in [G, F, E♭, D, C, B♭, A♭].</p>\n<p>This sequence can be interpreted in a lot of different ways. Harmonically it is typical to consider the following argument. If the original harmony is in the key of C major, than the I chord is C major triad (C, E, G). This triad transforms to (G, E♭, C), which is an inversion of the C minor triad. Since this would also fit the role of the I chord in the new harmony, this should be interpreted as transforming from a C major harmony to a C minor one.</p>\n<p>That's a good argument, but if we focus on the melody, the note that would be treated as the focus and resting place of the melody in the original key would be C, which would turn into G in the new melody. So, we could interpret G as the root note of the transformed sequence, which would make it a G Phrygian melody.</p>\n<p>Let's take this second stance and see what happens with all modes. Under this interpretation this is how the modes transform:</p>\n<ul>\n<li>C Ionian transforms into G Phrygian.</li>\n<li>C Dorian trasforms into G Dorian.</li>\n<li>C Phrygian trasforms into G Ionian.</li>\n<li>C Lydian transforms into G Locrian.</li>\n<li>C Mixolydian trasforms into G Aelian.</li>\n<li>C Aeolian trasforms into G Mixolydian.</li>\n<li>C Locrian transforms into G Lydian.</li>\n</ul>\n<h3><a href=\"#negative-harmony-inverts-brightness\" aria-hidden=\"true\" class=\"anchor\" id=\"negative-harmony-inverts-brightness\"></a>Negative Harmony inverts brightness</h3>\n<p>Finally, here's the neat and interesting pattern to notice: if we ignore the roots, the quality of the modes above is transforming up and down the <a href=\"https://www.youtube.com/watch?v=9rEqrPwVITY\">Brightness Scale</a>.</p>\n<p><figure><img src=\"./media/brightness_scale.svg\" alt=\"Brightness scale highlighting the negative harmony transformation.\" /></figure></p>\n<p>The effect of the transformation is to reflect the qualities of the modes around the center of the brightness scale, inverting the value of the brightness for the mode in question (the brightest mode becomes the darkest, the second brightest becomes the second darkest, etc).</p>\n<h2><a href=\"#so-what\" aria-hidden=\"true\" class=\"anchor\" id=\"so-what\"></a>So what?</h2>\n<p>Yes, this is just a simple neat symmetry I found. I intend to write more later on some other questions:</p>\n<ul>\n<li>What happens when you transform modes of other scales?</li>\n<li>Modes of the major scale are closed under this transformation. But this definitely won't happen always. What does it mean when it happens?</li>\n<li>What happens when you transform modes under the negative harmony centered in other keys?</li>\n<li>Is there a &quot;right&quot; key to use?</li>\n</ul>\n<p>Stay tuned.</p>\n",
+      "summary": "",
+      "date_published": "2021-02-20T00:00:00-00:00",
+      "image": "./media/negative_harm_C.svg",
+      "authors": [
+        {
+          "name": "Rafael S. Calsaverini",
+          "url": "",
+          "avatar": ""
+        }
+      ],
+      "tags": [
+        "Music Theory",
+        "Negative Harmony",
+        "Set Theory (Music)"
+      ],
+      "language": "en"
+    }
+  ]
+}

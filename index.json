@@ -1,0 +1,27 @@
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": "Agente Aleatório",
+  "home_page_url": "https://rcalsaverini.github.io/blog",
+  "feed_url": "https://rcalsaverini.github.io/blog/index.json",
+  "description": "Constantemente aumentando a entropia do universo.",
+  "items": [
+    {
+      "id": "https://rcalsaverini.github.io/blog/modularizing-gradient-boosting-models.html",
+      "url": "https://rcalsaverini.github.io/blog/modularizing-gradient-boosting-models.html",
+      "title": "Modularizing Gradient Boosting models",
+      "content_html": "",
+      "summary": "null",
+      "date_published": "2022-03-16T00:00:00-00:00",
+      "image": "",
+      "authors": [
+        {
+          "name": "Rafael Calsaverini",
+          "url": "https://bertha.social/@rcalsaverini",
+          "avatar": "https://github.com/rcalsaverini.png"
+        }
+      ],
+      "tags": [],
+      "language": "en"
+    }
+  ]
+}

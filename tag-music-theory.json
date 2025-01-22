@@ -1,0 +1,32 @@
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": "Agente Aleatório",
+  "home_page_url": "https://rcalsaverini.github.io/blog",
+  "feed_url": "https://rcalsaverini.github.io/blog/tag-music-theory.json",
+  "description": "Constantemente aumentando a entropia do universo.",
+  "items": [
+    {
+      "id": "https://rcalsaverini.github.io/blog/draft-conceptualize-messiaen-mode-3-composition.html",
+      "url": "https://rcalsaverini.github.io/blog/draft-conceptualize-messiaen-mode-3-composition.html",
+      "title": "How do I conceptualize Messiaen Mode 3 for composition?",
+      "content_html": "<h2><a href=\"#introduction\" aria-hidden=\"true\" class=\"anchor\" id=\"introduction\"></a>Introduction</h2>\n<p>As always, 12tone released a wonderful new video about Modes of Limited Transposition or Messiaen Modes, which are an extremely thought provoking set of scales. In the end he challenged listeners to write something using those scales and I decided to bite the bullet.</p>\n<p>I'm not going to explain a lot how modes of limited transposition are defined, since 12tone's video is already so good. But in essence those are scales that when transposed by certain intervals smaller than an octave, produce a scale with the same interval patterns over a different &quot;root&quot;. This symmetry kinds of make the root very ambiguous and mess up our sense of tonality. But at the same time there's a lot of &quot;familiar&quot; structure about those scales.</p>\n<h2><a href=\"#starting\" aria-hidden=\"true\" class=\"anchor\" id=\"starting\"></a>Starting</h2>\n<p>So, to start out I wanted to create a bit of structure because a lot of what I usually do when I try to write won't work. For example, choosing a root doesn't make a lot of sense since many different notes have completely simmetric patterns around them.</p>\n<p>I started by choosing Messiaen Mode 3 starting from the note <code>C</code>, which is comprised of the following notes: <code>C D Eb E F# G Ab Bb B</code> <sup class=\"footnote-ref\"><a href=\"#fn-footnote1\" id=\"fnref-footnote1\" data-footnote-ref>1</a></sup>. This mode repeats the same pattern of intervals after being transposed by a major third. So either <code>C</code>, <code>E</code> or <code>Ab</code> could be a &quot;root&quot;.</p>\n<p>Moreover, there are really just three classes of notes here, judging by how the other notes are related to them. We have:</p>\n<ul>\n<li>the &quot;roots&quot;: <code>C</code>, <code>E</code> and <code>Ab</code>;</li>\n<li>the &quot;seconds&quot;: <code>D</code>, <code>F#</code> and <code>Bb</code>;</li>\n<li>and the &quot;thirds&quot;: <code>Eb</code>, <code>G</code> and <code>B</code>.</li>\n</ul>\n<p>If you start on any of the roots, the pattern of intervals you see going up is: major second, minor third, major third, diminished fifth, fifth, augmented fifth, minor seventh and major seventh; for any of them. Similarly in the table below you can see the patterns of intervals going up from each of the classes:</p>\n<p>{{&lt; columntable caption=&quot;Interval structure&quot; &gt;}}</p>\n<p>headers: [Class ,Note,b2/b9,2/9,3m/#9,3M/b11,4/11,b5/#11,5 ,/#5/b13,6/13,7m/#13,7M]</p>\n<p>rows:</p>\n<pre><code>- [Roots/3, C, -, D, Eb, E, -, F#, G, Ab, -, Bb, B]\n- [E, -, F#, G, Ab, -, Bb, B, C, -, D, Eb]\n- [Ab, -, Bb, B, C, -, D, Eb, E, -, F#, G]\n- [Seconds/3, D, Eb, E, -, F#, G, Ab, -, Bb, B, C, -]\n- [F#, G, Ab, -, Bb, B, C, -, D, Eb, E, -]\n- [Bb, B, C, -, D, Eb, E, -, F#, G, Ab, -]\n- [Thirds/3, Eb, E, -, F#, G, Ab, -, Bb, B, C, -, D]\n- [G, Ab, -, Bb, B, C, -, D, Eb, E, -, F#]\n- [B, C, -, D, Eb, E, -, F#, G, Ab, -, Bb]\n</code></pre>\n<p>{{&lt; /columntable &gt;}}</p>\n<p>Since the structures are identical, we can focus on exploring the roots, seconds and thirds without worrying about the specific notes.</p>\n<h2><a href=\"#harmony\" aria-hidden=\"true\" class=\"anchor\" id=\"harmony\"></a>Harmony</h2>\n<p>Conjuring up chords from the table above is almost trivial, practically a matter of enumerating the intervals. Here are the chords that can be created for each class:</p>\n<p>{{&lt; columntable caption=&quot;Interval structure&quot; tag=&quot;code&quot;&gt;}}</p>\n<p>headers: [Class, Triads, Suspended Chords, 7th Chords, Suspended 7th Chords]</p>\n<p>rows:</p>\n<pre><code>- [Roots/4, I, Isus2/2, I7 IMaj7, I7sus2/2]\n- [IMin, IMin7 IMinMaj7]\n- [I˚, n/a/3 , IMin7(b5), n/a/3]\n- [I+, I+Maj7]\n- [Seconds, II+, II7(#5)]\n- [Thirds/3, IIIb, IIIbsus4/2, IIIbMaj7, IIIbsus4Maj7/2]\n- [IIIbMin, IIIbMinMaj7]\n- [IIIb+, n/a, IIIb+Maj7, n/a]\n</code></pre>\n<p>{{&lt; /columntable &gt;}}</p>\n<section class=\"footnotes\" data-footnotes>\n<ol>\n<li id=\"fn-footnote1\">\n<p>Since there are 9 tones in this scale, choosing the right letter notation is tricky so I just arbitrarily decided to not use double or unusual accidentals. I'm also not too concerned about calling intervals by the natural relative names. So instead of calling the fourth degree <code>Fb</code>, I'm just going to call it <code>E</code> and instead of saying it is a diminished fourth from the first degree, I'll just say it's a minor third from it. <a href=\"#fnref-footnote1\" class=\"footnote-backref\" data-footnote-backref data-footnote-backref-idx=\"1\" aria-label=\"Back to reference 1\">↩</a></p>\n</li>\n</ol>\n</section>\n",
+      "summary": "",
+      "date_published": "2021-07-02T00:00:00-00:00",
+      "image": "",
+      "authors": [
+        {
+          "name": "Rafael S. Calsaverini",
+          "url": "",
+          "avatar": ""
+        }
+      ],
+      "tags": [
+        "music theory",
+        "composition",
+        "messiaen modes",
+        "modes of limited transposition"
+      ],
+      "language": "en"
+    }
+  ]
+}

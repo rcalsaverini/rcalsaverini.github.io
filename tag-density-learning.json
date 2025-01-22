@@ -1,0 +1,31 @@
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": "Agente Aleatório",
+  "home_page_url": "https://rcalsaverini.github.io/blog",
+  "feed_url": "https://rcalsaverini.github.io/blog/tag-density-learning.json",
+  "description": "Constantemente aumentando a entropia do universo.",
+  "items": [
+    {
+      "id": "https://rcalsaverini.github.io/blog/draft-comment-on-paper-unsupervised-learning-by-predicting-noise.html",
+      "url": "https://rcalsaverini.github.io/blog/draft-comment-on-paper-unsupervised-learning-by-predicting-noise.html",
+      "title": "Comment on paper \"Unsupervised Learning by Predicting Noise\"",
+      "content_html": "<p>This is a short comment about something that occurred me while reading the recent paper Unsupervised Learning by Predicting Noise. Suppose we have a set of measurements of a variable $X$, which we assume were sampled from a distribution $p_{X}(x)$.</p>\n",
+      "summary": "",
+      "date_published": "2017-04-21T00:00:00-00:00",
+      "image": "",
+      "authors": [
+        {
+          "name": "Rafael S. Calsaverini",
+          "url": "",
+          "avatar": ""
+        }
+      ],
+      "tags": [
+        "Unsupervised Learning",
+        "Density Learning",
+        "Deep Learning"
+      ],
+      "language": "en"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 14:18:21 GMT</lastBuildDate><generator>marmite</generator><item><title>Could Neural Nets be used for Symbolic Optimization? Maybe.</title><link>https://rcalsaverini.github.io/blog/machine-learning-neural-nets-for-symbolic-optimization.html</link><author>Rafael S. Calsaverini</author><category>Machine Learning</category><category>Neural Networks</category><category>Deep Learning</category><category>Symbolic Optimization</category><guid>https://rcalsaverini.github.io/blog/machine-learning-neural-nets-for-symbolic-optimization.html</guid><pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">archive-2021</source><content:encoded><![CDATA[<h3><a href="#whats-symbolic-optimization" aria-hidden="true" class="anchor" id="whats-symbolic-optimization"></a>What's Symbolic Optimization</h3>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 16:03:38 GMT</lastBuildDate><generator>marmite</generator><item><title>Could Neural Nets be used for Symbolic Optimization? Maybe.</title><link>https://rcalsaverini.github.io/blog/machine-learning-neural-nets-for-symbolic-optimization.html</link><author>Rafael S. Calsaverini</author><category>Machine Learning</category><category>Neural Networks</category><category>Deep Learning</category><category>Symbolic Optimization</category><guid>https://rcalsaverini.github.io/blog/machine-learning-neural-nets-for-symbolic-optimization.html</guid><pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">archive-2021</source><content:encoded><![CDATA[<h3><a href="#whats-symbolic-optimization" aria-hidden="true" class="anchor" id="whats-symbolic-optimization"></a>What's Symbolic Optimization</h3>
 <p>A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &quot;optimal&quot; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let's call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The
 problem I want to discuss is finding expressions that minimize that function:</p>
 <p>$$
@@ -101,6 +101,56 @@ $$</p>
 </li>
 </ol>
 </section>
+]]></content:encoded></item><item><title>How do I conceptualize Messiaen Mode 3 for composition?</title><link>https://rcalsaverini.github.io/blog/draft-conceptualize-messiaen-mode-3-composition.html</link><author>Rafael S. Calsaverini</author><category>music theory</category><category>composition</category><category>messiaen modes</category><category>modes of limited transposition</category><guid>https://rcalsaverini.github.io/blog/draft-conceptualize-messiaen-mode-3-composition.html</guid><pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">archive-2021</source><content:encoded><![CDATA[<h2><a href="#introduction" aria-hidden="true" class="anchor" id="introduction"></a>Introduction</h2>
+<p>As always, 12tone released a wonderful new video about Modes of Limited Transposition or Messiaen Modes, which are an extremely thought provoking set of scales. In the end he challenged listeners to write something using those scales and I decided to bite the bullet.</p>
+<p>I'm not going to explain a lot how modes of limited transposition are defined, since 12tone's video is already so good. But in essence those are scales that when transposed by certain intervals smaller than an octave, produce a scale with the same interval patterns over a different &quot;root&quot;. This symmetry kinds of make the root very ambiguous and mess up our sense of tonality. But at the same time there's a lot of &quot;familiar&quot; structure about those scales.</p>
+<h2><a href="#starting" aria-hidden="true" class="anchor" id="starting"></a>Starting</h2>
+<p>So, to start out I wanted to create a bit of structure because a lot of what I usually do when I try to write won't work. For example, choosing a root doesn't make a lot of sense since many different notes have completely simmetric patterns around them.</p>
+<p>I started by choosing Messiaen Mode 3 starting from the note <code>C</code>, which is comprised of the following notes: <code>C D Eb E F# G Ab Bb B</code> <sup class="footnote-ref"><a href="#fn-footnote1" id="fnref-footnote1" data-footnote-ref>1</a></sup>. This mode repeats the same pattern of intervals after being transposed by a major third. So either <code>C</code>, <code>E</code> or <code>Ab</code> could be a &quot;root&quot;.</p>
+<p>Moreover, there are really just three classes of notes here, judging by how the other notes are related to them. We have:</p>
+<ul>
+<li>the &quot;roots&quot;: <code>C</code>, <code>E</code> and <code>Ab</code>;</li>
+<li>the &quot;seconds&quot;: <code>D</code>, <code>F#</code> and <code>Bb</code>;</li>
+<li>and the &quot;thirds&quot;: <code>Eb</code>, <code>G</code> and <code>B</code>.</li>
+</ul>
+<p>If you start on any of the roots, the pattern of intervals you see going up is: major second, minor third, major third, diminished fifth, fifth, augmented fifth, minor seventh and major seventh; for any of them. Similarly in the table below you can see the patterns of intervals going up from each of the classes:</p>
+<p>{{&lt; columntable caption=&quot;Interval structure&quot; &gt;}}</p>
+<p>headers: [Class ,Note,b2/b9,2/9,3m/#9,3M/b11,4/11,b5/#11,5 ,/#5/b13,6/13,7m/#13,7M]</p>
+<p>rows:</p>
+<pre><code>- [Roots/3, C, -, D, Eb, E, -, F#, G, Ab, -, Bb, B]
+- [E, -, F#, G, Ab, -, Bb, B, C, -, D, Eb]
+- [Ab, -, Bb, B, C, -, D, Eb, E, -, F#, G]
+- [Seconds/3, D, Eb, E, -, F#, G, Ab, -, Bb, B, C, -]
+- [F#, G, Ab, -, Bb, B, C, -, D, Eb, E, -]
+- [Bb, B, C, -, D, Eb, E, -, F#, G, Ab, -]
+- [Thirds/3, Eb, E, -, F#, G, Ab, -, Bb, B, C, -, D]
+- [G, Ab, -, Bb, B, C, -, D, Eb, E, -, F#]
+- [B, C, -, D, Eb, E, -, F#, G, Ab, -, Bb]
+</code></pre>
+<p>{{&lt; /columntable &gt;}}</p>
+<p>Since the structures are identical, we can focus on exploring the roots, seconds and thirds without worrying about the specific notes.</p>
+<h2><a href="#harmony" aria-hidden="true" class="anchor" id="harmony"></a>Harmony</h2>
+<p>Conjuring up chords from the table above is almost trivial, practically a matter of enumerating the intervals. Here are the chords that can be created for each class:</p>
+<p>{{&lt; columntable caption=&quot;Interval structure&quot; tag=&quot;code&quot;&gt;}}</p>
+<p>headers: [Class, Triads, Suspended Chords, 7th Chords, Suspended 7th Chords]</p>
+<p>rows:</p>
+<pre><code>- [Roots/4, I, Isus2/2, I7 IMaj7, I7sus2/2]
+- [IMin, IMin7 IMinMaj7]
+- [I˚, n/a/3 , IMin7(b5), n/a/3]
+- [I+, I+Maj7]
+- [Seconds, II+, II7(#5)]
+- [Thirds/3, IIIb, IIIbsus4/2, IIIbMaj7, IIIbsus4Maj7/2]
+- [IIIbMin, IIIbMinMaj7]
+- [IIIb+, n/a, IIIb+Maj7, n/a]
+</code></pre>
+<p>{{&lt; /columntable &gt;}}</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-footnote1">
+<p>Since there are 9 tones in this scale, choosing the right letter notation is tricky so I just arbitrarily decided to not use double or unusual accidentals. I'm also not too concerned about calling intervals by the natural relative names. So instead of calling the fourth degree <code>Fb</code>, I'm just going to call it <code>E</code> and instead of saying it is a diminished fourth from the first degree, I'll just say it's a minor third from it. <a href="#fnref-footnote1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+</ol>
+</section>
 ]]></content:encoded></item><item><title>Transforming modes</title><link>https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><category>Neo-Riemannian Theory</category><category>Chord transformations</category><guid>https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html</guid><pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">archive-2021</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
 <p>I want to continue the discussion in the <a href="blog-negative-harmony-inverts-brightness-modes.html">last post</a> about transformations of modes and sets of tones. I want to explore the following question: what are transformations that make sense and what are they effect on scales, tone sets and modes.</p>
 <h3><a href="#the-transformations" aria-hidden="true" class="anchor" id="the-transformations"></a>The Transformations</h3>
@@ -137,11 +187,11 @@ $$</p>
 <h3><a href="#what-is-negative-harmony-anyway" aria-hidden="true" class="anchor" id="what-is-negative-harmony-anyway"></a>What is Negative Harmony anyway?</h3>
 <p>There are many ways to understand negative harmony and I'm not going to pretend I'm able to give a full historical background. The video by the 12tone channel that I linked above does a much better job than I ever could. Here in this post I'm mainly interested in this as a transformation that can be applied to a particular set of notes, and that's how I'm going to describe and treat it.</p>
 <p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.
-<figure><img src="/media/negative_harm_C.svg" alt="The circle of fifths highlighting the negative harmony transformation in the key of C." /></figure></p>
+<figure><img src="./media/negative_harm_C.svg" alt="The circle of fifths highlighting the negative harmony transformation in the key of C." /></figure></p>
 <p>The arrows above indicate the notes that are to be switched. So, to apply the negative harmony transformation in the key of C, one would change C for G, D for F, etc.</p>
 <h3><a href="#parameterizing-negative-harmony" aria-hidden="true" class="anchor" id="parameterizing-negative-harmony"></a>Parameterizing Negative Harmony</h3>
 <p>One aspect that is not often discussed about this transformation is that it is actually a <strong>family of transformations</strong> parameterized by a key center. Note that the reflection axis chosen above is only one chosen from 12 possibilities. To highlight this, notice that in the diagram above the transformation in the key of C takes F to D. In the diagram below we have transformation in the key of A, showing that in this case it takes F to A♭.</p>
-<p><figure><img src="/media/negative_harm_A.svg" alt="The circle of fifths highlighting the negative harmony transformation in the key of C." /></figure></p>
+<p><figure><img src="./media/negative_harm_A.svg" alt="The circle of fifths highlighting the negative harmony transformation in the key of C." /></figure></p>
 <h2><a href="#transforming-modes" aria-hidden="true" class="anchor" id="transforming-modes"></a>Transforming modes</h2>
 <p>Typically negative harmony is discussed <a href="https://www.brltheory.com/resources/negative-harmony-chord-chart/">in the context of chords</a>, with an expectation that transformed chords has similar functions (having &quot;equivalent tonal gravity&quot;). I want to discuss how this transformation behaves when considering melodic elements, scales and modes.</p>
 <p>To start, let's check what happens when we transform the seven modes of the major scale. For example, let's apply the transformation over the major scale. As an ilustration, the sequence of notes [C, D, E, F, G, A, B] (the Ionian mode of C Major), transformed in the key of C, will result in [G, F, E♭, D, C, B♭, A♭].</p>
@@ -159,7 +209,7 @@ $$</p>
 </ul>
 <h3><a href="#negative-harmony-inverts-brightness" aria-hidden="true" class="anchor" id="negative-harmony-inverts-brightness"></a>Negative Harmony inverts brightness</h3>
 <p>Finally, here's the neat and interesting pattern to notice: if we ignore the roots, the quality of the modes above is transforming up and down the <a href="https://www.youtube.com/watch?v=9rEqrPwVITY">Brightness Scale</a>.</p>
-<p><figure><img src="/media/brightness_scale.svg" alt="Brightness scale highlighting the negative harmony transformation." /></figure></p>
+<p><figure><img src="./media/brightness_scale.svg" alt="Brightness scale highlighting the negative harmony transformation." /></figure></p>
 <p>The effect of the transformation is to reflect the qualities of the modes around the center of the brightness scale, inverting the value of the brightness for the mode in question (the brightest mode becomes the darkest, the second brightest becomes the second darkest, etc).</p>
 <h2><a href="#so-what" aria-hidden="true" class="anchor" id="so-what"></a>So what?</h2>
 <p>Yes, this is just a simple neat symmetry I found. I intend to write more later on some other questions:</p>

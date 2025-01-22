@@ -1,28 +1,28 @@
 {
   "marmite_version": "0.2.3",
-  "posts": 10,
-  "pages": 6,
-  "generated_at": "2025-01-22 11:18:21.455762038 -03:00",
-  "timestamp": 1737555501,
-  "elapsed_time": 0.152453706,
+  "posts": 15,
+  "pages": 7,
+  "generated_at": "2025-01-22 13:03:39.064821105 -03:00",
+  "timestamp": 1737561819,
+  "elapsed_time": 0.166440399,
   "config": {
     "name": "Agente Aleatório",
     "tagline": "Constantemente aumentando a entropia do universo.",
     "url": "https://rcalsaverini.github.io/blog",
     "footer": "<div>Powered by <a href=\"https://github.com/rochacbruno/marmite\">Marmite</a> | <small><a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">CC-BY_NC-SA</a></small></div>",
     "language": "en",
-    "pagination": 10,
-    "pages_title": "Pages",
+    "pagination": 5,
+    "pages_title": "Páginas",
     "tags_title": "Tags",
     "tags_content_title": "Posts tagged with '$tag'",
-    "archives_title": "Archive",
+    "archives_title": "Arquivo",
     "archives_content_title": "Posts from '$year'",
     "streams_title": "Streams",
     "streams_content_title": "Posts from '$stream'",
-    "default_author": "",
-    "authors_title": "Authors",
-    "enable_search": false,
-    "search_title": "Search",
+    "default_author": "rafael.calsaverini",
+    "authors_title": "Autores",
+    "enable_search": true,
+    "search_title": "Busca",
     "content_path": "content",
     "site_path": "",
     "templates_path": "templates",
@@ -31,7 +31,7 @@
     "card_image": "",
     "banner_image": "",
     "logo_image": "",
-    "default_date_format": "%b %e, %Y",
+    "default_date_format": "%A, %d %B %Y",
     "menu": [
       [
         "About",
@@ -52,11 +52,39 @@
       [
         "Github",
         "https://github.com/rcalsaverini/"
+      ],
+      [
+        "Follow me",
+        "https://bertha.social/@rcalsaverini"
       ]
     ],
-    "extra": null,
-    "authors": {},
-    "toc": false,
-    "json_feed": false
+    "extra": {
+      "fediverse_verification": "https://bertha.social/@rcalsaverini",
+      "comments": {
+        "title": "Comentários",
+        "source": "<script src=\"https://giscus.app/client.js\"\ndata-repo=\"rcalsaverini/rcalsaverini.github.io\"\ndata-repo-id=\"R_kgDONt_m0Q\"\ndata-category=\"General\"\ndata-category-id=\"DIC_kwDONt_m0c4CmPrT\"\ndata-mapping=\"pathname\"\ndata-strict=\"0\"\ndata-reactions-enabled=\"1\"\ndata-emit-metadata=\"0\"\ndata-input-position=\"top\"\ndata-theme=\"light_protanopia\"\ndata-lang=\"pt\"\ndata-loading=\"lazy\"\ncrossorigin=\"anonymous\"\nasync>\n</script>\n"
+      },
+      "colorscheme_toggle": true,
+      "colorscheme": "github"
+    },
+    "authors": {
+      "rafael.calsaverini": {
+        "name": "Rafael Calsaverini",
+        "avatar": "https://github.com/rcalsaverini.png",
+        "bio": "Físico e executivo da área de dados e machine learning.",
+        "links": [
+          [
+            "Mastodon",
+            "https://bertha.social/@rcalsaverini"
+          ],
+          [
+            "Github",
+            "https://github.com/rcalsaverini"
+          ]
+        ]
+      }
+    },
+    "toc": true,
+    "json_feed": true
   }
 }
