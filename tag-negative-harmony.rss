@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 16:03:38 GMT</lastBuildDate><generator>marmite</generator><item><title>Transforming modes</title><link>https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><category>Neo-Riemannian Theory</category><category>Chord transformations</category><guid>https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html</guid><pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-negative-harmony</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 18:26:17 GMT</lastBuildDate><generator>marmite</generator><item><title>Transforming modes</title><link>https://rcalsaverini.github.io/blog/transforming-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><category>Neo-Riemannian Theory</category><category>Chord transformations</category><guid>https://rcalsaverini.github.io/blog/transforming-modes.html</guid><pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-negative-harmony</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
 <p>I want to continue the discussion in the <a href="blog-negative-harmony-inverts-brightness-modes.html">last post</a> about transformations of modes and sets of tones. I want to explore the following question: what are transformations that make sense and what are they effect on scales, tone sets and modes.</p>
 <h3><a href="#the-transformations" aria-hidden="true" class="anchor" id="the-transformations"></a>The Transformations</h3>
 <p>I want to get back to the circle of fifths and define a few transformations and analise their implications. The transformations that I'm interested in are based in the idea of the negative harmony. As defined in the previous post, the negative harmony in a given key is obtained by reflecting the circle of fifths along an axis midway between the key and the its fifth. For example, here's a diagram of the negative harmony in the key of C:</p>
@@ -28,17 +28,33 @@
 <p>\end{tikzpicture}</p>
 <p>{{</tikz>}}</p>
 <p>We will identify those transformations by $N_{x}$ where $x \in {C, D\flat, \ldots, B\flat, B}$</p>
-]]></content:encoded></item><item><title>Negative Harmony inverts brightness of modes</title><link>https://rcalsaverini.github.io/blog/music-theory-negative-harmony-inverts-brightness-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><guid>https://rcalsaverini.github.io/blog/music-theory-negative-harmony-inverts-brightness-modes.html</guid><pubDate>Sat, 20 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-negative-harmony</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
+]]></content:encoded></item><item><title>Negative Harmony inverts brightness of modes</title><link>https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><guid>https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html</guid><pubDate>Sat, 20 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-negative-harmony</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
 <p>Recently I've been listening to a <a href="https://www.youtube.com/watch?v=SF8CdxcdJgw">12tone video</a> on YouTube about negative harmony, a concept recently popularized by musician Jacob Collier. On the related links I found a bunch of videos from <a href="https://www.youtube.com/channel/UCurOAVtqb7kM1siNlDynzFw">this channel</a> with &quot;negative harmony&quot; versions of many popular songs.</p>
 <p>The change in sonority of those songs clearly indicated for me a change in the <em>mode</em> of the song, which kind of go against the grain of what I've been told about the action of those transformations. In this post I want to explore negative harmony as a transformation not only on chords but on scales, modes and melody.</p>
 <h3><a href="#what-is-negative-harmony-anyway" aria-hidden="true" class="anchor" id="what-is-negative-harmony-anyway"></a>What is Negative Harmony anyway?</h3>
 <p>There are many ways to understand negative harmony and I'm not going to pretend I'm able to give a full historical background. The video by the 12tone channel that I linked above does a much better job than I ever could. Here in this post I'm mainly interested in this as a transformation that can be applied to a particular set of notes, and that's how I'm going to describe and treat it.</p>
-<p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.
-<figure><img src="./media/negative_harm_C.svg" alt="The circle of fifths highlighting the negative harmony transformation in the key of C." /></figure></p>
+<p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.</p>
+<center>
+<figure>
+  <object data=/media/negative_harm_C.svg width="320">
+  </object>
+  <figcaption>
+    The negative harmony transformation visualized in the Circle of Fifths
+  </figcaption>
+</figure>
+</center>
 <p>The arrows above indicate the notes that are to be switched. So, to apply the negative harmony transformation in the key of C, one would change C for G, D for F, etc.</p>
 <h3><a href="#parameterizing-negative-harmony" aria-hidden="true" class="anchor" id="parameterizing-negative-harmony"></a>Parameterizing Negative Harmony</h3>
 <p>One aspect that is not often discussed about this transformation is that it is actually a <strong>family of transformations</strong> parameterized by a key center. Note that the reflection axis chosen above is only one chosen from 12 possibilities. To highlight this, notice that in the diagram above the transformation in the key of C takes F to D. In the diagram below we have transformation in the key of A, showing that in this case it takes F to A♭.</p>
-<p><figure><img src="./media/negative_harm_A.svg" alt="The circle of fifths highlighting the negative harmony transformation in the key of C." /></figure></p>
+<center>
+<figure>
+  <object data=/media/negative_harm_A.svg width="320">
+  </object>
+  <figcaption>
+    The circle of fifths highlighting the negative harmony transformation in the key of A.
+  </figcaption>
+</figure>
+</center>
 <h2><a href="#transforming-modes" aria-hidden="true" class="anchor" id="transforming-modes"></a>Transforming modes</h2>
 <p>Typically negative harmony is discussed <a href="https://www.brltheory.com/resources/negative-harmony-chord-chart/">in the context of chords</a>, with an expectation that transformed chords has similar functions (having &quot;equivalent tonal gravity&quot;). I want to discuss how this transformation behaves when considering melodic elements, scales and modes.</p>
 <p>To start, let's check what happens when we transform the seven modes of the major scale. For example, let's apply the transformation over the major scale. As an ilustration, the sequence of notes [C, D, E, F, G, A, B] (the Ionian mode of C Major), transformed in the key of C, will result in [G, F, E♭, D, C, B♭, A♭].</p>
@@ -56,7 +72,15 @@
 </ul>
 <h3><a href="#negative-harmony-inverts-brightness" aria-hidden="true" class="anchor" id="negative-harmony-inverts-brightness"></a>Negative Harmony inverts brightness</h3>
 <p>Finally, here's the neat and interesting pattern to notice: if we ignore the roots, the quality of the modes above is transforming up and down the <a href="https://www.youtube.com/watch?v=9rEqrPwVITY">Brightness Scale</a>.</p>
-<p><figure><img src="./media/brightness_scale.svg" alt="Brightness scale highlighting the negative harmony transformation." /></figure></p>
+<center>
+<figure>
+  <object data=media/brightness_scale.svg width="320">
+  </object>
+  <figcaption>
+    Brightness scale highlighting the negative harmony transformation.
+  </figcaption>
+</figure>
+</center>
 <p>The effect of the transformation is to reflect the qualities of the modes around the center of the brightness scale, inverting the value of the brightness for the mode in question (the brightest mode becomes the darkest, the second brightest becomes the second darkest, etc).</p>
 <h2><a href="#so-what" aria-hidden="true" class="anchor" id="so-what"></a>So what?</h2>
 <p>Yes, this is just a simple neat symmetry I found. I intend to write more later on some other questions:</p>

@@ -2,9 +2,9 @@
   "marmite_version": "0.2.3",
   "posts": 15,
   "pages": 7,
-  "generated_at": "2025-01-22 13:03:39.064821105 -03:00",
-  "timestamp": 1737561819,
-  "elapsed_time": 0.166440399,
+  "generated_at": "2025-01-22 15:26:17.277036536 -03:00",
+  "timestamp": 1737570377,
+  "elapsed_time": 0.225865668,
   "config": {
     "name": "Agente Aleatório",
     "tagline": "Constantemente aumentando a entropia do universo.",
@@ -60,12 +60,12 @@
     ],
     "extra": {
       "fediverse_verification": "https://bertha.social/@rcalsaverini",
+      "colorscheme_toggle": true,
+      "colorscheme": "github",
       "comments": {
         "title": "Comentários",
         "source": "<script src=\"https://giscus.app/client.js\"\ndata-repo=\"rcalsaverini/rcalsaverini.github.io\"\ndata-repo-id=\"R_kgDONt_m0Q\"\ndata-category=\"General\"\ndata-category-id=\"DIC_kwDONt_m0c4CmPrT\"\ndata-mapping=\"pathname\"\ndata-strict=\"0\"\ndata-reactions-enabled=\"1\"\ndata-emit-metadata=\"0\"\ndata-input-position=\"top\"\ndata-theme=\"light_protanopia\"\ndata-lang=\"pt\"\ndata-loading=\"lazy\"\ncrossorigin=\"anonymous\"\nasync>\n</script>\n"
-      },
-      "colorscheme_toggle": true,
-      "colorscheme": "github"
+      }
     },
     "authors": {
       "rafael.calsaverini": {

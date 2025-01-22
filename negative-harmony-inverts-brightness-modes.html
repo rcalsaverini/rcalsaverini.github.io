@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
@@ -59,6 +60,8 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
     <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
     <link rel="stylesheet" type="text/css" href="./static/marmite.css">
     
+    <link rel="stylesheet" type="text/css" href="./static/colorschemes/github.css">
+    
     <link rel="stylesheet" type="text/css" href="./static/custom.css">
     
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
@@ -66,47 +69,147 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 
 
     <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="draft" href="draft.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: programming" href="tag-programming.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Music Theory" href="tag-music-theory.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Haskell" href="tag-haskell.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Monads" href="tag-monads.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Negative Harmony" href="tag-negative-harmony.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Set Theory (Music)" href="tag-set-theory-music.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: welcome" href="tag-welcome.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: marmite" href="tag-marmite.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Deep Learning" href="tag-deep-learning.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: blog" href="tag-blog.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Free Vector Space" href="tag-free-vector-space.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Ethics" href="tag-ethics.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Density Learning" href="tag-density-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Xenophobia" href="tag-xenophobia.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: modes of limited transposition" href="tag-modes-of-limited-transposition.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Fascism" href="tag-fascism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Liberalism" href="tag-liberalism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Unsupervised Learning" href="tag-unsupervised-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Racism" href="tag-racism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: music theory" href="tag-music-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: composition" href="tag-composition.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Humanism" href="tag-humanism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: messiaen modes" href="tag-messiaen-modes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Moral growth" href="tag-moral-growth.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Centrism" href="tag-centrism.rss">
     <link rel="alternate" type="application/rss+xml" title="author: Rafael S. Calsaverini" href="author-rafael-s-calsaverini.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: rafael.calsaverini" href="author-rafael-calsaverini.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2019" href="archive-2019.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2018" href="archive-2018.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2017" href="archive-2017.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2010" href="archive-2010.rss">
-    <link rel="alternate" type="application/rss+xml" title="year: 2000" href="archive-2000.rss">
     
 
     
+    <link rel="alternate" type="application/feed+json" title="JSON index" href="index.json">
+    
+    <link rel="alternate" type="application/feed+json" title="JSON draft" href="draft.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: programming" href="tag-programming.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Music Theory" href="tag-music-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Haskell" href="tag-haskell.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Monads" href="tag-monads.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Negative Harmony" href="tag-negative-harmony.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Set Theory (Music)" href="tag-set-theory-music.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Type safety" href="tag-type-safety.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Deep Learning" href="tag-deep-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Python" href="tag-python.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Chord transformations" href="tag-chord-transformations.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Free Vector Space" href="tag-free-vector-space.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Type-level programming" href="tag-type-level-programming.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Probability Monad" href="tag-probability-monad.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Ethics" href="tag-ethics.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Density Learning" href="tag-density-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Free Monads" href="tag-free-monads.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Symbolic Optimization" href="tag-symbolic-optimization.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Xenophobia" href="tag-xenophobia.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Category Theory" href="tag-category-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Neural Networks" href="tag-neural-networks.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Machine Learning" href="tag-machine-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: modes of limited transposition" href="tag-modes-of-limited-transposition.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Fascism" href="tag-fascism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Liberalism" href="tag-liberalism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Mypy" href="tag-mypy.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Unsupervised Learning" href="tag-unsupervised-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Racism" href="tag-racism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Type encodings" href="tag-type-encodings.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Stochastic Processes" href="tag-stochastic-processes.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Records" href="tag-records.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Functional programming" href="tag-functional-programming.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: music theory" href="tag-music-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: composition" href="tag-composition.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Humanism" href="tag-humanism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Monad Transformers" href="tag-monad-transformers.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Operational Monads" href="tag-operational-monads.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: messiaen modes" href="tag-messiaen-modes.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Moral growth" href="tag-moral-growth.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Centrism" href="tag-centrism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON author: Rafael S. Calsaverini"
+        href="author-rafael-s-calsaverini.json">
+    <link rel="alternate" type="application/feed+json" title="JSON author: rafael.calsaverini"
+        href="author-rafael-calsaverini.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2022" href="archive-2022.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2021" href="archive-2021.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2019" href="archive-2019.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2018" href="archive-2018.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2017" href="archive-2017.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2010" href="archive-2010.json">
     
     
+    
+    
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+        integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+        integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                // customised options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                ],
+                // • rendering keys, e.g.:
+                throwOnError: false,
+            });
+        });
+    </script>
 </head>
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
 <body>
     
     <main class="container">
@@ -122,54 +225,77 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
                     </li>
                 </ul>
                 <button id="menu-toggle" class="hamburger">&#9776;</button>
-                
+
                 <ul class="header-menu" id="header-menu">
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./about.html">About</a>
+                        <a class="menu-item secondary"  href="./about.html" >About</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./pages.html">Pages</a>
+                        <a class="menu-item secondary"  href="./pages.html" >Pages</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        <a class="menu-item secondary"  href="./tags.html" >Tags</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./streams.html">Streams</a>
+                        <a class="menu-item secondary"  href="./streams.html" >Streams</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="https://github.com/rochacbruno/marmite" target="_blank" >Github</a>
+                        <a class="menu-item secondary"  href="https://github.com/rcalsaverini/"
+                            target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://bertha.social/@rcalsaverini"
+                            target="_blank" >Follow me</a>
                         
                     </li>
                     
                     <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
                     
+                    <li><a href="#" id="search-toggle" class="secondary" title="Search (Ctrl + Shift + F)"> <span
+                                class="search-txt">Search</span><span class="search-magnifier"></span></a></li>
+                    
                     <div class="underline"></div>
                 </ul>
             </nav>
+            
+            <div class="marmite-background-overlay" id="overlay-close"></div>
+            <div class="marmite-search-bar hidden">
+                <span>Busca</span>
+                <button class="marmite-close-button" id="search-close">X</button>
+                <input placeholder="Search" id="marmite-search-input" />
+                <div class="marmite-search-bar-result">
+                    <ul id="marmite-search-bar-result"></ul>
+                </div>
+            </div>
             
         </header>
         
@@ -189,11 +315,33 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 
 
 <span class="content-date">
-    <small> Feb 20, 2021 - &#10710; 6 min</small>
+    <small> Saturday, 20 February 2021 - &#10710; 5 min</small>
 </span>
 
 </div>
 
+  
+  <div class="content-toc">
+    <a href="#" id="toc"></a>
+    <details>
+    <summary>🗒️</summary>
+    <ul>
+<ul>
+<li><a href="#intro">Intro</a></li>
+<ul>
+<li><a href="#what-is-negative-harmony-anyway">What is Negative Harmony anyway?</a></li>
+<li><a href="#parameterizing-negative-harmony">Parameterizing Negative Harmony</a></li>
+</ul>
+<li><a href="#transforming-modes">Transforming modes</a></li>
+<ul>
+<li><a href="#negative-harmony-inverts-brightness">Negative Harmony inverts brightness</a></li>
+</ul>
+<li><a href="#so-what">So what?</a></li>
+</ul>
+</ul>
+
+    </details>
+  </div>
   
 
   <div class="content-html"><h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
@@ -202,63 +350,27 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 <h3><a href="#what-is-negative-harmony-anyway" aria-hidden="true" class="anchor" id="what-is-negative-harmony-anyway"></a>What is Negative Harmony anyway?</h3>
 <p>There are many ways to understand negative harmony and I'm not going to pretend I'm able to give a full historical background. The video by the 12tone channel that I linked above does a much better job than I ever could. Here in this post I'm mainly interested in this as a transformation that can be applied to a particular set of notes, and that's how I'm going to describe and treat it.</p>
 <p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.</p>
-<p>{{<tikz caption="The circle of fifths highlighting the negative harmony transformation in the key of C">}}</p>
-<p>\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>
-<pre><code>\def \n {12}
-\def \radius {4 cm}
-\def \margin {7}
-
-\def \notes {-5/D$\flat$, -4/A$\flat$, -3/E$\flat$, -2/B$\flat$, -1/F, 0/C, 1/G, 2/D, 3/A, 4/E, 5/B, 6/F$\sharp$}
-
-\foreach \s/\key in \notes {
-  \def \start {360 * \s / \n + 15}
-  \def \end {360 * (\s - 1) / \n + 15}
-
-  \node[block, circle, color=violet] at ({90-\start}:\radius) (a\s) {\Large\key};
-  \draw[vec] ({\end+\margin}:\radius) arc ({\end+\margin}:{\start-\margin}:\radius);
-}
-
-\draw [thick,dashed,color=violet!50] (0, -\radius) -- (0, \radius);
-
-\draw[latex-latex,color=violet!50,thick] (a0) to (a1);
-\draw[latex-latex,color=violet!50,thick] (a2) to (a-1);
-\draw[latex-latex,color=violet!50,thick] (a3) to (a-2);
-\draw[latex-latex,color=violet!50,thick] (a4) to (a-3);
-\draw[latex-latex,color=violet!50,thick] (a5) to (a-4);
-\draw[latex-latex,color=violet!50,thick] (a6) to (a-5);
-</code></pre>
-<p>\end{tikzpicture}</p>
-<p>{{</tikz>}}</p>
+<center>
+<figure>
+  <object data=/media/negative_harm_C.svg width="320">
+  </object>
+  <figcaption>
+    The negative harmony transformation visualized in the Circle of Fifths
+  </figcaption>
+</figure>
+</center>
 <p>The arrows above indicate the notes that are to be switched. So, to apply the negative harmony transformation in the key of C, one would change C for G, D for F, etc.</p>
 <h3><a href="#parameterizing-negative-harmony" aria-hidden="true" class="anchor" id="parameterizing-negative-harmony"></a>Parameterizing Negative Harmony</h3>
 <p>One aspect that is not often discussed about this transformation is that it is actually a <strong>family of transformations</strong> parameterized by a key center. Note that the reflection axis chosen above is only one chosen from 12 possibilities. To highlight this, notice that in the diagram above the transformation in the key of C takes F to D. In the diagram below we have transformation in the key of A, showing that in this case it takes F to A♭.</p>
-<p>{{<tikz caption="The circle of fifths highlighting the negative harmony transformation in the key of A">}}</p>
-<p>\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>
-<pre><code>\def \n {12}
-\def \radius {4 cm}
-\def \margin {7}
-
-\def \notes {-5/B$\flat$, -4/F, -3/C, -2/G, -1/D, 0/A, 1/E, 2/B, 3/F$\sharp$, 4/D$\flat$, 5/A$\flat$, 6/E$\flat$}
-
-\foreach \s/\key in \notes {
-  \def \start {360 * \s / \n + 15}
-  \def \end {360 * (\s - 1) / \n + 15}
-
-  \node[block, circle,color=violet] at ({90-\start}:\radius) (a\s) {\Large\key};
-  \draw[vec] ({\end+\margin}:\radius) arc ({\end+\margin}:{\start-\margin}:\radius);
-}
-
-\draw [thick,dashed,color=violet!30] (0, -\radius) -- (0, \radius);
-
-\draw[latex-latex,color=violet!50,thick] (a0) to (a1);
-\draw[latex-latex,color=violet!50,thick] (a2) to (a-1);
-\draw[latex-latex,color=violet!50,thick] (a3) to (a-2);
-\draw[latex-latex,color=violet!50,thick] (a4) to (a-3);
-\draw[latex-latex,color=violet!50,thick] (a5) to (a-4);
-\draw[latex-latex,color=violet!50,thick] (a6) to (a-5);
-</code></pre>
-<p>\end{tikzpicture}</p>
-<p>{{</tikz>}}</p>
+<center>
+<figure>
+  <object data=/media/negative_harm_A.svg width="320">
+  </object>
+  <figcaption>
+    The circle of fifths highlighting the negative harmony transformation in the key of A.
+  </figcaption>
+</figure>
+</center>
 <h2><a href="#transforming-modes" aria-hidden="true" class="anchor" id="transforming-modes"></a>Transforming modes</h2>
 <p>Typically negative harmony is discussed <a href="https://www.brltheory.com/resources/negative-harmony-chord-chart/">in the context of chords</a>, with an expectation that transformed chords has similar functions (having &quot;equivalent tonal gravity&quot;). I want to discuss how this transformation behaves when considering melodic elements, scales and modes.</p>
 <p>To start, let's check what happens when we transform the seven modes of the major scale. For example, let's apply the transformation over the major scale. As an ilustration, the sequence of notes [C, D, E, F, G, A, B] (the Ionian mode of C Major), transformed in the key of C, will result in [G, F, E♭, D, C, B♭, A♭].</p>
@@ -276,31 +388,15 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 </ul>
 <h3><a href="#negative-harmony-inverts-brightness" aria-hidden="true" class="anchor" id="negative-harmony-inverts-brightness"></a>Negative Harmony inverts brightness</h3>
 <p>Finally, here's the neat and interesting pattern to notice: if we ignore the roots, the quality of the modes above is transforming up and down the <a href="https://www.youtube.com/watch?v=9rEqrPwVITY">Brightness Scale</a>.</p>
-<p>{{<tikz>}}
-\usetikzlibrary{shapes,arrows,positioning,automata}
-\usetikzlibrary{matrix,arrows,decorations.pathmorphing}</p>
-<p>\begin{tikzpicture}[auto,node distance=1.25cm, block/.style={rectangle, thick, fill=purple!20, align=center, minimum height=1cm, minimum width=2cm}, vec/.style={double,thick,color=purple!20}, connecto/.style={&lt;-&gt;, &gt;=latex, shorten &gt;=2pt, shorten &lt;=2pt, bend left=90, thick, dashed}]</p>
-<pre><code>\draw[thick,dashed,color=orange] (5, 0) -- (-2, 0) node[above,color=orange] at (5, 0) {reflexion axis};
-\node[block,] at (0, 0) (dor) {\normalsize Dorian};
-\node[block,above of=dor] (mix) {\normalsize Mixolydian};
-\node[block,above of=mix] (ion) {\normalsize Ionian};
-\node[block,above of=ion] (lyd) {\normalsize Lydian};
-\node[block,below of=dor] (aeo) {\normalsize Aeolian};
-\node[block,below of=aeo] (phr) {\normalsize Phrygian};
-\node[block,below of=phr] (loc) {\normalsize Locrian};
-
-\draw[vec,-&gt;] (-2, -4) -- (-2, 4)
-      node[above,sloped,color=purple] at (-2.5, 4) {high brightness}
-      node[midway,above,sloped,color=purple] at (-2.5, 0) {\textbf{Brightness Scale}}
-      node[below,sloped,color=purple] at (-2.5, -4) {low brightness};
-
-\draw[connecto] (lyd.east) to node[auto, swap] {} (loc.east);
-\draw[connecto] (ion.east) to node[auto, swap] {} (phr.east);
-\draw[connecto] (mix.east) to node[auto, swap] {} (aeo.east);
-\draw[connecto,bend left=90] (dor.30) to node[auto, swap] {} (dor.330);
-</code></pre>
-<p>\end{tikzpicture}
-{{</tikz>}}</p>
+<center>
+<figure>
+  <object data=media/brightness_scale.svg width="320">
+  </object>
+  <figcaption>
+    Brightness scale highlighting the negative harmony transformation.
+  </figcaption>
+</figure>
+</center>
 <p>The effect of the transformation is to reflect the qualities of the modes around the center of the brightness scale, inverting the value of the brightness for the mode in question (the brightest mode becomes the darkest, the second brightest becomes the second darkest, etc).</p>
 <h2><a href="#so-what" aria-hidden="true" class="anchor" id="so-what"></a>So what?</h2>
 <p>Yes, this is just a simple neat symmetry I found. I intend to write more later on some other questions:</p>
@@ -343,7 +439,7 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 
 
 <span class="content-date">
-    <small> Feb 20, 2021 - &#10710; 6 min</small>
+    <small> Saturday, 20 February 2021 - &#10710; 5 min</small>
 </span>
 
         </div>
@@ -388,12 +484,41 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 
 
 
+    <article>
+<header>Comentários</header>
+<script src="https://giscus.app/client.js"
+data-repo="rcalsaverini/rcalsaverini.github.io"
+data-repo-id="R_kgDONt_m0Q"
+data-category="General"
+data-category-id="DIC_kwDONt_m0c4CmPrT"
+data-mapping="pathname"
+data-strict="0"
+data-reactions-enabled="1"
+data-emit-metadata="0"
+data-input-position="top"
+data-theme="light_protanopia"
+data-lang="pt"
+data-loading="lazy"
+crossorigin="anonymous"
+async>
+</script>
+
+</article>
+
+
 
 
         </section>
         
         <footer class="footer-content grid">
             <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+            <div class="colorscheme-toggle-div">
+                colorscheme: <select name="colorscheme" class="colorscheme-toggle">
+                    <option value="default">default</option>
+                </select>
+                <span class="theme-toggle secondary" title="dark mode">&#9789;</span>
+            </div>
             
         </footer>
         
@@ -402,6 +527,12 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
     <script src="./static/marmite.js"></script>
     <script src="./static/custom.js"></script>
     
+    <script type="module" src="./static/search.js"></script>
+    
+    
+    <script type="application/javascript">
+        colorschemeSwitcher();
+    </script>
     
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
@@ -412,4 +543,5 @@ Recently I've been listening to a 12tone video on YouTube about negative harmony
 
 
 </body>
+
 </html>

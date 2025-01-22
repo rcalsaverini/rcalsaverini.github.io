@@ -1,1 +1,1185 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Wed, 16 Mar 2022 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 16:02:54 GMT</lastBuildDate><generator>marmite</generator><item><title>Modularizing Gradient Boosting models</title><link>https://rcalsaverini.github.io/blog/modularizing-gradient-boosting-models.html</link><description><![CDATA[null]]></description><author>rafael.calsaverini</author><guid>https://rcalsaverini.github.io/blog/modularizing-gradient-boosting-models.html</guid><pubDate>Wed, 16 Mar 2022 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[]]></content:encoded></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Sun, 13 Mar 2022 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 18:26:17 GMT</lastBuildDate><generator>marmite</generator><item><title>Does swapping 3rds and 7ths preserve harmonic feel?</title><link>https://rcalsaverini.github.io/blog/preserve-harmonies-swapping-3rds-7ths.html</link><description><![CDATA["Do chords that swapp thirds and sevenths retain the same \"harmonic feel\""]]></description><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Chord transformations</category><guid>https://rcalsaverini.github.io/blog/preserve-harmonies-swapping-3rds-7ths.html</guid><pubDate>Sun, 13 Mar 2022 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<p>The ii-V-I chord changes are arguably the most basic stable of jazz harmony, and exploring what's so compelling about this chord is always a good way to diving into what's harmony in jazz is all about. Recently the youtuber <a href="https://www.youtube.com/channel/UC4PIiYewI1YGyiZvgNlJNrA">Charles Cornell</a> published a <a href="https://www.youtube.com/watch?v=alsQOE0vuoc">nice video</a> in his channel exploring how ii-V-I changes in major have a very nice pattern of leading tones involving thirds and sevenths, and how this drives the harmony forward in such a compelling way, by stacking compelling resolutions that continuously release the tension built by moving the chords around.</p>
+<p>To drive the explanation home, Cornell made a strong assertion: most or all of the actual harmonic juice of a chord, at least in the context of jazz harmony is contained in the third and seventh. To drive this home he shows live in the piano how, if you throw away the root and fifth and only play thirds and sevenths, most of the harmonic feel of the ii-V-I changes are retained <sup class="footnote-ref"><a href="#fn-footnote1" id="fnref-footnote1" data-footnote-ref>1</a></sup>.</p>
+<p>Then, further in the video <sup class="footnote-ref"><a href="#fn-footnote2" id="fnref-footnote2" data-footnote-ref>2</a></sup>, Cornell points out that the resolution from ii to V and from V to I work by inverting the resolving the seventh down a half step into the third of the new chord. This also makes the third of the previous chord, that's kept as a kind of pedal point in the new chord, to become the new seventh. In summary: thirds becomes sevenths and sevenths resolve into thirds. And that's the basic mechanism of the most widespread harmonic language of jazz.</p>
+<h2><a href="#thirds-and-sevenths" aria-hidden="true" class="anchor" id="thirds-and-sevenths"></a>Thirds and Sevenths</h2>
+<p>That's not something super new and surprising but I think Cornell makes a good job in simplifying it and making it very pedagogic. But his explanation kind of lead me to ask myself some questions. In particular, forgetting about the resolutions and leading tones a bit, if most of the taste and color of a chord is contained in the thirds and sevenths, what happens if I change the other notes around it?</p>
+<p>I could start by taking a chord, stripping the root and fifth, and tacking on two other random notes there and see what happens. Right? Let's try.</p>
+<p>The first measure in the following embedded sheet is a ii-V-I in C major. The chords are, of course, Dmin7 ➞ G7 ➞ Cmaj7. On the second measure I kept all thirds and sevenths constant and randomly moved the other notes. Of course, after randomly moving notes, the new chord names are kind of non-sensical, but the best I can do to name them is this<sup class="footnote-ref"><a href="#fn-footnotechordnames" id="fnref-footnotechordnames" data-footnote-ref>3</a></sup>: G7(add4) ➞ Csus4maj7 ➞ Asus2sus4</p>
+<p>There's some weirdness because of the random bass notes, but the functions are still kind of recognizable, aren't they? They still sound like tension and release.</p>
+<center>
+  <iframe
+    src="https://flat.io/embed/622e575518f76000120ed90e?sharingKey=a033810480c2d5941c8061e90ecddf15a5d540e19ef724590df11e2034e187e4fe2dd9d7b6a93e87a09b5adaef4f8c638108e361fb88370e2db4e5f7c1dab37e"
+    height="275"
+    width="50%"
+    frameBorder="0">
+  </iframe>
+</center>
+<h2><a href="#chord-transformations" aria-hidden="true" class="anchor" id="chord-transformations"></a>Chord transformations</h2>
+<p>I was asking myself for more systematic chord transformations we could do that would preserve this &quot;3rd + 7th&quot; structure and the best I could do was to state it as follows: we want to find reasonable chords (whatever that means) for which the former third and seventh are still third and seventh in the new chord in some meaningful way. Let's investigate this.</p>
+<p>There are few transformations we can do that preserve same set of third and seventh:</p>
+<ul>
+<li>
+<p>We could change the &quot;quality&quot; of the third and seventh (major to minor, etc) by moving the other pitches. For example, we could turn a Cmaj7 (C E G B) into a Cmin7 (C♯ E G♯ B). That would turn E from major to minor third and the B from major to minor seventh. That's kind of boring though, right? It works, but it does generate anything incredibly new.</p>
+<p>This would turn our original ii-V-I  Dmin7 ➞ G7 ➞ Cmaj7 into  C♯maj7 ➞ A♭dim7 ➞ C♯min7. You can listen how that sounds in the sheet below. This looks interesting. The new chords certainly feel like they work together and convey similar harmonic movement. But it also feels a bit like simple modal borrowing instead of any super weird transformation. It merits more analysis thought. Perhaps I'll come back to this later.</p>
+<center>
+  <iframe
+    src="https://flat.io/embed/622e7e4718f760001211887d?sharingKey=b8882a97e994188a69b7e00faaac06bb1789100935284cbf63335b2784c4747959c90b7009ca43cd393f5d8f43898366c4e19c0eeb2ead105d6e8fa420f38db1"
+    height="275"
+    width="50%"
+    frameBorder="0">
+  </iframe>
+</center>
+</li>
+<li>
+<p>We could also use the same two notes in other functions of the chord (the third as root, the seventh as fifth, etc) but that would kind of defeat the purpose of using the third and seventh as the core of the harmonic taste and color of a chord. So I won't consider this here.</p>
+</li>
+<li>
+<p>We could &quot;swap&quot; the third with the seventh. For that to be possible, the interval between the original third and seventh must be such that if we invert that interval, we could still have a &quot;plausible third&quot; (minor or major, or perhaps a sus2/sus4 chord at most) and a &quot;plausible seventh&quot; (minor, or major or perhaps a major sixth). <sup class="footnote-ref"><a href="#fn-footnote3" id="fnref-footnote3" data-footnote-ref>4</a></sup></p>
+</li>
+</ul>
+<p>Let's explore that last idea further. Here's a table with all &quot;plausible thirds&quot; and &quot;plausible sevenths&quot; with the respect intervals between them<sup class="footnote-ref"><a href="#fn-footnote4" id="fnref-footnote4" data-footnote-ref>5</a></sup>:</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">M2 (sus2)</th>
+<th align="center">m3 (minor)</th>
+<th align="center">M3 (major)</th>
+<th align="center">P4 (sus4)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">M7</td>
+<td align="center">M6</td>
+<td align="center">m6</td>
+<td align="center">P5</td>
+<td align="center">TT</td>
+</tr>
+<tr>
+<td align="center">m7</td>
+<td align="center">m6</td>
+<td align="center">P5</td>
+<td align="center">TT</td>
+<td align="center">P4</td>
+</tr>
+<tr>
+<td align="center">M6</td>
+<td align="center">P5</td>
+<td align="center">TT</td>
+<td align="center">P4</td>
+<td align="center">M3</td>
+</tr>
+</tbody>
+</table>
+<p>After inversion:</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">M2 (sus2)</th>
+<th align="center">m3 (minor)</th>
+<th align="center">M3 (major)</th>
+<th align="center">P4 (sus4)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">M7</td>
+<td align="center">m3</td>
+<td align="center">M3</td>
+<td align="center">P4</td>
+<td align="center">TT</td>
+</tr>
+<tr>
+<td align="center">m7</td>
+<td align="center">M3</td>
+<td align="center">P4</td>
+<td align="center">TT</td>
+<td align="center">P5</td>
+</tr>
+<tr>
+<td align="center">M6</td>
+<td align="center">P4</td>
+<td align="center">TT</td>
+<td align="center">P5</td>
+<td align="center">m6</td>
+</tr>
+</tbody>
+</table>
+<p>Comparing those tables it's clear that: all &quot;plausible&quot; pair of &quot;third and seventh&quot; are between M3 and M6 in distance. So, only inversions that will be in this range can be rationalized. So X6sus4 and Xmaj7sus2 chords are excluded (thank god, because those are some extra silly names for chords). But all other chords in the that table can be transformed into something &quot;plausible&quot;.</p>
+<p>Let's try to understand the mechanism. Consider the Cmaj7 chord. It's major third is an E and it's major seventh is a B (an interval of a perfect fifth). After inverting their roles, we would need a chord in which B functions as a third and E as a seventh. This would imply an inverted interval of a perfect fourth between them. There are only two options of that interval between a 3rd and a 7th: M3 to M6 – a X6 chord – and P4 to m7 – a X7sus4&quot; chord. To find those chords, we need to find which roots would have an B as major third or perfect fourth. It turns out to be G and F♯ respectively. So, finally the possible transformations are:</p>
+<ul>
+<li>turn Cmaj7 into G6</li>
+<li>turn Cmaj7 into F♯7sus4</li>
+</ul>
+<p>Now that's quite interesting.</p>
+<p>Below I built a table with all transformations from which we can lift a few new transformed ii-V-I changes to listen and see what they sound like. One I think is particularly compelling is the following:</p>
+<ul>
+<li>Dmin7 becomes A♭6</li>
+<li>G7 becomes Dmin6</li>
+<li>Cmaj7 becomes G6</li>
+</ul>
+<p>What I find so compeling is that there are two major 6th chords doing completely different jobs in this progression. Listen to this:</p>
+<center>
+  <iframe
+    src="https://flat.io/embed/6230e77b4382750012abd0f4?sharingKey=8fba0d961681a045887174b3ac4de922ccbe02162baf318a99edc883a11b2ff9d6f5e4b99e664ff349a056a511e63b74d7dd1f060b9b88d58f97ccfa31d06a0c"
+    height="275"
+    width="50%"
+    frameBorder="0">
+  </iframe>
+</center>
+<h2><a href="#table-with-all-possible-transformations" aria-hidden="true" class="anchor" id="table-with-all-possible-transformations"></a>Table with all possible transformations</h2>
+<p>Let's try to build a table for the transformations.</p>
+<p>All chords that can be transformed are all combinations in the 3rds and 7ths table above except the ones excluded above. So (we're going to use C as root)<sup class="footnote-ref"><a href="#fn-footnotesus46" id="fnref-footnotesus46" data-footnote-ref>6</a></sup>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>M2</th>
+<th>m3</th>
+<th>M3</th>
+<th>P4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M7</td>
+<td>-</td>
+<td>Cminmaj7</td>
+<td>Cmaj7</td>
+<td>Cmaj7sus4</td>
+</tr>
+<tr>
+<td>m7</td>
+<td>C7sus2</td>
+<td>Cmin7</td>
+<td>C7</td>
+<td>C7sus4</td>
+</tr>
+<tr>
+<td>M6</td>
+<td>C6sus2</td>
+<td>Cmin6</td>
+<td>C6</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>The logic to build all tranformations is the following:</p>
+<ul>
+<li>Start from the original chord.</li>
+<li>Find out the interval between it's 3rd and 7th.</li>
+<li>Invert this interval and find all pair of 3rd and 7th compatible with the new inverted interval.</li>
+<li>Choose one of those pairs.</li>
+<li>Assign the pitch of the old 7th to the new 3rd, and find what must be the root such that this pitch is the 3rd.</li>
+<li>Add the 5th from that root and build the chord.</li>
+</ul>
+<p>Here are the results <sup class="footnote-ref"><a href="#fn-footnotelazy" id="fnref-footnotelazy" data-footnote-ref>7</a></sup>.</p>
+<table>
+<thead>
+<tr>
+<th>old (3,7)</th>
+<th>old chord</th>
+<th>old interval</th>
+<th>new interval</th>
+<th>new (3,7)</th>
+<th>new root</th>
+<th>new chord</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(M3, M7) = (E, B)</td>
+<td>Cmaj7</td>
+<td>P5</td>
+<td>P4</td>
+<td>(M3, M6) = (B, E)</td>
+<td>G</td>
+<td>G6</td>
+</tr>
+<tr>
+<td>(M3, M7) = (E, B)</td>
+<td>Cmaj7</td>
+<td>P5</td>
+<td>P4</td>
+<td>(P4, m7) = (B, E)</td>
+<td>F♯</td>
+<td>F♯7sus4</td>
+</tr>
+<tr>
+<td>(M3, m7) = (E, Bb)</td>
+<td>C7</td>
+<td>TT</td>
+<td>TT</td>
+<td>(P4, M7) = (Bb, E)</td>
+<td>F</td>
+<td>Fmaj7sus4</td>
+</tr>
+<tr>
+<td>(M3, m7) = (E, Bb)</td>
+<td>C7</td>
+<td>TT</td>
+<td>TT</td>
+<td>(m3, M6) = (Bb, E)</td>
+<td>G</td>
+<td>Gmin6</td>
+</tr>
+<tr>
+<td>(M3, M6) = (E, A)</td>
+<td>C6</td>
+<td>P4</td>
+<td>P5</td>
+<td>(M3, M7) = (A, E)</td>
+<td>F</td>
+<td>Fmaj7</td>
+</tr>
+<tr>
+<td>(M3, M6) = (E, A)</td>
+<td>C6</td>
+<td>P4</td>
+<td>P5</td>
+<td>(m3, m7) = (A, E)</td>
+<td>F♯</td>
+<td>F♯min7</td>
+</tr>
+<tr>
+<td>(M3, M6) = (E, A)</td>
+<td>C6</td>
+<td>P4</td>
+<td>P5</td>
+<td>(M2, M6) = (A, E)</td>
+<td>G</td>
+<td>G6sus2</td>
+</tr>
+<tr>
+<td>(m3, M7) = (Eb, B)</td>
+<td>Cminmaj7</td>
+<td>m6</td>
+<td>M3</td>
+<td>(P4, M6) = (B, Eb)</td>
+<td>F♯</td>
+<td>F♯6sus4</td>
+</tr>
+<tr>
+<td>(m3, m7) = (Eb, Bb)</td>
+<td>Cmin7</td>
+<td>P5</td>
+<td>P4</td>
+<td>(P4, M7) = (Bb, E)</td>
+<td>F</td>
+<td>Fmaj7sus4</td>
+</tr>
+<tr>
+<td>(m3, m7) = (Eb, Bb)</td>
+<td>Cmin7</td>
+<td>P5</td>
+<td>P4</td>
+<td>(M3, M6) = (Bb, E)</td>
+<td>F♯</td>
+<td>F♯6</td>
+</tr>
+<tr>
+<td>(m3, M6) = (Eb, A)</td>
+<td>Cmin6</td>
+<td>TT</td>
+<td>TT</td>
+<td>(P4, M7) = (A, Eb)</td>
+<td>E</td>
+<td>Emaj7sus4</td>
+</tr>
+<tr>
+<td>(m3, M6) = (Eb, A)</td>
+<td>Cmin6</td>
+<td>TT</td>
+<td>TT</td>
+<td>(M3, m7) = (A, Eb)</td>
+<td>F</td>
+<td>F7</td>
+</tr>
+<tr>
+<td>(m3, M6) = (Eb, A)</td>
+<td>Cmin6</td>
+<td>TT</td>
+<td>TT</td>
+<td>(m3, M6) = (A, Eb)</td>
+<td>F♯</td>
+<td>F♯min6</td>
+</tr>
+</tbody>
+</table>
+<h3><a href="#footnotes" aria-hidden="true" class="anchor" id="footnotes"></a>Footnotes</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Semitones</th>
+<th align="center">Name</th>
+<th align="center">Symbol</th>
+<th align="center">Inversion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">unison</td>
+<td align="center">–</td>
+<td align="center">8va</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">minor second</td>
+<td align="center">m2</td>
+<td align="center">M7</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">major second</td>
+<td align="center">M2</td>
+<td align="center">m7</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">minor third</td>
+<td align="center">m3</td>
+<td align="center">M6</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">major third</td>
+<td align="center">M3</td>
+<td align="center">m6</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">perfect fourth</td>
+<td align="center">P4</td>
+<td align="center">P5</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">tritone</td>
+<td align="center">TT</td>
+<td align="center">TT</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">perfect fifth</td>
+<td align="center">P5</td>
+<td align="center">P4</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">minor sixth</td>
+<td align="center">m6</td>
+<td align="center">M3</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">major sixth</td>
+<td align="center">M6</td>
+<td align="center">m3</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">minor seventh</td>
+<td align="center">m7</td>
+<td align="center">M2</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">major seventh</td>
+<td align="center">M7</td>
+<td align="center">m2</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">perfect octave</td>
+<td align="center">8va</td>
+<td align="center">–</td>
+</tr>
+</tbody>
+</table>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-footnote1">
+<p>See the demonstration on the first 1:30 minutes of the video. <a href="#fnref-footnote1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-footnote2">
+<p>See the explanation beggining in 6:29 minutes into the video. <a href="#fnref-footnote2" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-footnotechordnames">
+<p>I'm also aware some of the chord names are quite ridiculous. I'm just using them to facilitate the identification of the &quot;thirds and sevenths&quot;. <a href="#fnref-footnotechordnames" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a></p>
+</li>
+<li id="fn-footnote3">
+<p>To be clear: I'm kind of abusing a lot from the language here by calling describing suspensions as &quot;thirds&quot; and sixths as &quot;sevenths&quot;. I'm cognizant of that. <a href="#fnref-footnote3" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="4" aria-label="Back to reference 4">↩</a></p>
+</li>
+<li id="fn-footnote4">
+<p>I'm using the following nomenclature and symbols for intervals: <a href="#fnref-footnote4" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="5" aria-label="Back to reference 5">↩</a></p>
+</li>
+<li id="fn-footnotesus46">
+<p>Yeah, just to be fair, this are more reasonable names for some of those chords. Of course this would depend a lot on the context:</p>
+<table>
+<thead>
+<tr>
+<th>Weird name I'm using</th>
+<th>Tentative better name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cmaj7sus2</td>
+<td>G/C</td>
+</tr>
+<tr>
+<td>Cmaj7sus4</td>
+<td>G7(no 5)/C</td>
+</tr>
+<tr>
+<td>C7sus2</td>
+<td>Gmin/C</td>
+</tr>
+<tr>
+<td>C7sus4</td>
+<td>Gmin7(no 5)/C</td>
+</tr>
+<tr>
+<td>C6sus2</td>
+<td>Gsus2/C</td>
+</tr>
+<tr>
+<td>C6sus4</td>
+<td>Dmin(add 4)/C with an omitted root?</td>
+</tr>
+</tbody>
+</table>
+<a href="#fnref-footnotesus46" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="6" aria-label="Back to reference 6">↩</a>
+</li>
+<li id="fn-footnotelazy">
+<p>I got lazy in the middle of filling this up by hand. Later I'll implement some code to run the algorithm and finish the table. In the meantime, I leave this as an exercise to the reader. <a href="#fnref-footnotelazy" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="7" aria-label="Back to reference 7">↩</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded></item><item><title>Could Neural Nets be used for Symbolic Optimization? Maybe.</title><link>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization.html</link><author>Rafael S. Calsaverini</author><category>Machine Learning</category><category>Neural Networks</category><category>Deep Learning</category><category>Symbolic Optimization</category><guid>https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization.html</guid><pubDate>Fri, 02 Jul 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<h3><a href="#whats-symbolic-optimization" aria-hidden="true" class="anchor" id="whats-symbolic-optimization"></a>What's Symbolic Optimization</h3>
+<p>A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &quot;optimal&quot; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let's call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The
+problem I want to discuss is finding expressions that minimize that function:</p>
+<p>$$
+e^{\star} = \arg \min_{e \in \mathrm{Exp}_G} f(e)
+$$</p>
+<h3><a href="#a-toy-version-of-the-problem" aria-hidden="true" class="anchor" id="a-toy-version-of-the-problem"></a>A toy version of the problem</h3>
+<p>Let's discuss one particular toy version of this problem. It might look like a silly problem, but it's simple enough to illustrate the concept and non-trivial enough to avoid simple solutions.</p>
+<p>Suppose we have a training set that consist of a sample of strings. We hold the hypothesis that there's an underlying logic or grammar that generated those strings and we want to describe commmon patterns in these strings by finding a regular expression that would match as many of those strings as possible. We'd like to use this regular expression to check if future out-of-sample strings we come across display the same patterns and belong to this group.</p>
+<p>As an example, suppose our training set consists of the names &quot;Rafael&quot;, &quot;Gabriel&quot; and &quot;Manoel&quot;. Of course we have infinite regular expressions that match all those names. In particular we have the really trivial option <code>/Rafael|Gabriel|Manoel/</code> that would certainly match all strings but would probably fail to match out-of-sample items that do match interesting patterns in the training set – for example &quot;Emanuel&quot;. In a way, this looks a lot like overfitting. Another failure mode would be underfitting and choosing the regex <code>/.\*/</code>, that certainly fits all in-sample items but would also accept all out-of-sample items, even those that don't match any interesting patterns in the training set – for example &quot;Pedro&quot;. Probably what we want is something like <code>/.+el/</code> (or perhaps something with a bit more structure if this is not sufficiently constrained and we want to avoid matching the string &quot;chapel&quot;).</p>
+<p>So, we have to impose additional requirements and constraints or, in ML parlance, additional regularizations that would make our regular expression regularize better. It could be interesting, for example, to find the regular expression that fits as many items as possible but also fail to match a set of randomly chosen strings (a negative sample). Or to find the regular expression that generates a reasonably sized match set but still match as many items as possible. That can be perhaps stated as finding the regular expression $e$ that minimizes a function:</p>
+<p>$$
+f(e) = − \sum_{s \in \mathrm{D}} \mathtt{Match}_e(s) + \lambda \Lambda(e)
+$$</p>
+<p>Where:</p>
+<ul>
+<li>$\mathtt{Match}_e(s)$ is 1 if the regular expression e matches the string s and 0 otherwise; and</li>
+<li>$\Lambda(e)$ is some regularization that penalizes regular expressions that are either too &quot;broad&quot; or too &quot;restricted&quot;. For example we could penalizing matching random strings and penalize expressions that have a finite (or
+too small) match set.</li>
+</ul>
+<h3><a href="#what-other-things-we-could-solve-if-we-learn-how-to-do-this" aria-hidden="true" class="anchor" id="what-other-things-we-could-solve-if-we-learn-how-to-do-this"></a>What other things we could solve if we learn how to do this?</h3>
+<p>This particular problem of symbolic optimization have been bugging me for a while. There seems to be a lot of things we could do if we could solve this problem. Here's a non-exhaustive list.</p>
+<ul>
+<li><strong>Symbolic Regression</strong>: we could be interested in finding the best analytical function to represent a set of data points. In this case the grammar $G$ would be a simple grammar of mathematical expressions containing things nodes (numerical values, input variables), unary operations (like $\sin$, $\cos$, $\exp$, etc), binary operators (like $+$, $−$, $×$, etc) and so on. An expression in this grammar would be a mathematical expression like $y = \sin(\pi × x_1) × exp(−4.6 × x_2)$. The function we want to minimize would be, for example, the least-squares error of fitting this expression over a set of points:
+$$f(e) = \sum_{k=1}^{N} (y_k − \mathtt{Eval}_e(\mathbf{x}_k))^2$$
+Where $\mathtt{Eval}_e(\mathbf{x})$ is a procedure that evaluates the expression $e$ at the input $\mathbf{x}$.</li>
+<li><strong>Learning to Parse</strong>: another intriguing problem is learning how to parse strings in a certain domain. For example, imagine we have a bunch of strings representing addresses in a culture or systems we're not familiar with and we want to learn how to extract parts. How would we go about learning what structures are interesting and what parts deserve a name? We could optimize through grammars that parse those strings into parts that are reusable and build an objective function that rewards reusability of parts. That's a very handwavy example, but it can be made more concrete.</li>
+<li><strong>Enhancing code-completion by leveraging test cases</strong>: there are many ML-based code completion products today (like <a href="https://www.tabnine.com/">Tabnine</a>, <a href="https://www.kite.com/">kite</a>, the new <a href="https://devblogs.microsoft.com/visualstudio/the-making-of-intellicodes-first-deep-learning-model-a-research-journey/">Visual Studio Intellisense</a> and <a href="https://copilot.github.com/">Github's Copilot</a>) but all of them look only into the immediate vicinity of the code and offer suggestions based on the environment of the code. Perhaps one could rank order the code suggestions by how well it passes a set of test cases? That would probably help the programmer narrow down the correct code completing even better. Such a procedure could be framed as symbolic optimization<sup class="footnote-ref"><a href="#fn-idris" id="fnref-idris" data-footnote-ref>1</a></sup>.</li>
+</ul>
+<h3><a href="#why-is-it-hard" aria-hidden="true" class="anchor" id="why-is-it-hard"></a>Why is it hard?</h3>
+<p>Now, this looks interesting but it actually seems very intractable. First of all, the function
+$f$ might be expensive to calculate. Even if it isn't, the space of possible expressions is combinatorially large. Probably factorially large in the size of the grammar G and depth of the expressions being considered. Pure enumeration is unfeasible and techniques like genetic programming don't deal well with high dimensional inputs. Something like Simulated Annealing can deal better with big combinatorial spaces, but convergence is slow.</p>
+<p>Wouldn't it be nice if we could somehow turn this into gradient descent over a continuous space of analytical functions? That's the easiest and most tractable type of optimization we know. If we can map somehow, even approximately, a combinatorial optimization into a continous, $\mathbb{R}^n$ valued optimization, that would the best deal we could get, wouldn't it?</p>
+<h4><a href="#how-to-make-it-easier" aria-hidden="true" class="anchor" id="how-to-make-it-easier"></a>How to make it easier?</h4>
+<p>So, here's an idea that ocurred to me a while ago, when I was reading the Neural Architecture Optimization paper<sup class="footnote-ref"><a href="#fn-naopaper" id="fnref-naopaper" data-footnote-ref>2</a></sup>. Suppose we had a pair of function, let's call it an Encoder/Decoder pair, that map our expressions into and onto real valued vectors. That is, we a pair of functions:</p>
+<p>$$E: \mathrm{Exp}_G \to \mathbb{R}^k$$</p>
+<p>and</p>
+<p>$$D: \mathbb{R}^k \to \mathrm{Exp}_G$$</p>
+<p>such that $D(E(e)) = e$ for all $e \in \mathrm{Exp}_G$.</p>
+<p>If we had such a pair of functions, we could, instead of finding the expression $e$ that optimizes $f(e)$, we could try to find the vector $\mathbf{x} \in \mathbb{R}^k$ that optimizes $f(D(\mathbf{x}))$. Now we're optimizing over a continuous space!!! That's a bit of progress but it's still not perfect: we don't know how to calculate gradients of $f(D(\mathbf{x}))$ with respect to the vector $\mathbf{x}$, since there's the intervening combinatorial space of the expressions.</p>
+<h4><a href="#neural-networks-to-the-rescue" aria-hidden="true" class="anchor" id="neural-networks-to-the-rescue"></a>Neural Networks to the rescue.</h4>
+<p>Let's first focus on the Encoder/Decoder pair. What if we could train functions to learn this bijection? Even if it's not an exact bijection, it could be a start, right?</p>
+<p>So, imagine we have a parametric family of functions we could use to find a suitable encoder:</p>
+<p>$$E: \Theta_E \times \mathrm{Exp}_G \to \mathbb{R}^k$$</p>
+<p>where $\Theta_E$ is some space of parameters. We could try to find a function that evaluates how well the vector $E(\theta_E, e)$ encodes the expression $e \in \mathrm{Exp}_G$ and find the parameter $\theta_E \in \Theta_E$ that optimizes that &quot;well-encodability&quot; function. If the parameter space is nice and the &quot;well-encodability&quot; function is continuous this could be done by gradient descent.</p>
+<p>We could do the same with the decoder:</p>
+<p>$$D: \Theta_D \times \mathbb{R}^k \to \mathrm{Exp}_G $$</p>
+<p>If we put the encoder and decoder together, one good candidate for a measure of &quot;well-encodability/decodability&quot; is the reconstruction loss<sup class="footnote-ref"><a href="#fn-granted" id="fnref-granted" data-footnote-ref>3</a></sup>:</p>
+<p>$$
+\ell(\theta_E, \theta_D) = \sum_{k=1}^N d(e_k, D(\theta_D, E(\theta_E, e_k)))
+$$</p>
+<p>where $d(e, e')$ is a measure of how distant two expressions are. In summary, we would:</p>
+<ul>
+<li>sample a random expression $e$</li>
+<li>use the encoder to generate it's latent encoding vector $\mathbf{x} = E(\theta_E, e)$;</li>
+<li>use the decoder to recover the a new expression $e' = D(\theta_D, \mathbf{x})$;</li>
+<li>adjust the parameters $\theta_E$ and $\theta_D$ to minimize the distance between the expressions $e$ with $e'$.</li>
+</ul>
+<p>Now, after we have learned the encoder and decoder, we could now go back to our original optimization problem. We still want to find the best expression that minimizes $f(e)$ and we want to do that by minimizing $f(D(x, \theta_D))$. Perhaps we can apply the same trick above? We could try to learn a function:</p>
+<p>$$V: \Theta_V \times \mathbb{R}^k \to \mathbb{R} $$</p>
+<p>that given the vector embedding $\mathbf{x} = E(\theta_E, e)$ associated to an expression $e$, learns to estimate the value of $f(e)$. One possible way would be to:</p>
+<ul>
+<li>sample a random expression $e$</li>
+<li>use the encoder to recover its associated embedding $\mathbf{x} = E(\theta_E, e)$;</li>
+<li>compare the value of $f(e)$ with the value of $V(\theta_V, \mathbf{x})$ and adjust the parameter $\theta_V$ to minimize the error.</li>
+</ul>
+<p>That could be achieved by gradient descending the loss function:</p>
+<p>$$
+\ell(\theta_V) = \sum_{k=1}^{N} (V(\theta_V, E(\theta_E, e)) - f(e))^2
+$$</p>
+<p>So, in the end we could simulaneously descend into the three parameters $\theta_E$, $\theta_D$ and $\theta_V$ to minimize the following loss:</p>
+<p>$$
+\ell(\theta_E, \theta_D, \theta_V) = \sum_{k=1}^N\left[d(e_k, D(\theta_D, E(\theta_E, e_k))) + (V(\theta_V, E(\theta_E, e)) - f(e))^2\right]
+$$</p>
+<p>Once we learn the best parameters $\theta_E^\star$, $\theta_D^\star$, $\theta_V^\star$, finding the best expression $e$ that maximizes $f(e)$ can be done by:</p>
+<ul>
+<li>find the vector $\mathbf{x}^\star$ that maximizes $V(\theta_V^\star, \mathbf{x})$;</li>
+<li>decode it to find the optimal expression associated with it: $e^\star = D(\theta_D^\star, \mathbf{x}^\star)$.</li>
+</ul>
+<p>This will probably not be an exact solution, but hopefully one that is good enough.</p>
+<h3><a href="#problems-and-conclusions" aria-hidden="true" class="anchor" id="problems-and-conclusions"></a>Problems and conclusions</h3>
+<p>That's a nice story, but is it actually possible to do? That's a great question. I have no idea. I tried attacking the regex problem with this idea before and I hit several brick walls (that mainly stem from my lack of knowledge in symbolic computation since my focus is 100% in ML and not in Computer Science in general).</p>
+<p>The first difficulty is how to define the parametric family of encoders $E(\theta, e)$. Those functions must take values in the set of possible expressions $\mathrm{Exp}_G$ (the set of all regular expressions in our toy example). We could work with a string representation of the expression and use whatever fancy architecture kids are using for processing strings nowadays. But it would be nice to be able to feed the Abstract Syntax Tree (AST) of the expression and process this. I wonder if that would add significant amounts of inductive bias about the problem and help the model to learn. I tried using TreeLSTMs<sup class="footnote-ref"><a href="#fn-treelstm" id="fnref-treelstm" data-footnote-ref>4</a></sup> for this problem the past and the result was interesting. So I think this part is really feasible.</p>
+<p>The parametric family of decoders $D(\theta_D, \mathbf{x})$ is a much worse problem though. Those functions have to produce syntatically correct expressions in order for the optimization to make sense. Using simple string generation neural nets to produce a string representation of the expression will probably not garantee syntatically valid expressions for every latent vector we input. One possibility is to build it as a generative process that produces valid ASTs recursively. That can work but on my past tries I had a lot of trouble with performance.</p>
+<p>Also randomly generating trees is not easy and naive processes tend to produce trees with a very heavily tailed depth distribution. In my experiments frequently my decode would generate mostly very shallow ASTs but every once in a while it would generate a monstrously deep AST. Manually clipping the maximum depth didn't work very well for me, but I might have done something dumb.</p>
+<p>So, I didn't reach the point where I could test if this idea would work at all, but that looks like a promising idea for someone with actual time to test it.</p>
+<h3><a href="#references-and-footnotes" aria-hidden="true" class="anchor" id="references-and-footnotes"></a>References and Footnotes</h3>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-idris">
+<p>Alternatively, some other strategies like <a href="https://www.idris-lang.org/courses/MGS2018/idris-mgs4.pdf">type driven development</a> in <a href="https://www.idris-lang.org/">Idris</a> use information about typing and dependently typed proofs to suggest code by case analysis. Given a strong enough type constraint Idris is able to generate the desired code for a function. Perhaps there's a way to marry this with symbolic manipulation of ASTs as well. <a href="#fnref-idris" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-naopaper">
+<p>Luo, R., Tian, F., Qin, T., Chen, E., &amp; Liu, T. Y. (2018). Neural architecture optimization. <a href="https://arxiv.org/abs/1808.07233"><em>arXiv preprint arXiv:1808.07233</em></a>. <a href="#fnref-naopaper" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-granted">
+<p>Granted that we are able to find a distance function between expressions that can provide continuous gradients with respect to $\theta_D$ and $\theta_E$. <a href="#fnref-granted" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a></p>
+</li>
+<li id="fn-treelstm">
+<p>Tai, K. S., Socher, R., &amp; Manning, C. D. (2015). Improved semantic representations from tree-structured long short-term memory networks. <a href="https://arxiv.org/abs/1503.00075"><em>arXiv preprint arXiv:1503.00075</em></a>. <a href="#fnref-treelstm" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="4" aria-label="Back to reference 4">↩</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded></item><item><title>Transforming modes</title><link>https://rcalsaverini.github.io/blog/transforming-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><category>Neo-Riemannian Theory</category><category>Chord transformations</category><guid>https://rcalsaverini.github.io/blog/transforming-modes.html</guid><pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
+<p>I want to continue the discussion in the <a href="blog-negative-harmony-inverts-brightness-modes.html">last post</a> about transformations of modes and sets of tones. I want to explore the following question: what are transformations that make sense and what are they effect on scales, tone sets and modes.</p>
+<h3><a href="#the-transformations" aria-hidden="true" class="anchor" id="the-transformations"></a>The Transformations</h3>
+<p>I want to get back to the circle of fifths and define a few transformations and analise their implications. The transformations that I'm interested in are based in the idea of the negative harmony. As defined in the previous post, the negative harmony in a given key is obtained by reflecting the circle of fifths along an axis midway between the key and the its fifth. For example, here's a diagram of the negative harmony in the key of C:</p>
+<p>{{<tikz>}}
+\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>
+<pre><code>\def \n {12}
+\def \radius {4 cm}
+\def \margin {7}
+
+\def \notes {1,...,12}
+
+\foreach \s in \notes {
+  \def \start {360 * \s / \n + 15}
+  \def \end {360 * (\s - 1) / \n + 15}
+
+  \node[block, circle, color=violet] at ({90-\start}:\radius) (a\s) {\Large $X_{\s}$};
+  \draw[vec] ({\end+\margin}:\radius) arc ({\end+\margin}:{\start-\margin}:\radius);
+}
+
+
+\foreach \x in {1, 2, ..., 6} {
+    \def \a {\x * 30 - 30}
+    \draw [thick,dashed,color=violet!50] (\a:-\radius-20) -- (\a:\radius + 20)
+        node[above,sloped,color=purple] at (\a:\radius + 20) {$\mathcal{N}_{\x}$};
+}
+</code></pre>
+<p>\end{tikzpicture}</p>
+<p>{{</tikz>}}</p>
+<p>We will identify those transformations by $N_{x}$ where $x \in {C, D\flat, \ldots, B\flat, B}$</p>
+]]></content:encoded></item><item><title>Negative Harmony inverts brightness of modes</title><link>https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html</link><author>Rafael S. Calsaverini</author><category>Music Theory</category><category>Negative Harmony</category><category>Set Theory (Music)</category><guid>https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html</guid><pubDate>Sat, 20 Feb 2021 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
+<p>Recently I've been listening to a <a href="https://www.youtube.com/watch?v=SF8CdxcdJgw">12tone video</a> on YouTube about negative harmony, a concept recently popularized by musician Jacob Collier. On the related links I found a bunch of videos from <a href="https://www.youtube.com/channel/UCurOAVtqb7kM1siNlDynzFw">this channel</a> with &quot;negative harmony&quot; versions of many popular songs.</p>
+<p>The change in sonority of those songs clearly indicated for me a change in the <em>mode</em> of the song, which kind of go against the grain of what I've been told about the action of those transformations. In this post I want to explore negative harmony as a transformation not only on chords but on scales, modes and melody.</p>
+<h3><a href="#what-is-negative-harmony-anyway" aria-hidden="true" class="anchor" id="what-is-negative-harmony-anyway"></a>What is Negative Harmony anyway?</h3>
+<p>There are many ways to understand negative harmony and I'm not going to pretend I'm able to give a full historical background. The video by the 12tone channel that I linked above does a much better job than I ever could. Here in this post I'm mainly interested in this as a transformation that can be applied to a particular set of notes, and that's how I'm going to describe and treat it.</p>
+<p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.</p>
+<center>
+<figure>
+  <object data=/media/negative_harm_C.svg width="320">
+  </object>
+  <figcaption>
+    The negative harmony transformation visualized in the Circle of Fifths
+  </figcaption>
+</figure>
+</center>
+<p>The arrows above indicate the notes that are to be switched. So, to apply the negative harmony transformation in the key of C, one would change C for G, D for F, etc.</p>
+<h3><a href="#parameterizing-negative-harmony" aria-hidden="true" class="anchor" id="parameterizing-negative-harmony"></a>Parameterizing Negative Harmony</h3>
+<p>One aspect that is not often discussed about this transformation is that it is actually a <strong>family of transformations</strong> parameterized by a key center. Note that the reflection axis chosen above is only one chosen from 12 possibilities. To highlight this, notice that in the diagram above the transformation in the key of C takes F to D. In the diagram below we have transformation in the key of A, showing that in this case it takes F to A♭.</p>
+<center>
+<figure>
+  <object data=/media/negative_harm_A.svg width="320">
+  </object>
+  <figcaption>
+    The circle of fifths highlighting the negative harmony transformation in the key of A.
+  </figcaption>
+</figure>
+</center>
+<h2><a href="#transforming-modes" aria-hidden="true" class="anchor" id="transforming-modes"></a>Transforming modes</h2>
+<p>Typically negative harmony is discussed <a href="https://www.brltheory.com/resources/negative-harmony-chord-chart/">in the context of chords</a>, with an expectation that transformed chords has similar functions (having &quot;equivalent tonal gravity&quot;). I want to discuss how this transformation behaves when considering melodic elements, scales and modes.</p>
+<p>To start, let's check what happens when we transform the seven modes of the major scale. For example, let's apply the transformation over the major scale. As an ilustration, the sequence of notes [C, D, E, F, G, A, B] (the Ionian mode of C Major), transformed in the key of C, will result in [G, F, E♭, D, C, B♭, A♭].</p>
+<p>This sequence can be interpreted in a lot of different ways. Harmonically it is typical to consider the following argument. If the original harmony is in the key of C major, than the I chord is C major triad (C, E, G). This triad transforms to (G, E♭, C), which is an inversion of the C minor triad. Since this would also fit the role of the I chord in the new harmony, this should be interpreted as transforming from a C major harmony to a C minor one.</p>
+<p>That's a good argument, but if we focus on the melody, the note that would be treated as the focus and resting place of the melody in the original key would be C, which would turn into G in the new melody. So, we could interpret G as the root note of the transformed sequence, which would make it a G Phrygian melody.</p>
+<p>Let's take this second stance and see what happens with all modes. Under this interpretation this is how the modes transform:</p>
+<ul>
+<li>C Ionian transforms into G Phrygian.</li>
+<li>C Dorian trasforms into G Dorian.</li>
+<li>C Phrygian trasforms into G Ionian.</li>
+<li>C Lydian transforms into G Locrian.</li>
+<li>C Mixolydian trasforms into G Aelian.</li>
+<li>C Aeolian trasforms into G Mixolydian.</li>
+<li>C Locrian transforms into G Lydian.</li>
+</ul>
+<h3><a href="#negative-harmony-inverts-brightness" aria-hidden="true" class="anchor" id="negative-harmony-inverts-brightness"></a>Negative Harmony inverts brightness</h3>
+<p>Finally, here's the neat and interesting pattern to notice: if we ignore the roots, the quality of the modes above is transforming up and down the <a href="https://www.youtube.com/watch?v=9rEqrPwVITY">Brightness Scale</a>.</p>
+<center>
+<figure>
+  <object data=media/brightness_scale.svg width="320">
+  </object>
+  <figcaption>
+    Brightness scale highlighting the negative harmony transformation.
+  </figcaption>
+</figure>
+</center>
+<p>The effect of the transformation is to reflect the qualities of the modes around the center of the brightness scale, inverting the value of the brightness for the mode in question (the brightest mode becomes the darkest, the second brightest becomes the second darkest, etc).</p>
+<h2><a href="#so-what" aria-hidden="true" class="anchor" id="so-what"></a>So what?</h2>
+<p>Yes, this is just a simple neat symmetry I found. I intend to write more later on some other questions:</p>
+<ul>
+<li>What happens when you transform modes of other scales?</li>
+<li>Modes of the major scale are closed under this transformation. But this definitely won't happen always. What does it mean when it happens?</li>
+<li>What happens when you transform modes under the negative harmony centered in other keys?</li>
+<li>Is there a &quot;right&quot; key to use?</li>
+</ul>
+<p>Stay tuned.</p>
+]]></content:encoded></item><item><title>Boehm-Beraducci encoding for trees in python - a preview</title><link>https://rcalsaverini.github.io/blog/boehm-beraducci-encoding-for-trees-in-python-a-preview.html</link><author>rafael.calsaverini</author><category>programming</category><category>Python</category><category>Functional programming</category><category>Type encodings</category><guid>https://rcalsaverini.github.io/blog/boehm-beraducci-encoding-for-trees-in-python-a-preview.html</guid><pubDate>Mon, 21 Jan 2019 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<p>A few years ago I was very impressed for learning the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Boehm-Berarducci encoding</a>, which is a way for encoding
+<a href="https://en.wikipedia.org/wiki/Algebraic_data_type">Algebraic Data Types</a> (ADTs) into a kind of <a href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda calculus</a> that is well <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed</a> called <a href="https://en.wikipedia.org/wiki/System_F">System F</a>.
+The first thing I asked myself was in which languages I would be able to use this encoding to represent ADTs,
+with python being the most critical one for me.</p>
+<p>I was specially motivated for going back at trying this in Python after [I became very frustrated] with my n-th attempt at
+actually using <a href="http://mypy-lang.org/">mypy</a> as a static type checker. Using Boehm-Berarducci encodings certainly will avoid some difficulties
+with recursive types, but I don't think it will solve everything (specially my problems with higher kinded types
+and generic tuples). Aditionaly, I'm not certain about how efficient this implementation would be (both in space and time complexity)
+in a language without the facilities of modern and efficient functional compiler like GHC (tail-rec optimization, etc).</p>
+<p>That said, it's a lot of fun to code this, and I plan to explore this in future posts. As an appetizer, here's a simple tree type
+that typechecks correctly using <a href="http://mypy-lang.org/">mypy</a> in Python, with smart constructors for leafs and branches:</p>
+<pre><code class="language-python">
+  from typing import NamedTuple, TypeVar, Callable
+
+  A = TypeVar(&quot;A&quot;)
+  R = TypeVar(&quot;R&quot;)
+  Branch = Callable[[R, R], R]
+
+
+  class BinaryTree(NamedTuple):
+      constructor: Callable[[R, Branch[R]], R]
+
+      def __call__(self, leaf: R, branch: Branch[R]):
+          return self.constructor(leaf, branch)
+
+      @classmethod
+      def leaf(cls):
+          def leafer(leaf: R, branch: Branch[R]) -&gt; R:
+              return leaf
+
+          return cls(leafer)
+
+      @classmethod
+      def branch(cls, left, right):
+          def brancher(leaf: R, branch: Branch[R]) -&gt; R:
+              return branch(left, right)
+
+          return cls(brancher)
+</code></pre>
+<p>I'll still be checking it this is the actually usable in real code and it certainly falls short from the elegance
+and terseness of a Haskell implementation. But compared with the typical Python code it's actually not that bad.</p>
+<p>I'll be posting here any progress I have with this.</p>
+<p>[I became very frustrated]: {{&lt; relref &quot;blog/2019-01-20-frustrations-with-mypy.md&quot; &gt;}}</p>
+]]></content:encoded></item><item><title>A few frustrations with Python&apos;s type annotation system</title><link>https://rcalsaverini.github.io/blog/a-few-frustrations-with-python-s-type-annotation-system.html</link><author>rafael.calsaverini</author><category>Python</category><category>Type safety</category><category>Mypy</category><category>programming</category><guid>https://rcalsaverini.github.io/blog/a-few-frustrations-with-python-s-type-annotation-system.html</guid><pubDate>Sun, 20 Jan 2019 22:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<p>I have on and off again tried to use <a href="http://mypy-lang.org/">mypy</a> to type check my python code, but some shortcomings of Python's type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.</p>
+<h3><a href="#the-ugly-syntax-for-function-types-is-annoying-but-there-are-worse-problems" aria-hidden="true" class="anchor" id="the-ugly-syntax-for-function-types-is-annoying-but-there-are-worse-problems"></a>The ugly syntax for function types is annoying but there are worse problems</h3>
+<p>Yes, writing <code>Callable[[Callable[[A], B], F[A]], F[B]]</code> instead of <code>(a -&gt; b) -&gt; f a -&gt; f b</code> as in Haskell or <code>(A =&gt; B, F[A]) =&gt; F[B]</code> (or maybe the uncurried <code>(A =&gt; B) =&gt; (F[A] =&gt; F[B])</code> version) as in Scala is really annoying.</p>
+<p>But that's neither here nor there. One can get accostumed to it. On the other hand, it is certainly symptomatic of the philosophy chosen for the type system: passing functions around is not an idea on the forefront of this design.</p>
+<h3><a href="#people-are-not-using-it" aria-hidden="true" class="anchor" id="people-are-not-using-it"></a>People are not using it</h3>
+<p>In general, the overwhelming majority of the python libraries I use simply don't have type annotations or stub files and don't plan to add them in the near future. Writing stub files on your own is a pain. This by itself prevents the adoption of type annotations without a lot of effort in providing stub files yourself.</p>
+<h3><a href="#the-ad-hoc-polymorphism-mechanism-chosen-is-annoying" aria-hidden="true" class="anchor" id="the-ad-hoc-polymorphism-mechanism-chosen-is-annoying"></a>The ad hoc polymorphism mechanism chosen is annoying</h3>
+<p>The only way to do ad hoc polymorphism is with structural subtyping (using <code>Protocol</code>). This isn't so bad, since the language embraces duck typing so thoroughly. But it's somewhat annoying for two reasons:</p>
+<ol>
+<li>
+<p>First, admitedly a lesser problem, there's no clear indication in the code that a given class implements a particular <code>Protocol</code>. There's no explicit inheritance, nor explicit instancing of the <code>Protocol</code>. If you don't know the protocol exists, when you see the code of a class, you have no clue that there is a more general pattern that this class implements.</p>
+</li>
+<li>
+<p>Second, there's no &quot;post facto&quot; instancing of <code>Protocol</code> like it's possible to do with Haskell's or Scala's typeclasses, or Go's interfaces. You have one chance to instanciate a class as a particular Protocol: when you write that classes code. If the class belongs to a third party library you can't change, you have to write wrappers (which are terribly annoying, because the language offers no syntax sugar for them).</p>
+</li>
+</ol>
+<h3><a href="#no-support-for-lightweight-parametrically-polymorphic-product-types" aria-hidden="true" class="anchor" id="no-support-for-lightweight-parametrically-polymorphic-product-types"></a>No support for lightweight parametrically polymorphic product types</h3>
+<p>Python's type annotations don't allow you to write generic named tuples. This prevents one to write very lightweight types like:</p>
+<pre><code class="language-python">class Foo(NamedTuple, Generic[A]):
+    a_value: A
+    a_list: List[A]
+</code></pre>
+<p>If you want a parametrically polymorphic type, it must be a fully fledged class by itself.</p>
+<pre><code class="language-python">### will type check
+class Foo(Generic[A]):
+    def __init__(self, a_value: A, a_list: List[A]):
+        self.a_value = a_value
+        self.a_list = a_list
+</code></pre>
+<p>This discourages me to use it for many applications, since Python's classes are not exactly lightweight things and I'd rather not have a class if I don't really need one. You could use a type synonym for an untagged tuple, but this would be a serious documentation hazard:</p>
+<pre><code class="language-python">Foo = Tuple[A, List[A]]
+</code></pre>
+<h3><a href="#no-support-for-lightweight-recursive-product-types" aria-hidden="true" class="anchor" id="no-support-for-lightweight-recursive-product-types"></a>No support for lightweight recursive product types</h3>
+<p>Similarly, Python's type annotations don't allow recursive types unless you're dealing with a full fledged class. Recursive <code>NamedTuples</code> are forbidden, and so are recursive <code>Union</code>s (which wouldn't be possible given the restriction on higher-kinded types anyway, see below). This further prevents fast and lightweight types like:</p>
+<pre><code class="language-python">class BinaryTree(NamedTuple):
+    left: &quot;BinaryTree&quot;
+    right: &quot;BinaryTree&quot;
+</code></pre>
+<p>and requires you to use the full (and heavy) Python classes:</p>
+<pre><code class="language-python">class BinaryTree(object):
+    def __init__(self, left: &quot;BinaryTree&quot;, right: &quot;BinaryTree&quot;):
+            self.left = left
+            self.right = right
+</code></pre>
+<h3><a href="#no-higher-kinded-types" aria-hidden="true" class="anchor" id="no-higher-kinded-types"></a>No higher kinded types</h3>
+<p>Python's type annotations have no support for <a href="https://stackoverflow.com/questions/6246719/what-is-a-higher-kinded-type-in-scala">higher-kinded</a> types. All type variables in a class that inherit from Generic must be of kind <code>*</code>. This is kind of a catastrophe for any kind of more advanced use of the type system to improve correctness garantees. It also prevents some uses of higher kinded patterns like functors, monads, etc.</p>
+<p>For example, you can't use the finally tagless or <a href="http://okmij.org/ftp/tagless-final/index.html">tagless-final</a> pattern. At least not like this:</p>
+<pre><code class="language-python">class DataAccessMonad(Generic[M]):
+    def get_user(self, user_id: UserId) -&gt; M[User]
+        pass
+</code></pre>
+<p>Also, this makes it difficult to implement &quot;post-facto&quot; ad hoc polymorphism using something like <a href="https://typelevel.org/cats/typeclasses.html">Scala's typeclass instance</a> mechanisms to escape <code>Protocol</code>s. For this, one would need to write:</p>
+<pre><code class="language-python">class FunctorInstance(Generic[F]):
+
+    @staticmethod
+    def map(value: F[A], function: Callable[[A], B]) -&gt; F[B]:
+        pass
+</code></pre>
+<p>My original plan for a type class library involved creating a way to inject the instance, wrap the <code>F[A]</code> value and monkey patch it to call <code>value.map</code> when you need it. The fact that one can't use higher kinded types prevents the code above to type check.</p>
+<h3><a href="#and-so-no-fixed-point-functors-and-other-niceties" aria-hidden="true" class="anchor" id="and-so-no-fixed-point-functors-and-other-niceties"></a>And so... no fixed point functors and other niceties</h3>
+<p>This means also that you can't use fixed point types like:</p>
+<pre><code class="language-python">class CoFree(NamedTuple, Generic[F, A]):
+    value: A
+    continuations: F[&quot;Cofree[F, A]&quot;]
+</code></pre>
+<p>because this requires F to be of kind <code>* -&gt; *</code>. Fixed point types are awfully useful for dealing with tree-like structures (see for example <a href="https://www.youtube.com/watch?v=7xSfLPD6tiQ">this talk from Rob Norris</a>) and would similarly fail to type check on <a href="http://mypy-lang.org/">mypy</a>.</p>
+<h3><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h3>
+<p>There are more problems, but those are the main ones that prevented me from really using <a href="http://mypy-lang.org/">mypy</a> or type annotations in Python. This haven't prevented me from writing good and useful Python code, and I still love to write Python. But it certainly increases the attrition.</p>
+]]></content:encoded></item><item><title>Type safe records as an excuse to learn type level programming in Haskell</title><link>https://rcalsaverini.github.io/blog/type-safe-records-as-an-excuse-to-learn-type-level-programming-in-haskell.html</link><author>rafael.calsaverini</author><category>programming</category><category>Haskell</category><category>Type safety</category><category>Records</category><category>Type-level programming</category><guid>https://rcalsaverini.github.io/blog/type-safe-records-as-an-excuse-to-learn-type-level-programming-in-haskell.html</guid><pubDate>Mon, 12 Feb 2018 22:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<p>I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find <a href="https://www.youtube.com/watch?v=wNa3MMbhwS4">this amazing talk</a> by <a href="http://www.seas.upenn.edu/~sweirich/">Prof. Stephanie Weirich</a> about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC's extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof. Weirich uses in her talk. She does a lot more than this, in the talk, but I'm going slowly to understand every bit of it.</p>
+<h3><a href="#type-safe-records" aria-hidden="true" class="anchor" id="type-safe-records"></a>Type Safe Records</h3>
+<p>The <em>record problem</em> is an old problem in Haskell. Succintly, Haskell's traditional native records have lots of problems -- you couldn't reuse record names, updating record fields lead to dull boilerplate code, etc. Many of those problems <a href="http://www.parsonsmatt.org/overcoming-records/#/">are attacked</a> by the idea of <a href="https://hackage.haskell.org/package/lens">lenses</a> (see this <a href="https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation">talk by Simon Peyton Jones</a> to get the basics of it) and many <a href="http://hackage.haskell.org/packages/#cat:Records">other libraries</a> as well as the <a href="https://hackage.haskell.org/package/base-4.10.1.0/docs/GHC-Records.html">OverloadedRecordFields</a> extension.</p>
+<p>Though there are many solutions attacking parts of the record problem, there's one particular aspect of it which offers a nice opportunity to learn type level programming techniques in Haskel and are worth working out from scratch: how to create records whose type's are aware of the fields contained in the records and their types?</p>
+<p>That means, how to create a record type such that the when we try to access a non-existing field:</p>
+<pre><code class="language-haskell">&gt; getField &quot;nonExistentFieldName&quot; record
+</code></pre>
+<p>we get an actual type error in compile time. This allows us to completely rule out a whole class of bugs from our programs: we don't need to worry about users acessing unexisting fields type of errors because this code wouldn't even compile.</p>
+<h3><a href="#first-attempt-a-list-of-named-entries" aria-hidden="true" class="anchor" id="first-attempt-a-list-of-named-entries"></a>First attempt: a list of named entries</h3>
+<p>Our first attempt will be to model our records as lists of named-entries:</p>
+<pre><code class="language-haskell">data Entry a = Entry String a
+data Dict a = Nil | Cons (Entry a) (Dict a)
+
+getField :: String -&gt; Dict a -&gt; Maybe a
+getField _ Nil = Nothing
+getField name (Cons (Entry name' x) dict') =  case (name == name') of
+    True  -&gt; Just x
+    False -&gt; getField name dict'
+</code></pre>
+<p>This compiles alright, but it's not a solution to our problem. First of all, it has no information about the entry field names in the type. The type of <code>Dict a</code> only carries information about the type of the values. Second, all fields must be of the same type. If you try to build something like: ''</p>
+<pre><code class="language-haskell">-- this raises a type error
+myRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) (Cons (Entry &quot;age&quot; (35::Int)) Nil)
+</code></pre>
+<p>You'll get an obvious type error since <code>Cons (Entry &quot;age&quot; 35::Int) Nil</code> is a <code>Dict Int</code> and <code>Entry &quot;name&quot; &quot;Rafael&quot;</code> is an <code>Entry String</code>, and <code>Cons</code> type signature is <code>Entry a -&gt; Dict a -&gt; Dict a</code>.</p>
+<p>So, it seems that this is not a very useful record (:P).</p>
+<p>Let's try to solve the second problem first and make the type of each entry more flexible. For that we need GADTs and existential types.</p>
+<h3><a href="#using-gadts-and-existential-types" aria-hidden="true" class="anchor" id="using-gadts-and-existential-types"></a>Using GADTs and existential types</h3>
+<p>The second problem is caused by the fact the we have a explicit reference to the type of the entry in the <code>Dict</code> type constructor. We could try to make it more flexible like this:</p>
+<pre><code class="language-haskell">data Dict a = Nil | Cons (Entry a) (Dict b)
+</code></pre>
+<p>But of course this doesn't work because the type variable <code>b</code> is not defined in this scope. There is no way for the type checker to fix it:</p>
+<pre><code class="language-ghci">/.../Post.hs:5:42: error:
+    Not in scope: type variable ‘b’
+  |
+5 | data Dict a = Nil | Cons (Entry a) (Dict b)
+</code></pre>
+<p>For this to work, we need to put <code>b</code> in scope, without adding it as argument to the type constructor or else we'd get an infinite regress of types (I'll get back to this later). For that we need two GHC extensions: <code>GADTs</code> and <code>Rank2Types</code> (or <code>RankNTypes</code>, or other extension providing the <code>forall</code> keyword).</p>
+<p><code>GADTs</code> is an extension that allows us to give more generic types to the data constructors of an algebraic data type. It also allows a nicer syntax for data constructors with a long type signature. With <code>GADTs</code> and <code>RankNTypes</code> enabled we can do this:</p>
+<pre><code class="language-haskell">{-# LANGUAGE GADTs, RankNTypes  #-}
+
+data Entry a = Entry String a
+data Dict a = Nil | forall b . Cons (Entry a) (Dict b)
+</code></pre>
+<p>This compiles correctly and we can try to use it! Now our previous record is well typed:</p>
+<pre><code class="language-haskell">myRecord :: Dict String
+myRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) (Cons (Entry &quot;age&quot; (35::Int)) Nil)
+</code></pre>
+<p>But look what happened. The information that there's an <code>Int</code> somewhere inside the structure of the record is gone! Yep. We enclosed it in a <code>forall</code> and all the information <code>Cons</code> have now is that its second argument is some kind of <code>Dict b</code>, whatever <code>b</code> is. This doesn't look like a good sign.</p>
+<p>Let's try to write a <code>getField</code> function. We still didn't solve the problem of letting the type know what fields are possible, so we still need to guard ourselves against the possibility that the user will try to fetch the data from a field that doesn't exist. So the signature of <code>getField</code> still is <code>String -&gt; Dict a -&gt; Maybe</code>... wait a minute! What's the return type?</p>
+<p>In the record above, if the field name is <code>&quot;name&quot;</code> it should return a <code>String</code>, but if the field name is <code>&quot;age&quot;</code> it should return an <code>Int</code>. But the compiler wouldn't know that because there's no information in the type of the record about the value of the fields in is tail. We only have information about the type of the head entry.</p>
+<p>So, the return type of <code>getField</code> is something like <code>(forall b . Maybe b)</code>? That doesn't look very useful. I can retrieve the value but I loose all the information about its type! This doesn't seem to be working...</p>
+<h3><a href="#keeping-track-of-the-field-types" aria-hidden="true" class="anchor" id="keeping-track-of-the-field-types"></a>Keeping track of the field types</h3>
+<p>I want to get back to &quot;infinite regress of types&quot; I refered above. Why couldn't we put the <code>b</code> type variable above as an argument for the type constructor? Well, let's try and see. We could create a data type <code>Dict a b</code> where <code>a</code> is the value of the head <code>Entry</code> and <code>b</code> is the type of the head of the next <code>Dict</code> down the <code>Cons</code> data constructor. So:</p>
+<pre><code class="language-haskell">data Dict a b = Nil | Cons (Entry a) (Dict b ???)
+</code></pre>
+<p>Oops. Damn, what about the type of the entry after the next entry? Well... Let's put it in the constructor too:</p>
+<pre><code class="language-haskell">data Dict a b c = Nil | Cons (Entry a) (Dict b c ???)
+</code></pre>
+<p>You get it, right? There's always a new type to keep track of. The type of the record must know not only the type of the head entry, but also all the types of all entries in its tail. This looks a hell like a linked list of types, doesn't it? If we had a way to create <strong>a type level list</strong> we could have the following GADT:</p>
+<pre><code class="language-haskell">data Dict (types :: (TypeLevelList Type)) where
+    Nil :: Dict TypeLevelEmptyList
+    Cons :: (Entry a) -&gt; Dict (tail :: TypeLevelList) -&gt; Dict (a `TypeLevelCons` tail)
+</code></pre>
+<p>Wait, what the hell is this? First of all, what are those type signatures in the wrong place? Those are <em>kind signatures</em>. Kind is the &quot;type of a type constructor&quot;. For example, type constructors that have no parameters, like <code>Bool</code> or <code>String</code> have kind <code>Type</code> (or <code>*</code>). Type constructors that take a single parameter, like <code>Maybe</code> have kind <code>Type -&gt; Type</code>. Single parameter Typeclasses like <code>Functor</code> or <code>Monad</code> have kind <code>Type -&gt; Constraint</code>, etc.</p>
+<p>Here I'm supposing that there exists a kind called <code>TypeLevelList</code>, and that there exists two type constructors:</p>
+<ul>
+<li><code>TypeLevelEmptyList</code> with kind <code>TypeLevelList</code>,</li>
+<li><code>TypeLevelCons</code> with kind <code>Type -&gt; TypeLevelList -&gt; TypeLevelList</code>.</li>
+</ul>
+<p>When I write <code>data Dict (types :: TypeLevelList)</code> I'm declaring a type constructor <code>Dict</code>with kind <code>TypeLevelList -&gt; Type</code>. This type has two data constructors:</p>
+<ul>
+<li><code>Nil</code> which is just an empty record with type <code>Dict TypeLevelEmptyList</code></li>
+<li><code>Cons</code> which takes an <code>Entry a</code> and a <code>Dict TypeLevelList</code> and return another <code>Dict TypeLevelList</code> putting <code>a</code> on the head of that <code>TypeLevelList</code> it received.</li>
+</ul>
+<p>In practice we'd have something like this:</p>
+<pre><code class="language-haskell">emptyRecord :: Dict TypeLevelEmptyList
+emptyRecord = Nil
+
+agedRecord :: Dict (Int `TypeLevelCons` TypeLevelEmptyList)
+agedRecord = Cons (Entry &quot;age&quot; 35) emptyRecord
+
+recordWithAStringAndAnInt :: Dict (String `TypeLevelCons` Int `TypeLevelCons` TypeLevelEmptyList)
+namedAndAgedRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) agedRecord
+</code></pre>
+<p>This is sweet! We can keep track to the types of all fields! But how do we create those type level lists? :O</p>
+<h3><a href="#type-level-lists" aria-hidden="true" class="anchor" id="type-level-lists"></a>Type Level Lists</h3>
+<p>To create those type level lists we have to use a GHC extension called <code>DataKinds</code>. To understand what <code>DataKinds</code> do lets consider this simple type declaration:</p>
+<pre><code class="language-haskell">data Nat = Zero | Succ Nat
+</code></pre>
+<p>What this does is to create a type constructor called <code>Nat</code>, whose kind is <code>Type</code>, and two data constructors:</p>
+<ul>
+<li><code>Zero</code>, whose type is <code>Nat</code></li>
+<li><code>Succ</code>, whose type is <code>Nat -&gt; Nat</code></li>
+</ul>
+<p>When you use the <code>DataKinds</code> extension this declaration creates, besides the three objects described above, three more objects:</p>
+<ul>
+<li>a <strong>&quot;kind constructor&quot;</strong> <code>'Nat</code> (the tick is not a typo)</li>
+<li>a <strong>type constructor</strong> <code>'Zero</code> whose <strong>kind</strong> is <code>'Nat</code></li>
+<li>a <strong>type constructor</strong> <code>'Succ</code> whose <strong>kind</strong> is <code>'Nat -&gt; 'Nat</code></li>
+</ul>
+<p>Those types constructed with those type constructors are not inhabited by values, but they are very useful for <strong>type computation</strong>. So, how do we create the &quot;kind constructor&quot; <code>TypeLevelList</code> with type constructor <code>TypeLevelEmptyList</code> and <code>TypeLevelCons</code>? Exactly with the same code that we would use to create a type constructor <code>List</code> with data constructor <code>EmptyList</code> and <code>Cons</code>, but we use the <code>DataKinds</code> extension to lift those objects from the <code>value :: type</code> world to the <code>type :: kind</code> world. We can do:</p>
+<pre><code class="language-haskell">{-# LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures #-}
+
+module Post where
+
+import Data.Kind (Type)
+
+data Entry a = Entry String a
+
+data List a  = EmptyList | ListCons a (List a)
+
+data Dict (a :: (List Type)) where
+    Nil :: Dict 'EmptyList
+    Cons :: Entry a -&gt; Dict t -&gt; Dict ('ListCons a t)
+</code></pre>
+<p>So, what's happening here? First of all we have the declaration <code>data List a = EmptyList | ListCons a (List a)</code>. This is a simple <em>list type</em>, but since we used the <code>Data.Kinds</code> extension, we get a new <strong>list kind</strong> for free:</p>
+<ul>
+<li><code>'List</code> is a &quot;kind constructor&quot; which takes a kind and return another kind (<code>* -&gt; *</code>)</li>
+<li><code>'EmptyList :: forall a . List a</code> is a type constructor</li>
+<li><code>'ListCons :: forall a . a -&gt; List a -&gt; List a</code> is another type constructor</li>
+</ul>
+<p>So, when applied to the kind <code>Type</code>, the &quot;kind constructor&quot; <code>'List</code> creates the kind <code>'List Type</code> which is a list of types! We can have the following types which have this kind:</p>
+<pre><code class="language-haskell">'EmptyList
+'ListCons Int 'EmptyList
+'ListCons String (Cons Int 'EmptyList)
+</code></pre>
+<p>etc. All those types have kind <code>'List Type</code>. Those types are not inhabited (that is, we can't construct values that have those types), but we can used them to provide compile time information that helps us to avoid bugs, because we can build type constructors that build inhabited types out of them! For example, we can build <code>Dict</code>. Let's check the kind of <code>Dict</code> on GHCi:</p>
+<pre><code class="language-haskell">&gt; :k Dict
+Dict :: List Type -&gt; Type
+-- the actual GHCi output is Dict :: List * -&gt; *, but Type is a nice synonym for *
+</code></pre>
+<p>This is what's happening with the declaration <code>data Dict (a :: (List Type))</code>. We used the extension <code>KindSignatures</code> to inform the compiler that the <code>Dict</code> type constructor has a kind which takes an argument of kind <code>List Type</code> and returns a regular <code>Type</code>.</p>
+<p>Now to the data constructors - which are the things that allows us to actually build values of type <code>Dict a</code>. The simples one is <code>Nil</code> which builds a value of type <code>Dict 'EmptyList</code>. This is an empty record, with no values stored and thus no types stored in the type level list.</p>
+<p>Also we have <code>Cons</code>, which takes a parameter of type <code>Entry a</code> and a parameter of type <code>Dict t</code> (remember, here <code>t</code> is a type of kind <code>'List Type</code>) and builds a value of type <code>Dict ('ListCons a t)</code>. So, <code>Cons</code> does two things:</p>
+<ul>
+<li>it concatenates a new entry with an existing record,</li>
+<li>it also concatenates the <em>type</em> of the value stored in this entry into an <em>existing list of types</em> that describes the types of the entries in the existing record.</li>
+</ul>
+<p>Wow. If that's too much to grasp, let's see this in action:</p>
+<pre><code class="language-haskell">namedRecord ::Dict ('ListCons String 'EmptyList)
+namedRecord = (Entry &quot;name&quot; &quot;Rafael&quot;) Nil
+
+namedAndAgedRecord :: Dict ('ListCons Int ('ListCons String 'EmptyList))
+namedAndAgedRecord = Cons (Entry &quot;age&quot; (35::Int)) namedRecord
+</code></pre>
+<p>See how the types of the fields we're creating are concatenated in the type of the record? This allows us to know precisely the types of all the fields in a record!</p>
+<h3><a href="#making-it-prettier" aria-hidden="true" class="anchor" id="making-it-prettier"></a>Making it prettier</h3>
+<p>We didn't have to code our own list type, Haskell already provides one for us and fortunately <code>Data.Kinds</code> works with the built-in types too. So we could have written simply:</p>
+<pre><code class="language-haskell">{-# LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures, TypeInType, TypeOperators #-}
+
+module Post where
+
+import Data.Kind (Type)
+
+infixr 6 :&gt;
+
+data Entry a = Entry String a
+
+data Dict (a :: [Type]) where
+    Nil :: Dict '[]
+    (:&gt;) :: Entry a -&gt; Dict t -&gt; Dict (a:t)
+</code></pre>
+<p>We made a few changes to make the types nicer:</p>
+<ul>
+<li>
+<p>We are now using Haskel's built-in lists:</p>
+<pre><code class="language-haskell">&gt; :k Dict
+Dict :: [Type] -&gt; Type
+</code></pre>
+<p>This is completely equivalent to the previous signature <code>List Type -&gt; Type</code> the only difference is that we're using the built-in type instead of our custom list type.</p>
+</li>
+<li>
+<p>We're using the <code>TypeInType</code> extension to allow for the syntax <code>[Type]</code></p>
+</li>
+<li>
+<p>We're using the <code>TypeOperators</code> extension to allow for two things:</p>
+<ol>
+<li>using the promoted type constructor <code>(:) :: a -&gt; [a] -&gt; [a]</code> which concatenates a type on the head of a type level list;</li>
+<li>renaming the ugly <code>Cons</code> data constructor to a nicer <code>(:&gt;)</code> infix type operator so that the expressions are nicer looking.</li>
+</ol>
+</li>
+</ul>
+<p>With this modifications, instead of this ugly monster:</p>
+<pre><code class="language-haskell">myRecord :: Dict ('ListCons String ('ListCons Int 'EmptyList))
+myRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) (Cons (Entry &quot;age&quot; 35) Nil)
+</code></pre>
+<p>we can write this:</p>
+<pre><code class="language-haskell">myRecord :: Dict '[String, Int]
+myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot; 35 :&gt; Nil
+</code></pre>
+<p>Much better, right?</p>
+<h3><a href="#this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised" aria-hidden="true" class="anchor" id="this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised"></a>This is already too long and you didn't get to the point you promised</h3>
+<p>Well, yep. This post is already big and we still don't know:</p>
+<ul>
+<li>how to write <code>getField</code></li>
+<li>how to enhance the type <code>Dict</code> to allow for information about field names to be statically checked by the compiler.</li>
+</ul>
+<p>So it looks like a perfect point to stop and start planning to write Part 2!</p>
+]]></content:encoded></item><item><title>Operational Semantics for Monads]</title><link>https://rcalsaverini.github.io/blog/operational-semantics-for-monads.html</link><author>Rafael S. Calsaverini</author><category>programming</category><category>Haskell</category><category>Monads</category><category>Operational Monads</category><category>Free Monads</category><category>Free Vector Space</category><category>Category Theory</category><guid>https://rcalsaverini.github.io/blog/operational-semantics-for-monads.html</guid><pubDate>Wed, 25 Aug 2010 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<p><strong>Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.</strong></p>
+<p>While randomly browsing around on <a href="http://planet.haskell.org/">Planet Haskell</a> I've found <a href="http://apfelmus.nfshost.com/articles/operational-monad.html#concatenation-and-thoughts-on-the-interface">a post</a> on <a href="http://apfelmus.nfshost.com/">Heinrich Apfelmus' blog</a> about something called &quot;operational semantics&quot; for monads. Found it very iluminating. Basically it's a form to implement monads focusing not on defining the bind and return operators, but on what the monad is really supposed to do. It's a view where a monad define a Domain Specific Language, that must be interpreted in order to cause it's effects. It seems to me it's exactly what is implemented in the <a href="http://hackage.haskell.org/packages/archive/MonadPrompt/1.0.0.2/doc/html/Control-Monad-Prompt.html">monadprompt (Control.Monad.Prompt)</a> package, although I'm not sure.</p>
+<h1><a href="#the-operational-monad" aria-hidden="true" class="anchor" id="the-operational-monad"></a>The Operational Monad</h1>
+<pre><code class="language-haskell">{-# LANGUAGE GADTs #-}
+import Control.Monad
+import Data.Map (Map, fromList, unionWith)
+</code></pre>
+<p>The definition of a monad on this approach starts with a common interface given by the following data type and a singleton function:</p>
+<pre><code class="language-haskell">data Program m a where
+    Then :: m a -&gt; (a -&gt; Program m b) -&gt; Program m b
+    Return :: a -&gt; Program m a
+
+singleton :: m a -&gt; Program m a
+singleton i = i `Then` Return
+</code></pre>
+<p>Note that the types of the data constructors Then and Return are very similar (but not equal...) to the types of the monadic operations (&gt;&gt;=) and return. This identification of class functions with data constructors is recurring throughout this post. This data type is instanciated as a traditional monad as follows:</p>
+<pre><code class="language-haskell">instance Monad (Program m) where
+    return = Return
+    (Return a)    &gt;&gt;= f  = f a
+    (i `Then` is) &gt;&gt;= f  = i `Then` (\ x -&gt; is x &gt;&gt;= f)
+</code></pre>
+<p>This is all we need! As an example let's describe the implementation of the State Monad within this approach. This is exactly the first example given by Apfelmus on his post, disguised as a stack machine.</p>
+<h1><a href="#example-implementing-the-state-monad" aria-hidden="true" class="anchor" id="example-implementing-the-state-monad"></a>Example: implementing the State Monad</h1>
+<p>The operational approach to monads begins with recognizing what operations you want your monad to perform. A State Monad have a state, a return value and two function: one that allows us to retrieve the state as the return value, and one that allows us to insert a new state. Let's represent this in the following GADT:</p>
+<pre><code class="language-haskell">data StateOp st retVal where
+    Get :: StateOp st st  -- retrieve current state as a returned value
+    Put :: st -&gt; StateOp st ()  -- insert a new state
+</code></pre>
+<p>This are the operations needed on the <code>State</code> Monad, but the monad itself is a sequence of compositions of such operations:</p>
+<pre><code class="language-haskell">type State st retVal = Program (StateOp st) retVal
+</code></pre>
+<p>Note that the type synonym State st is a monad already and satisfy all the monad laws by construction. We don't need to worry about implementing return and <code>(&gt;&gt;=)</code> correctly: they are already defined.</p>
+<p>So far, so good but... how do we use this monad in practice? This types define a kind of Domain Specific Language: we have operations represented by Get and Put and we can compose them in little programs by using Then and Return. Now we need to write an interpreter for this language. I find this is greatly simplified if you notice that the construct</p>
+<pre><code class="language-haskell">do x &lt;- singleton foo
+   bar x
+</code></pre>
+<p>can be translated as <em>foo <code>Then</code> bar</em> in this context. Thus, to define how you'll interpret the later, just think what's the effect you want to have when you write the former.</p>
+<p>Our interpreter will take a <code>State st retVal</code> and a state st as input and return a pair: the next state and the returned value <code>(st, retVal)</code>:</p>
+<pre><code class="language-haskell">interpret :: State st retVal -&gt; st -&gt; (st, retVal)
+</code></pre>
+<p>First of all, how should we interpret the program <code>Return val</code> ? This program just takes any state input and return it unaltered, with val as it's returned value:</p>
+<pre><code class="language-haskell">interpret (Return val) st = (st, val)
+</code></pre>
+<p>The next step is to interpret the program <em>foo <code>Then</code> bar</em>. Looking at the type of things always helps: Then, in this context, have type <code>StateOp st a -&gt; (a -&gt; State st b) -&gt; State st b</code>. So, in the expression <em>foo <code>Then</code> bar</em>, foo is of type <code>StateOp st a</code>, that is, it's a stateful computation with state of type <code>st</code> and returned value of type <code>a</code>. The rest of the expression, <code>bar</code>, is of type <code>a -&gt; State st b</code>, that is, it expects to receive something of the type of the returned value of foo and return the next computation to be executed. We have two options for <code>foo</code>: <code>Get</code> and <code>Put x</code>.</p>
+<p>When executing <em>Get <code>Then</code> bar</em>, we want this program to return the current state as the returned value. But we also want it to call the execution of <code>bar val</code>, the rest of the code. And if <code>val</code> is the value returned by the last computation, <code>Get</code>, it must be the current state:</p>
+<pre><code class="language-haskell">interpret (Get `Then` bar) st = interpret (bar st) st
+</code></pre>
+<p>The program <em>Put x <code>Then</code> bar</em> is suposed to just insert <code>x</code> as the new state and call <code>bar val</code>. But if you look at the type of <code>Put x</code>, it's returned value is empty: <code>()</code>. So we must call <code>bar ()</code>. The current state is then discarded and substituted by <code>x</code>.</p>
+<pre><code class="language-haskell">interpret (Put x `Then` bar) _  = interpret (bar ()) x
+</code></pre>
+<p>We have our interpreter (which, you guessed right, is just the function <code>runState</code> from `Control.Monad.State) and now it's time to write programs in this language. Let's then define some helper functions:</p>
+<pre><code class="language-haskell">get :: State st st
+get = singleton Get
+
+put :: st -&gt; State st ()
+put = singleton . Put
+</code></pre>
+<p>and write some code to be interpreted:</p>
+<pre><code class="language-haskell">example :: Num a =&gt; State a a
+example = do x &lt;- get
+          put (x + 1)
+          return x
+
+test1 = interpret example 0
+test2 = interpret (replicateM 10 example) 0
+</code></pre>
+<p>This can be run in ghci to give exactly what you would expect from the state monad:</p>
+<pre><code class="language-haskell">*Main&gt; test1
+(1,0)
+
+*Main&gt; test2
+(10,[0,1,2,3,4,5,6,7,8,9])
+</code></pre>
+<h1><a href="#vector-spaces" aria-hidden="true" class="anchor" id="vector-spaces"></a>Vector Spaces</h1>
+<p>The approach seems very convenient from the point of view of developing applications, as it's focused on what are actions the code must implement and how the code should be executed. But it seems to me that the focus on the operations the monad will implement is also very convenient to think about mathematical structures. To give an example, I'd like to implement a monad for Vector Spaces, in the spirit of Dan Piponi (Sigfpe)'s ideas <a href="http://blog.sigfpe.com/2007/02/monads-for-vector-spaces-probability.html">here</a>, <a href="http://blog.sigfpe.com/2007/03/monads-vector-spaces-and-quantum.html">here</a> and <a href="http://blog.sigfpe.com/2009/05/trace-diagrams-with-monads.html">here</a>.</p>
+<p>A vector space $\mathbb{V_F}$ is a set of elements $\mathbf{x}\in\mathbb{V_F}$ that can be summed ($\mathbf{x} + \mathbf{y} \in\mathbb{V_F}$ if $\mathbf{x},\mathbf{y} \in \mathbb{V_F}$) and multiplied elements of a field ($\alpha\mathbf{x}$ if $\alpha\in \mathcal{F}$ and $\mathbf{x}\in\mathbb{V_F}$). If we want this to be implemented as a monad then, we should, in analogy with what we did for the State Monad, write a GADT with data constructors that implement the sum and product by a scalar:</p>
+<pre><code class="language-haskell">data VectorOp field label where
+
+    Sum :: Vector field label
+        -&gt; Vector field label
+        -&gt; VectorOp field label
+
+    Mul :: field
+        -&gt; Vector field label
+        -&gt; VectorOp field label
+
+type Vector field label = Program (VectorOp field) label
+</code></pre>
+<p>and then we must implement a interpreter:</p>
+<pre><code class="language-haskell">runVector :: (Num field, Ord label) =&gt; Vector field label -&gt; Map label field
+runVector (Return a) = fromList [(a, 1)]
+runVector (Sum u v `Then` foo) = let uVec = (runVector (u &gt;&gt;= foo))
+                                     vVec = (runVector (v &gt;&gt;= foo))
+                                 in unionWith (+) uVec vVec
+runVector (Mul x u `Then` foo) = fmap (x*) (runVector (u &gt;&gt;= foo))
+</code></pre>
+<p>The interpreter <code>runVector</code> takes a vector and returns it's representation as a <code>Map</code>. As an example, we could do the following:</p>
+<pre><code class="language-haskell">infixr 3 &lt;*&gt;
+infixr 2 &lt;+&gt;
+
+u &lt;+&gt; v = singleton $ Sum u v
+x &lt;*&gt; u = singleton $ Mul x u
+
+data Base = X | Y | Z deriving(Ord, Eq, Show)
+
+x, y, z :: Vector Double Base
+x = return X
+y = return Y
+z = return Z
+
+reflectXY :: Vector Double Base -&gt; Vector Double Base
+reflectXY vecU = do cp &lt;- vecU
+                    return (transf cp)
+                        where transf X = Y
+                              transf Y = X
+                              transf Z = Z
+</code></pre>
+<p>and test this on ghci:</p>
+<pre><code class="language-ghci">*Main&gt; runVector $ x &lt;+&gt; y
+fromList [(X,1.0),(Y,1.0)]
+
+*Main&gt; runVector $ reflectXY $ x &lt;+&gt; z
+fromList [(Y,1.0),(Z,1.0)]
+</code></pre>
+<p>As Dan Piponi points out in his talk, any function acting on the base <code>f :: Base -&gt; Base</code> is lifted to a linear map on the vector space Space field Base by doing (because this is the Free Vector Space over <code>Base</code>):</p>
+<pre><code class="language-haskell">linearTrans f u = do vec &lt;- u
+                  return (f vec)
+</code></pre>
+<p>More on this later. :)</p>
+]]></content:encoded></item><item><title>Stochastic Processes as Monad Transformers</title><link>https://rcalsaverini.github.io/blog/stochastic-processes-as-monad-transformers.html</link><author>Rafael S. Calsaverini</author><category>programming</category><category>Haskell</category><category>Monad Transformers</category><category>Monads</category><category>Stochastic Processes</category><category>Probability Monad</category><guid>https://rcalsaverini.github.io/blog/stochastic-processes-as-monad-transformers.html</guid><pubDate>Tue, 03 Aug 2010 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">index</source><content:encoded><![CDATA[<p><strong>Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.</strong></p>
+<p>I have a difficulty to understand functional programming concepts that I can’t put to some very simple and natural use (natural for me, of course). I need to find the perfect simple example to implement to finally understand something. And I’m not a computer scientist, so things like parsers and compilers have very little appeal to me (probably because I don’t understand them…). I’m a physicist, so this drives me to look for physical problems that can be implemented in Haskell so I can understand some concepts.</p>
+<p>Monad transformers still eludes me. But I think I finally got the perfect subject were I can understand them: stochastic processes! First some book keeping:</p>
+<pre><code class="language-haskell">import Control.Monad.State
+import Control.Monad
+import Control.Monad.Rand
+</code></pre>
+<p>Now, stochastic processes have characteristics related to two different monads. In one hand, they are dynamical processes, and the way to implement dynamics in Haskell is with state monads. For example, if I want to iterate the logistic map:</p>
+<p>$$x_{t+1} = \alpha x_t\left(1-x_t\right)$$</p>
+<p>$$ teste = teste $$</p>
+<p>I could do the following:</p>
+<pre><code class="language-haskell">  f :: Double -&gt; Double
+  f x = 4*x*(1-x)
+
+  logistic :: State Double Double
+  logistic = do x0 &lt;- get
+        let x1 = f x
+        put x1
+        return x1
+  runLogistic :: State Double [Double]
+  runLogistic n x0= evalState (replicateM n logistic) x0
+</code></pre>
+<p>Running this on ghci would give you, for example:</p>
+<pre><code class="language-haskell">  *Main&gt; runLogistic 5 0.2
+  [0.6400000000000001,0.9215999999999999,0.28901376000000045, 0.8219392261226504,0.5854205387341]
+</code></pre>
+<p>So we can make the loose correspondence: dynamical system ↔ state monad.</p>
+<p>On the other hand, stochastic processes are compositions of random variables, and this is done with the Rand monad (found in <code>Control.Monad.Random</code>). As an example, the Box-Muller formula tells us that, if I have two inpendent random variables $x$ and $y$, distributed uniformly between in the \([0, 1]\) interval, then, the expression:</p>
+<p>$$\sqrt{-2\log(x)}\cos(2\pi y)$$</p>
+<p>will be normally distributed. We can write then:</p>
+<pre><code class="language-haskell">boxmuller :: Double -&gt; Double -&gt; Double
+boxmuller x y = sqrt(-2*log x)*cos(2*pi*y)
+
+normal :: Rand StdGen Double  -- normally distributed
+normal = do x &lt;- getRandom
+            y &lt;- getRandom
+            return $ boxmuller x y
+
+normals n = replicateM n normal -- n independent samples from normal
+</code></pre>
+<p>Running this function we get what we need:</p>
+<pre><code class="language-haskell">*Main&gt; (evalRand $ normals 5) (mkStdGen 0) =
+[0.1600255836730147,0.1575360140445035,-1.595627933129274,
+-0.18196791439834512,-1.082222285056746]
+</code></pre>
+<p>So what is a stochastic process? In very rough terms: is a dynamical system with random variables. So we need a way to make the <code>Rand</code> monad to talk nicely with the <code>State</code> monad. The way to do this is to use a monad transformer, in this case, the <code>StateT</code> transformer. Monad transformers allows you to combine the functionalities of two different monads. In the case of the <code>StateT</code> monads, they allow you to add a state to any other monad you want. In our case, we want to wrap the <code>Rand</code> monad inside a <code>StateT</code> transformer and work with things of type:</p>
+<pre><code class="language-haskell">foo ::  StateT s (Rand StdGen) r
+</code></pre>
+<p>This type represent a monad that can store a state with type s, like the state monad, and can generate random variables of type r, like the rand monad. In general we would have a type</p>
+<pre><code class="language-haskell">foo2 ::(MonadTrans t, Monad m) =&gt; t m a
+</code></pre>
+<p>In this case, <code>t = StateT s</code> and <code>m = Rand StdGen</code>. The class <code>MonadTrans</code> is defined in <code>Control.Monad.Trans</code>, and provides the function:</p>
+<pre><code class="language-haskell">lift :: (MonadTrans t, Monad m) =&gt; m a -&gt; t m a
+</code></pre>
+<p>In this case, <code>t</code> is itself a monad, and can be treated like one through the code. It works like this: inside a do expression you can use the <code>lift</code> function to access the inner monad. Things called with lift will operate in the inner monad. Things called without <code>lift</code> will operate in the outer monad.</p>
+<p>So, suppose we want to simulate this very simple process:</p>
+<p>$$x_{t+1} = x_t + \eta_t$$</p>
+<p>where \(\eta_t\) is drawn from a normal distribution. We would do:</p>
+<pre><code class="language-haskell">randomWalk :: StateT Double (Rand StdGen) Double
+randomWalk = do eta &lt;- lift normal
+                x &lt;- get
+                let x' = x + eta
+                put x'
+                return x'
+runWalk :: Int -&gt; Double -&gt; StdGen -&gt; [Double]
+runWalk n x0 gen = evalRand (replicateM n $ evalStateT randomWalk x0) gen
+</code></pre>
+<p>The <code>evalStateT</code> function is just evalState adapted to run a StateT monad. Running this on ghci we get:</p>
+<pre><code class="language-haskell"> *Main&gt; runWalk 5 0.0 gen
+[0.1600255836730147,0.1575360140445035,-1.595627933129274,
+-0.18196791439834512,-1.082222285056746]
+</code></pre>
+<p>This is what we can accomplish: we can easily operate simultaneously with functions that expect a state monad, like put and get, we can unwrap things with <code>&lt;-</code> from the inner <code>Rand</code> monad by using <code>lift</code> , and we can return things to the state monad. We could have any monad inside the <code>StateT</code> transformer. For example, we could have another <code>State</code> monad. Here is a fancy implementation of the Fibonacci sequence using a <code>State</code> monad (that stores the last but one value in the sequence as its internal state) inside a <code>StateT</code> transfomer (that stores the last value of the sequence):</p>
+<pre><code class="language-haskell">fancyFib :: StateT Int (State Int) Int
+fancyFib = do old &lt;- lift get
+              new &lt;- get
+              let new' = new + old
+                  old' = new
+              lift $ put old'
+              put new'
+              return new
+
+fancyFibs :: Int -&gt; StateT Int (State Int) [Int]
+fancyFibs n = replicateM n fancyFibs
+</code></pre>
+<p>And we can run this to get:</p>
+<pre><code class="language-haskell">*Main&gt; evalState (evalStateT (fancyFibs 10) 1) 0
+[1,1,2,3,5,8,13,21,34,55]
+</code></pre>
+]]></content:encoded></item></channel></rss>

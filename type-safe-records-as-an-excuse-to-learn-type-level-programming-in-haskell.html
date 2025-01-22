@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
@@ -20,6 +21,8 @@
 <meta property="article:published_time" content=" 2018-02-12T22:00:00+00:00">
 
 
+<meta property="article:author" content="https://rcalsaverini.github.io/blog/author-rafael.calsaverini.html">
+
 
 <script type="application/ld+json">
 {
@@ -33,7 +36,11 @@
     "headline": "Type safe records as an excuse to learn type level programming in Haskell",
     "description": "I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find this amazing talk by Prof. Step...",
     
-    
+    "author": {
+        "@type": "Person",
+        "name": "Rafael Calsaverini",
+        "url": "https://rcalsaverini.github.io/blog/author-rafael.calsaverini.html",
+    },
     "publisher": {
         "@type": "Organization",
         "name": "Agente Aleatório",
@@ -51,6 +58,8 @@
     <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
     <link rel="stylesheet" type="text/css" href="./static/marmite.css">
     
+    <link rel="stylesheet" type="text/css" href="./static/colorschemes/github.css">
+    
     <link rel="stylesheet" type="text/css" href="./static/custom.css">
     
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
@@ -58,47 +67,147 @@
 
 
     <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="draft" href="draft.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: programming" href="tag-programming.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Music Theory" href="tag-music-theory.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Haskell" href="tag-haskell.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Monads" href="tag-monads.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Negative Harmony" href="tag-negative-harmony.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Set Theory (Music)" href="tag-set-theory-music.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: welcome" href="tag-welcome.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: marmite" href="tag-marmite.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Deep Learning" href="tag-deep-learning.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: blog" href="tag-blog.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
-    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
     <link rel="alternate" type="application/rss+xml" title="tag: Free Vector Space" href="tag-free-vector-space.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Ethics" href="tag-ethics.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Density Learning" href="tag-density-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Xenophobia" href="tag-xenophobia.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: modes of limited transposition" href="tag-modes-of-limited-transposition.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Fascism" href="tag-fascism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Liberalism" href="tag-liberalism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Unsupervised Learning" href="tag-unsupervised-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Racism" href="tag-racism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: music theory" href="tag-music-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: composition" href="tag-composition.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Humanism" href="tag-humanism.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: messiaen modes" href="tag-messiaen-modes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Moral growth" href="tag-moral-growth.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Centrism" href="tag-centrism.rss">
     <link rel="alternate" type="application/rss+xml" title="author: Rafael S. Calsaverini" href="author-rafael-s-calsaverini.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: rafael.calsaverini" href="author-rafael-calsaverini.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2019" href="archive-2019.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2018" href="archive-2018.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2017" href="archive-2017.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2010" href="archive-2010.rss">
-    <link rel="alternate" type="application/rss+xml" title="year: 2000" href="archive-2000.rss">
     
 
     
+    <link rel="alternate" type="application/feed+json" title="JSON index" href="index.json">
+    
+    <link rel="alternate" type="application/feed+json" title="JSON draft" href="draft.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: programming" href="tag-programming.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Music Theory" href="tag-music-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Haskell" href="tag-haskell.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Monads" href="tag-monads.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Negative Harmony" href="tag-negative-harmony.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Set Theory (Music)" href="tag-set-theory-music.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Type safety" href="tag-type-safety.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Deep Learning" href="tag-deep-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Python" href="tag-python.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Chord transformations" href="tag-chord-transformations.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Free Vector Space" href="tag-free-vector-space.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Type-level programming" href="tag-type-level-programming.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Probability Monad" href="tag-probability-monad.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Ethics" href="tag-ethics.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Density Learning" href="tag-density-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Free Monads" href="tag-free-monads.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Symbolic Optimization" href="tag-symbolic-optimization.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Xenophobia" href="tag-xenophobia.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Category Theory" href="tag-category-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Neural Networks" href="tag-neural-networks.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Machine Learning" href="tag-machine-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: modes of limited transposition" href="tag-modes-of-limited-transposition.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Fascism" href="tag-fascism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Liberalism" href="tag-liberalism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Mypy" href="tag-mypy.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Unsupervised Learning" href="tag-unsupervised-learning.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Racism" href="tag-racism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Type encodings" href="tag-type-encodings.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Stochastic Processes" href="tag-stochastic-processes.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Records" href="tag-records.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Functional programming" href="tag-functional-programming.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: music theory" href="tag-music-theory.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: composition" href="tag-composition.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Humanism" href="tag-humanism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Monad Transformers" href="tag-monad-transformers.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Operational Monads" href="tag-operational-monads.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: messiaen modes" href="tag-messiaen-modes.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Moral growth" href="tag-moral-growth.json">
+    <link rel="alternate" type="application/feed+json" title="JSON tag: Centrism" href="tag-centrism.json">
+    <link rel="alternate" type="application/feed+json" title="JSON author: Rafael S. Calsaverini"
+        href="author-rafael-s-calsaverini.json">
+    <link rel="alternate" type="application/feed+json" title="JSON author: rafael.calsaverini"
+        href="author-rafael-calsaverini.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2022" href="archive-2022.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2021" href="archive-2021.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2019" href="archive-2019.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2018" href="archive-2018.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2017" href="archive-2017.json">
+    <link rel="alternate" type="application/feed+json" title="JSON year: 2010" href="archive-2010.json">
     
     
+    
+    
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+        integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+        integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                // customised options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                ],
+                // • rendering keys, e.g.:
+                throwOnError: false,
+            });
+        });
+    </script>
 </head>
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
 <body>
     
     <main class="container">
@@ -114,54 +223,77 @@
                     </li>
                 </ul>
                 <button id="menu-toggle" class="hamburger">&#9776;</button>
-                
+
                 <ul class="header-menu" id="header-menu">
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./about.html">About</a>
+                        <a class="menu-item secondary"  href="./about.html" >About</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./pages.html">Pages</a>
+                        <a class="menu-item secondary"  href="./pages.html" >Pages</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        <a class="menu-item secondary"  href="./tags.html" >Tags</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="./streams.html">Streams</a>
+                        <a class="menu-item secondary"  href="./streams.html" >Streams</a>
                         
                     </li>
                     
-                      
-                      
+                    
+                    
                     <li>
                         
-                        <a class="menu-item secondary"  href="https://github.com/rochacbruno/marmite" target="_blank" >Github</a>
+                        <a class="menu-item secondary"  href="https://github.com/rcalsaverini/"
+                            target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://bertha.social/@rcalsaverini"
+                            target="_blank" >Follow me</a>
                         
                     </li>
                     
                     <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
                     
+                    <li><a href="#" id="search-toggle" class="secondary" title="Search (Ctrl + Shift + F)"> <span
+                                class="search-txt">Search</span><span class="search-magnifier"></span></a></li>
+                    
                     <div class="underline"></div>
                 </ul>
             </nav>
+            
+            <div class="marmite-background-overlay" id="overlay-close"></div>
+            <div class="marmite-search-bar hidden">
+                <span>Busca</span>
+                <button class="marmite-close-button" id="search-close">X</button>
+                <input placeholder="Search" id="marmite-search-input" />
+                <div class="marmite-search-bar-result">
+                    <ul id="marmite-search-bar-result"></ul>
+                </div>
+            </div>
             
         </header>
         
@@ -181,11 +313,32 @@
 
 
 <span class="content-date">
-    <small> Feb 12, 2018 - &#10710; 12 min</small>
+    <small> Monday, 12 February 2018 - &#10710; 12 min</small>
 </span>
 
 </div>
 
+  
+  <div class="content-toc">
+    <a href="#" id="toc"></a>
+    <details>
+    <summary>🗒️</summary>
+    <ul>
+<ul>
+<ul>
+<li><a href="#type-safe-records">Type Safe Records</a></li>
+<li><a href="#first-attempt-a-list-of-named-entries">First attempt: a list of named entries</a></li>
+<li><a href="#using-gadts-and-existential-types">Using GADTs and existential types</a></li>
+<li><a href="#keeping-track-of-the-field-types">Keeping track of the field types</a></li>
+<li><a href="#type-level-lists">Type Level Lists</a></li>
+<li><a href="#making-it-prettier">Making it prettier</a></li>
+<li><a href="#this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised">This is already too long and you didn't get to the point you promised</a></li>
+</ul>
+</ul>
+</ul>
+
+    </details>
+  </div>
   
 
   <div class="content-html"><p>I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find <a href="https://www.youtube.com/watch?v=wNa3MMbhwS4">this amazing talk</a> by <a href="http://www.seas.upenn.edu/~sweirich/">Prof. Stephanie Weirich</a> about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC's extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof. Weirich uses in her talk. She does a lot more than this, in the talk, but I'm going slowly to understand every bit of it.</p>
@@ -393,6 +546,22 @@ myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot;
     <div class="content-authors-flex">
       <div class="content-authors-full">
         
+<div class="content-authors">
+    <ul>
+        
+            
+            
+            <li>
+                <a href="author-rafael.calsaverini.html">
+                    <img src="https://github.com/rcalsaverini.png" alt="Rafael Calsaverini" class="avatar">
+                    Rafael Calsaverini
+                </a>
+            </li>
+            
+        
+    </ul>
+</div>
+
 
       </div>
 
@@ -402,12 +571,14 @@ myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot;
 
 
 <span class="content-date">
-    <small> Feb 12, 2018 - &#10710; 12 min</small>
+    <small> Monday, 12 February 2018 - &#10710; 12 min</small>
 </span>
 
         </div>
 
         <ul class="content-tags">
+          
+          <li><a href="./tag-programming.html">programming</a></li>
           
           <li><a href="./tag-haskell.html">Haskell</a></li>
           
@@ -432,13 +603,19 @@ myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot;
   
   
   <article>
-    Related Haskell content
+    Related programming content
     <ul>
       
       
+      <li><a href="./boehm-beraducci-encoding-for-trees-in-python-a-preview.html">Boehm-Beraducci encoding for trees in python - a preview</a></li>
       
       
-      <li><a href="./operational-semantics-for-monads.html">Operational Semantics for Monads</a></li>
+      <li><a href="./a-few-frustrations-with-python-s-type-annotation-system.html">A few frustrations with Python's type annotation system</a></li>
+      
+      
+      
+      
+      <li><a href="./operational-semantics-for-monads.html">Operational Semantics for Monads]</a></li>
       
       
       <li><a href="./stochastic-processes-as-monad-transformers.html">Stochastic Processes as Monad Transformers</a></li>
@@ -449,12 +626,41 @@ myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot;
 
 
 
+    <article>
+<header>Comentários</header>
+<script src="https://giscus.app/client.js"
+data-repo="rcalsaverini/rcalsaverini.github.io"
+data-repo-id="R_kgDONt_m0Q"
+data-category="General"
+data-category-id="DIC_kwDONt_m0c4CmPrT"
+data-mapping="pathname"
+data-strict="0"
+data-reactions-enabled="1"
+data-emit-metadata="0"
+data-input-position="top"
+data-theme="light_protanopia"
+data-lang="pt"
+data-loading="lazy"
+crossorigin="anonymous"
+async>
+</script>
+
+</article>
+
+
 
 
         </section>
         
         <footer class="footer-content grid">
             <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+            <div class="colorscheme-toggle-div">
+                colorscheme: <select name="colorscheme" class="colorscheme-toggle">
+                    <option value="default">default</option>
+                </select>
+                <span class="theme-toggle secondary" title="dark mode">&#9789;</span>
+            </div>
             
         </footer>
         
@@ -463,6 +669,12 @@ myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot;
     <script src="./static/marmite.js"></script>
     <script src="./static/custom.js"></script>
     
+    <script type="module" src="./static/search.js"></script>
+    
+    
+    <script type="application/javascript">
+        colorschemeSwitcher();
+    </script>
     
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
@@ -473,4 +685,5 @@ myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot;
 
 
 </body>
+
 </html>
