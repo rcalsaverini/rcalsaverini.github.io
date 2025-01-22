@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="Could Neural Nets be used for Symbolic Optimization? Maybe.">
+
+<meta property="og:description" content="What's Symbolic Optimization
+A while ago I was entertaining problems in the intersection of symbolic...">
+
+
+<meta property="og:url" content="https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Agente Aleatório">
+
+<meta property="article:published_time" content=" 2021-07-02T00:00:00+00:00">
+
+
+<meta property="article:author" content="https://rcalsaverini.github.io/blog/author-Rafael S. Calsaverini.html">
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization.html"
+    },
+    "url": "https://rcalsaverini.github.io/blog/neural-nets-for-symbolic-optimization.html",
+    "headline": "Could Neural Nets be used for Symbolic Optimization? Maybe.",
+    "description": "What's Symbolic Optimization
+A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Le...",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Rafael S. Calsaverini",
+        "url": "https://rcalsaverini.github.io/blog/author-Rafael S. Calsaverini.html",
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agente Aleatório",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://rcalsaverini.github.io/blog/"
+        }
+    },
+    "datePublished": "2021-07-02T00:00:00+00:00"
+}
+</script>
+
+
+    <title>Could Neural Nets be used for Symbolic Optimization? Maybe. | Agente Aleatório</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Music Theory" href="tag-music-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Haskell" href="tag-haskell.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monads" href="tag-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Negative Harmony" href="tag-negative-harmony.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Set Theory (Music)" href="tag-set-theory-music.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: welcome" href="tag-welcome.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: marmite" href="tag-marmite.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Deep Learning" href="tag-deep-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: blog" href="tag-blog.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Vector Space" href="tag-free-vector-space.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: Rafael S. Calsaverini" href="author-rafael-s-calsaverini.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2019" href="archive-2019.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2018" href="archive-2018.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2010" href="archive-2010.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2000" href="archive-2000.rss">
+    
+
+    
+    
+    
+</head>
+<body>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Agente Aleatório</a></h2>
+                             <p>Constantemente aumentando a entropia do universo.</p> 
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+                
+                <ul class="header-menu" id="header-menu">
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./about.html">About</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./pages.html">Pages</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./streams.html">Streams</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://github.com/rochacbruno/marmite" target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>Could Neural Nets be used for Symbolic Optimization? Maybe.</h1> 
+    
+
+
+<span class="content-date">
+    <small> Jul  2, 2021 - &#10710; 11 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><h3><a href="#whats-symbolic-optimization" aria-hidden="true" class="anchor" id="whats-symbolic-optimization"></a>What's Symbolic Optimization</h3>
+<p>A while ago I was entertaining problems in the intersection of symbolic manipulation of expressions and Deep Learning. In particular I was interested in finding &quot;optimal&quot; expressions in some way. So, imagine you have some grammar $G$ that describe a set of expressions, let's call it $\mathrm{Exp}_G$, and suppose we have a real-valued function that takes an expression and maps into a number $f: \mathrm{Exp}_G \to \mathbb{R}$. The
+problem I want to discuss is finding expressions that minimize that function:</p>
+<p>$$
+e^{\star} = \arg \min_{e \in \mathrm{Exp}_G} f(e)
+$$</p>
+<h3><a href="#a-toy-version-of-the-problem" aria-hidden="true" class="anchor" id="a-toy-version-of-the-problem"></a>A toy version of the problem</h3>
+<p>Let's discuss one particular toy version of this problem. It might look like a silly problem, but it's simple enough to illustrate the concept and non-trivial enough to avoid simple solutions.</p>
+<p>Suppose we have a training set that consist of a sample of strings. We hold the hypothesis that there's an underlying logic or grammar that generated those strings and we want to describe commmon patterns in these strings by finding a regular expression that would match as many of those strings as possible. We'd like to use this regular expression to check if future out-of-sample strings we come across display the same patterns and belong to this group.</p>
+<p>As an example, suppose our training set consists of the names &quot;Rafael&quot;, &quot;Gabriel&quot; and &quot;Manoel&quot;. Of course we have infinite regular expressions that match all those names. In particular we have the really trivial option <code>/Rafael|Gabriel|Manoel/</code> that would certainly match all strings but would probably fail to match out-of-sample items that do match interesting patterns in the training set – for example &quot;Emanuel&quot;. In a way, this looks a lot like overfitting. Another failure mode would be underfitting and choosing the regex <code>/.\*/</code>, that certainly fits all in-sample items but would also accept all out-of-sample items, even those that don't match any interesting patterns in the training set – for example &quot;Pedro&quot;. Probably what we want is something like <code>/.+el/</code> (or perhaps something with a bit more structure if this is not sufficiently constrained and we want to avoid matching the string &quot;chapel&quot;).</p>
+<p>So, we have to impose additional requirements and constraints or, in ML parlance, additional regularizations that would make our regular expression regularize better. It could be interesting, for example, to find the regular expression that fits as many items as possible but also fail to match a set of randomly chosen strings (a negative sample). Or to find the regular expression that generates a reasonably sized match set but still match as many items as possible. That can be perhaps stated as finding the regular expression $e$ that minimizes a function:</p>
+<p>$$
+f(e) = − \sum_{s \in \mathrm{D}} \mathtt{Match}_e(s) + \lambda \Lambda(e)
+$$</p>
+<p>Where:</p>
+<ul>
+<li>$\mathtt{Match}_e(s)$ is 1 if the regular expression e matches the string s and 0 otherwise; and</li>
+<li>$\Lambda(e)$ is some regularization that penalizes regular expressions that are either too &quot;broad&quot; or too &quot;restricted&quot;. For example we could penalizing matching random strings and penalize expressions that have a finite (or
+too small) match set.</li>
+</ul>
+<h3><a href="#what-other-things-we-could-solve-if-we-learn-how-to-do-this" aria-hidden="true" class="anchor" id="what-other-things-we-could-solve-if-we-learn-how-to-do-this"></a>What other things we could solve if we learn how to do this?</h3>
+<p>This particular problem of symbolic optimization have been bugging me for a while. There seems to be a lot of things we could do if we could solve this problem. Here's a non-exhaustive list.</p>
+<ul>
+<li><strong>Symbolic Regression</strong>: we could be interested in finding the best analytical function to represent a set of data points. In this case the grammar $G$ would be a simple grammar of mathematical expressions containing things nodes (numerical values, input variables), unary operations (like $\sin$, $\cos$, $\exp$, etc), binary operators (like $+$, $−$, $×$, etc) and so on. An expression in this grammar would be a mathematical expression like $y = \sin(\pi × x_1) × exp(−4.6 × x_2)$. The function we want to minimize would be, for example, the least-squares error of fitting this expression over a set of points:
+$$f(e) = \sum_{k=1}^{N} (y_k − \mathtt{Eval}_e(\mathbf{x}_k))^2$$
+Where $\mathtt{Eval}_e(\mathbf{x})$ is a procedure that evaluates the expression $e$ at the input $\mathbf{x}$.</li>
+<li><strong>Learning to Parse</strong>: another intriguing problem is learning how to parse strings in a certain domain. For example, imagine we have a bunch of strings representing addresses in a culture or systems we're not familiar with and we want to learn how to extract parts. How would we go about learning what structures are interesting and what parts deserve a name? We could optimize through grammars that parse those strings into parts that are reusable and build an objective function that rewards reusability of parts. That's a very handwavy example, but it can be made more concrete.</li>
+<li><strong>Enhancing code-completion by leveraging test cases</strong>: there are many ML-based code completion products today (like <a href="https://www.tabnine.com/">Tabnine</a>, <a href="https://www.kite.com/">kite</a>, the new <a href="https://devblogs.microsoft.com/visualstudio/the-making-of-intellicodes-first-deep-learning-model-a-research-journey/">Visual Studio Intellisense</a> and <a href="https://copilot.github.com/">Github's Copilot</a>) but all of them look only into the immediate vicinity of the code and offer suggestions based on the environment of the code. Perhaps one could rank order the code suggestions by how well it passes a set of test cases? That would probably help the programmer narrow down the correct code completing even better. Such a procedure could be framed as symbolic optimization<sup class="footnote-ref"><a href="#fn-idris" id="fnref-idris" data-footnote-ref>1</a></sup>.</li>
+</ul>
+<h3><a href="#why-is-it-hard" aria-hidden="true" class="anchor" id="why-is-it-hard"></a>Why is it hard?</h3>
+<p>Now, this looks interesting but it actually seems very intractable. First of all, the function
+$f$ might be expensive to calculate. Even if it isn't, the space of possible expressions is combinatorially large. Probably factorially large in the size of the grammar G and depth of the expressions being considered. Pure enumeration is unfeasible and techniques like genetic programming don't deal well with high dimensional inputs. Something like Simulated Annealing can deal better with big combinatorial spaces, but convergence is slow.</p>
+<p>Wouldn't it be nice if we could somehow turn this into gradient descent over a continuous space of analytical functions? That's the easiest and most tractable type of optimization we know. If we can map somehow, even approximately, a combinatorial optimization into a continous, $\mathbb{R}^n$ valued optimization, that would the best deal we could get, wouldn't it?</p>
+<h4><a href="#how-to-make-it-easier" aria-hidden="true" class="anchor" id="how-to-make-it-easier"></a>How to make it easier?</h4>
+<p>So, here's an idea that ocurred to me a while ago, when I was reading the Neural Architecture Optimization paper<sup class="footnote-ref"><a href="#fn-naopaper" id="fnref-naopaper" data-footnote-ref>2</a></sup>. Suppose we had a pair of function, let's call it an Encoder/Decoder pair, that map our expressions into and onto real valued vectors. That is, we a pair of functions:</p>
+<p>$$E: \mathrm{Exp}_G \to \mathbb{R}^k$$</p>
+<p>and</p>
+<p>$$D: \mathbb{R}^k \to \mathrm{Exp}_G$$</p>
+<p>such that $D(E(e)) = e$ for all $e \in \mathrm{Exp}_G$.</p>
+<p>If we had such a pair of functions, we could, instead of finding the expression $e$ that optimizes $f(e)$, we could try to find the vector $\mathbf{x} \in \mathbb{R}^k$ that optimizes $f(D(\mathbf{x}))$. Now we're optimizing over a continuous space!!! That's a bit of progress but it's still not perfect: we don't know how to calculate gradients of $f(D(\mathbf{x}))$ with respect to the vector $\mathbf{x}$, since there's the intervening combinatorial space of the expressions.</p>
+<h4><a href="#neural-networks-to-the-rescue" aria-hidden="true" class="anchor" id="neural-networks-to-the-rescue"></a>Neural Networks to the rescue.</h4>
+<p>Let's first focus on the Encoder/Decoder pair. What if we could train functions to learn this bijection? Even if it's not an exact bijection, it could be a start, right?</p>
+<p>So, imagine we have a parametric family of functions we could use to find a suitable encoder:</p>
+<p>$$E: \Theta_E \times \mathrm{Exp}_G \to \mathbb{R}^k$$</p>
+<p>where $\Theta_E$ is some space of parameters. We could try to find a function that evaluates how well the vector $E(\theta_E, e)$ encodes the expression $e \in \mathrm{Exp}_G$ and find the parameter $\theta_E \in \Theta_E$ that optimizes that &quot;well-encodability&quot; function. If the parameter space is nice and the &quot;well-encodability&quot; function is continuous this could be done by gradient descent.</p>
+<p>We could do the same with the decoder:</p>
+<p>$$D: \Theta_D \times \mathbb{R}^k \to \mathrm{Exp}_G $$</p>
+<p>If we put the encoder and decoder together, one good candidate for a measure of &quot;well-encodability/decodability&quot; is the reconstruction loss<sup class="footnote-ref"><a href="#fn-granted" id="fnref-granted" data-footnote-ref>3</a></sup>:</p>
+<p>$$
+\ell(\theta_E, \theta_D) = \sum_{k=1}^N d(e_k, D(\theta_D, E(\theta_E, e_k)))
+$$</p>
+<p>where $d(e, e')$ is a measure of how distant two expressions are. In summary, we would:</p>
+<ul>
+<li>sample a random expression $e$</li>
+<li>use the encoder to generate it's latent encoding vector $\mathbf{x} = E(\theta_E, e)$;</li>
+<li>use the decoder to recover the a new expression $e' = D(\theta_D, \mathbf{x})$;</li>
+<li>adjust the parameters $\theta_E$ and $\theta_D$ to minimize the distance between the expressions $e$ with $e'$.</li>
+</ul>
+<p>Now, after we have learned the encoder and decoder, we could now go back to our original optimization problem. We still want to find the best expression that minimizes $f(e)$ and we want to do that by minimizing $f(D(x, \theta_D))$. Perhaps we can apply the same trick above? We could try to learn a function:</p>
+<p>$$V: \Theta_V \times \mathbb{R}^k \to \mathbb{R} $$</p>
+<p>that given the vector embedding $\mathbf{x} = E(\theta_E, e)$ associated to an expression $e$, learns to estimate the value of $f(e)$. One possible way would be to:</p>
+<ul>
+<li>sample a random expression $e$</li>
+<li>use the encoder to recover its associated embedding $\mathbf{x} = E(\theta_E, e)$;</li>
+<li>compare the value of $f(e)$ with the value of $V(\theta_V, \mathbf{x})$ and adjust the parameter $\theta_V$ to minimize the error.</li>
+</ul>
+<p>That could be achieved by gradient descending the loss function:</p>
+<p>$$
+\ell(\theta_V) = \sum_{k=1}^{N} (V(\theta_V, E(\theta_E, e)) - f(e))^2
+$$</p>
+<p>So, in the end we could simulaneously descend into the three parameters $\theta_E$, $\theta_D$ and $\theta_V$ to minimize the following loss:</p>
+<p>$$
+\ell(\theta_E, \theta_D, \theta_V) = \sum_{k=1}^N\left[d(e_k, D(\theta_D, E(\theta_E, e_k))) + (V(\theta_V, E(\theta_E, e)) - f(e))^2\right]
+$$</p>
+<p>Once we learn the best parameters $\theta_E^\star$, $\theta_D^\star$, $\theta_V^\star$, finding the best expression $e$ that maximizes $f(e)$ can be done by:</p>
+<ul>
+<li>find the vector $\mathbf{x}^\star$ that maximizes $V(\theta_V^\star, \mathbf{x})$;</li>
+<li>decode it to find the optimal expression associated with it: $e^\star = D(\theta_D^\star, \mathbf{x}^\star)$.</li>
+</ul>
+<p>This will probably not be an exact solution, but hopefully one that is good enough.</p>
+<h3><a href="#problems-and-conclusions" aria-hidden="true" class="anchor" id="problems-and-conclusions"></a>Problems and conclusions</h3>
+<p>That's a nice story, but is it actually possible to do? That's a great question. I have no idea. I tried attacking the regex problem with this idea before and I hit several brick walls (that mainly stem from my lack of knowledge in symbolic computation since my focus is 100% in ML and not in Computer Science in general).</p>
+<p>The first difficulty is how to define the parametric family of encoders $E(\theta, e)$. Those functions must take values in the set of possible expressions $\mathrm{Exp}_G$ (the set of all regular expressions in our toy example). We could work with a string representation of the expression and use whatever fancy architecture kids are using for processing strings nowadays. But it would be nice to be able to feed the Abstract Syntax Tree (AST) of the expression and process this. I wonder if that would add significant amounts of inductive bias about the problem and help the model to learn. I tried using TreeLSTMs<sup class="footnote-ref"><a href="#fn-treelstm" id="fnref-treelstm" data-footnote-ref>4</a></sup> for this problem the past and the result was interesting. So I think this part is really feasible.</p>
+<p>The parametric family of decoders $D(\theta_D, \mathbf{x})$ is a much worse problem though. Those functions have to produce syntatically correct expressions in order for the optimization to make sense. Using simple string generation neural nets to produce a string representation of the expression will probably not garantee syntatically valid expressions for every latent vector we input. One possibility is to build it as a generative process that produces valid ASTs recursively. That can work but on my past tries I had a lot of trouble with performance.</p>
+<p>Also randomly generating trees is not easy and naive processes tend to produce trees with a very heavily tailed depth distribution. In my experiments frequently my decode would generate mostly very shallow ASTs but every once in a while it would generate a monstrously deep AST. Manually clipping the maximum depth didn't work very well for me, but I might have done something dumb.</p>
+<p>So, I didn't reach the point where I could test if this idea would work at all, but that looks like a promising idea for someone with actual time to test it.</p>
+<h3><a href="#references-and-footnotes" aria-hidden="true" class="anchor" id="references-and-footnotes"></a>References and Footnotes</h3>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-idris">
+<p>Alternatively, some other strategies like <a href="https://www.idris-lang.org/courses/MGS2018/idris-mgs4.pdf">type driven development</a> in <a href="https://www.idris-lang.org/">Idris</a> use information about typing and dependently typed proofs to suggest code by case analysis. Given a strong enough type constraint Idris is able to generate the desired code for a function. Perhaps there's a way to marry this with symbolic manipulation of ASTs as well. <a href="#fnref-idris" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-naopaper">
+<p>Luo, R., Tian, F., Qin, T., Chen, E., &amp; Liu, T. Y. (2018). Neural architecture optimization. <a href="https://arxiv.org/abs/1808.07233"><em>arXiv preprint arXiv:1808.07233</em></a>. <a href="#fnref-naopaper" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-granted">
+<p>Granted that we are able to find a distance function between expressions that can provide continuous gradients with respect to $\theta_D$ and $\theta_E$. <a href="#fnref-granted" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a></p>
+</li>
+<li id="fn-treelstm">
+<p>Tai, K. S., Socher, R., &amp; Manning, C. D. (2015). Improved semantic representations from tree-structured long short-term memory networks. <a href="https://arxiv.org/abs/1503.00075"><em>arXiv preprint arXiv:1503.00075</em></a>. <a href="#fnref-treelstm" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="4" aria-label="Back to reference 4">↩</a></p>
+</li>
+</ol>
+</section>
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+<div class="content-authors">
+    <ul>
+        
+            
+            
+            <li >
+                <a class="secondary" href="author-Rafael S. Calsaverini.html">
+                    <img src="static/avatar-placeholder.png" alt="Rafael S. Calsaverini" class="avatar">
+                    Rafael S. Calsaverini
+                </a>
+            </li>
+            
+        
+    </ul>
+</div>
+
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Jul  2, 2021 - &#10710; 11 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+          <li><a href="./tag-machine-learning.html">Machine Learning</a></li>
+          
+          <li><a href="./tag-neural-networks.html">Neural Networks</a></li>
+          
+          <li><a href="./tag-deep-learning.html">Deep Learning</a></li>
+          
+          <li><a href="./tag-symbolic-optimization.html">Symbolic Optimization</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+  
+  
+  
+  
+
+
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+</html>

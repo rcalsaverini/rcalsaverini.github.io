@@ -1,0 +1,62 @@
+{
+  "marmite_version": "0.2.3",
+  "posts": 10,
+  "pages": 6,
+  "generated_at": "2025-01-22 11:18:21.455762038 -03:00",
+  "timestamp": 1737555501,
+  "elapsed_time": 0.152453706,
+  "config": {
+    "name": "Agente Aleatório",
+    "tagline": "Constantemente aumentando a entropia do universo.",
+    "url": "https://rcalsaverini.github.io/blog",
+    "footer": "<div>Powered by <a href=\"https://github.com/rochacbruno/marmite\">Marmite</a> | <small><a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">CC-BY_NC-SA</a></small></div>",
+    "language": "en",
+    "pagination": 10,
+    "pages_title": "Pages",
+    "tags_title": "Tags",
+    "tags_content_title": "Posts tagged with '$tag'",
+    "archives_title": "Archive",
+    "archives_content_title": "Posts from '$year'",
+    "streams_title": "Streams",
+    "streams_content_title": "Posts from '$stream'",
+    "default_author": "",
+    "authors_title": "Authors",
+    "enable_search": false,
+    "search_title": "Search",
+    "content_path": "content",
+    "site_path": "",
+    "templates_path": "templates",
+    "static_path": "static",
+    "media_path": "media",
+    "card_image": "",
+    "banner_image": "",
+    "logo_image": "",
+    "default_date_format": "%b %e, %Y",
+    "menu": [
+      [
+        "About",
+        "about.html"
+      ],
+      [
+        "Pages",
+        "pages.html"
+      ],
+      [
+        "Tags",
+        "tags.html"
+      ],
+      [
+        "Streams",
+        "streams.html"
+      ],
+      [
+        "Github",
+        "https://github.com/rcalsaverini/"
+      ]
+    ],
+    "extra": null,
+    "authors": {},
+    "toc": false,
+    "json_feed": false
+  }
+}

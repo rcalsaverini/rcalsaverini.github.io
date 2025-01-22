@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Mon, 21 Jan 2019 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 14:18:21 GMT</lastBuildDate><generator>marmite</generator><item><title>Boehm-Beraducci encoding for trees in python - a preview</title><link>https://rcalsaverini.github.io/blog/programming-boehm-beraducci-encoding-for-trees-in-python-a-preview.html</link><category>Python</category><category>Functional programming</category><category>Type encodings</category><guid>https://rcalsaverini.github.io/blog/programming-boehm-beraducci-encoding-for-trees-in-python-a-preview.html</guid><pubDate>Mon, 21 Jan 2019 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">archive-2019</source><content:encoded><![CDATA[<p>A few years ago I was very impressed for learning the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Boehm-Berarducci encoding</a>, which is a way for encoding
+<a href="https://en.wikipedia.org/wiki/Algebraic_data_type">Algebraic Data Types</a> (ADTs) into a kind of <a href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda calculus</a> that is well <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed</a> called <a href="https://en.wikipedia.org/wiki/System_F">System F</a>.
+The first thing I asked myself was in which languages I would be able to use this encoding to represent ADTs,
+with python being the most critical one for me.</p>
+<p>I was specially motivated for going back at trying this in Python after [I became very frustrated] with my n-th attempt at
+actually using <a href="http://mypy-lang.org/">mypy</a> as a static type checker. Using Boehm-Berarducci encodings certainly will avoid some difficulties
+with recursive types, but I don't think it will solve everything (specially my problems with higher kinded types
+and generic tuples). Aditionaly, I'm not certain about how efficient this implementation would be (both in space and time complexity)
+in a language without the facilities of modern and efficient functional compiler like GHC (tail-rec optimization, etc).</p>
+<p>That said, it's a lot of fun to code this, and I plan to explore this in future posts. As an appetizer, here's a simple tree type
+that typechecks correctly using <a href="http://mypy-lang.org/">mypy</a> in Python, with smart constructors for leafs and branches:</p>
+<pre><code class="language-python">
+  from typing import NamedTuple, TypeVar, Callable
+
+  A = TypeVar(&quot;A&quot;)
+  R = TypeVar(&quot;R&quot;)
+  Branch = Callable[[R, R], R]
+
+
+  class BinaryTree(NamedTuple):
+      constructor: Callable[[R, Branch[R]], R]
+
+      def __call__(self, leaf: R, branch: Branch[R]):
+          return self.constructor(leaf, branch)
+
+      @classmethod
+      def leaf(cls):
+          def leafer(leaf: R, branch: Branch[R]) -&gt; R:
+              return leaf
+
+          return cls(leafer)
+
+      @classmethod
+      def branch(cls, left, right):
+          def brancher(leaf: R, branch: Branch[R]) -&gt; R:
+              return branch(left, right)
+
+          return cls(brancher)
+</code></pre>
+<p>I'll still be checking it this is the actually usable in real code and it certainly falls short from the elegance
+and terseness of a Haskell implementation. But compared with the typical Python code it's actually not that bad.</p>
+<p>I'll be posting here any progress I have with this.</p>
+<p>[I became very frustrated]: {{&lt; relref &quot;blog/2019-01-20-frustrations-with-mypy.md&quot; &gt;}}</p>
+]]></content:encoded></item><item><title>A few frustrations with Python&apos;s type annotation system</title><link>https://rcalsaverini.github.io/blog/programming-a-few-frustrations-with-python-s-type-annotation-system.html</link><category>Python</category><category>Type safety</category><category>Mypy</category><guid>https://rcalsaverini.github.io/blog/programming-a-few-frustrations-with-python-s-type-annotation-system.html</guid><pubDate>Sun, 20 Jan 2019 22:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">archive-2019</source><content:encoded><![CDATA[<p>I have on and off again tried to use <a href="http://mypy-lang.org/">mypy</a> to type check my python code, but some shortcomings of Python's type annotation system really get in the way. This came now because I needed to write code involving trees that had to change the types of values stored on the nodes. This highlighted a few serious shortcomings for anyone that is accostumed to use stronger type systems.</p>
+<h3><a href="#the-ugly-syntax-for-function-types-is-annoying-but-there-are-worse-problems" aria-hidden="true" class="anchor" id="the-ugly-syntax-for-function-types-is-annoying-but-there-are-worse-problems"></a>The ugly syntax for function types is annoying but there are worse problems</h3>
+<p>Yes, writing <code>Callable[[Callable[[A], B], F[A]], F[B]]</code> instead of <code>(a -&gt; b) -&gt; f a -&gt; f b</code> as in Haskell or <code>(A =&gt; B, F[A]) =&gt; F[B]</code> (or maybe the uncurried <code>(A =&gt; B) =&gt; (F[A] =&gt; F[B])</code> version) as in Scala is really annoying.</p>
+<p>But that's neither here nor there. One can get accostumed to it. On the other hand, it is certainly symptomatic of the philosophy chosen for the type system: passing functions around is not an idea on the forefront of this design.</p>
+<h3><a href="#people-are-not-using-it" aria-hidden="true" class="anchor" id="people-are-not-using-it"></a>People are not using it</h3>
+<p>In general, the overwhelming majority of the python libraries I use simply don't have type annotations or stub files and don't plan to add them in the near future. Writing stub files on your own is a pain. This by itself prevents the adoption of type annotations without a lot of effort in providing stub files yourself.</p>
+<h3><a href="#the-ad-hoc-polymorphism-mechanism-chosen-is-annoying" aria-hidden="true" class="anchor" id="the-ad-hoc-polymorphism-mechanism-chosen-is-annoying"></a>The ad hoc polymorphism mechanism chosen is annoying</h3>
+<p>The only way to do ad hoc polymorphism is with structural subtyping (using <code>Protocol</code>). This isn't so bad, since the language embraces duck typing so thoroughly. But it's somewhat annoying for two reasons:</p>
+<ol>
+<li>
+<p>First, admitedly a lesser problem, there's no clear indication in the code that a given class implements a particular <code>Protocol</code>. There's no explicit inheritance, nor explicit instancing of the <code>Protocol</code>. If you don't know the protocol exists, when you see the code of a class, you have no clue that there is a more general pattern that this class implements.</p>
+</li>
+<li>
+<p>Second, there's no &quot;post facto&quot; instancing of <code>Protocol</code> like it's possible to do with Haskell's or Scala's typeclasses, or Go's interfaces. You have one chance to instanciate a class as a particular Protocol: when you write that classes code. If the class belongs to a third party library you can't change, you have to write wrappers (which are terribly annoying, because the language offers no syntax sugar for them).</p>
+</li>
+</ol>
+<h3><a href="#no-support-for-lightweight-parametrically-polymorphic-product-types" aria-hidden="true" class="anchor" id="no-support-for-lightweight-parametrically-polymorphic-product-types"></a>No support for lightweight parametrically polymorphic product types</h3>
+<p>Python's type annotations don't allow you to write generic named tuples. This prevents one to write very lightweight types like:</p>
+<pre><code class="language-python">class Foo(NamedTuple, Generic[A]):
+    a_value: A
+    a_list: List[A]
+</code></pre>
+<p>If you want a parametrically polymorphic type, it must be a fully fledged class by itself.</p>
+<pre><code class="language-python">### will type check
+class Foo(Generic[A]):
+    def __init__(self, a_value: A, a_list: List[A]):
+        self.a_value = a_value
+        self.a_list = a_list
+</code></pre>
+<p>This discourages me to use it for many applications, since Python's classes are not exactly lightweight things and I'd rather not have a class if I don't really need one. You could use a type synonym for an untagged tuple, but this would be a serious documentation hazard:</p>
+<pre><code class="language-python">Foo = Tuple[A, List[A]]
+</code></pre>
+<h3><a href="#no-support-for-lightweight-recursive-product-types" aria-hidden="true" class="anchor" id="no-support-for-lightweight-recursive-product-types"></a>No support for lightweight recursive product types</h3>
+<p>Similarly, Python's type annotations don't allow recursive types unless you're dealing with a full fledged class. Recursive <code>NamedTuples</code> are forbidden, and so are recursive <code>Union</code>s (which wouldn't be possible given the restriction on higher-kinded types anyway, see below). This further prevents fast and lightweight types like:</p>
+<pre><code class="language-python">class BinaryTree(NamedTuple):
+    left: &quot;BinaryTree&quot;
+    right: &quot;BinaryTree&quot;
+</code></pre>
+<p>and requires you to use the full (and heavy) Python classes:</p>
+<pre><code class="language-python">class BinaryTree(object):
+    def __init__(self, left: &quot;BinaryTree&quot;, right: &quot;BinaryTree&quot;):
+            self.left = left
+            self.right = right
+</code></pre>
+<h3><a href="#no-higher-kinded-types" aria-hidden="true" class="anchor" id="no-higher-kinded-types"></a>No higher kinded types</h3>
+<p>Python's type annotations have no support for <a href="https://stackoverflow.com/questions/6246719/what-is-a-higher-kinded-type-in-scala">higher-kinded</a> types. All type variables in a class that inherit from Generic must be of kind <code>*</code>. This is kind of a catastrophe for any kind of more advanced use of the type system to improve correctness garantees. It also prevents some uses of higher kinded patterns like functors, monads, etc.</p>
+<p>For example, you can't use the finally tagless or <a href="http://okmij.org/ftp/tagless-final/index.html">tagless-final</a> pattern. At least not like this:</p>
+<pre><code class="language-python">class DataAccessMonad(Generic[M]):
+    def get_user(self, user_id: UserId) -&gt; M[User]
+        pass
+</code></pre>
+<p>Also, this makes it difficult to implement &quot;post-facto&quot; ad hoc polymorphism using something like <a href="https://typelevel.org/cats/typeclasses.html">Scala's typeclass instance</a> mechanisms to escape <code>Protocol</code>s. For this, one would need to write:</p>
+<pre><code class="language-python">class FunctorInstance(Generic[F]):
+
+    @staticmethod
+    def map(value: F[A], function: Callable[[A], B]) -&gt; F[B]:
+        pass
+</code></pre>
+<p>My original plan for a type class library involved creating a way to inject the instance, wrap the <code>F[A]</code> value and monkey patch it to call <code>value.map</code> when you need it. The fact that one can't use higher kinded types prevents the code above to type check.</p>
+<h3><a href="#and-so-no-fixed-point-functors-and-other-niceties" aria-hidden="true" class="anchor" id="and-so-no-fixed-point-functors-and-other-niceties"></a>And so... no fixed point functors and other niceties</h3>
+<p>This means also that you can't use fixed point types like:</p>
+<pre><code class="language-python">class CoFree(NamedTuple, Generic[F, A]):
+    value: A
+    continuations: F[&quot;Cofree[F, A]&quot;]
+</code></pre>
+<p>because this requires F to be of kind <code>* -&gt; *</code>. Fixed point types are awfully useful for dealing with tree-like structures (see for example <a href="https://www.youtube.com/watch?v=7xSfLPD6tiQ">this talk from Rob Norris</a>) and would similarly fail to type check on <a href="http://mypy-lang.org/">mypy</a>.</p>
+<h3><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h3>
+<p>There are more problems, but those are the main ones that prevented me from really using <a href="http://mypy-lang.org/">mypy</a> or type annotations in Python. This haven't prevented me from writing good and useful Python code, and I still love to write Python. But it certainly increases the attrition.</p>
+]]></content:encoded></item></channel></rss>

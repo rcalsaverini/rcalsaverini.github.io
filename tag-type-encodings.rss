@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Mon, 21 Jan 2019 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 14:18:21 GMT</lastBuildDate><generator>marmite</generator><item><title>Boehm-Beraducci encoding for trees in python - a preview</title><link>https://rcalsaverini.github.io/blog/programming-boehm-beraducci-encoding-for-trees-in-python-a-preview.html</link><category>Python</category><category>Functional programming</category><category>Type encodings</category><guid>https://rcalsaverini.github.io/blog/programming-boehm-beraducci-encoding-for-trees-in-python-a-preview.html</guid><pubDate>Mon, 21 Jan 2019 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-type-encodings</source><content:encoded><![CDATA[<p>A few years ago I was very impressed for learning the <a href="http://okmij.org/ftp/tagless-final/course/Boehm-Berarducci.html">Boehm-Berarducci encoding</a>, which is a way for encoding
+<a href="https://en.wikipedia.org/wiki/Algebraic_data_type">Algebraic Data Types</a> (ADTs) into a kind of <a href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda calculus</a> that is well <a href="https://en.wikipedia.org/wiki/Typed_lambda_calculus">typed</a> called <a href="https://en.wikipedia.org/wiki/System_F">System F</a>.
+The first thing I asked myself was in which languages I would be able to use this encoding to represent ADTs,
+with python being the most critical one for me.</p>
+<p>I was specially motivated for going back at trying this in Python after [I became very frustrated] with my n-th attempt at
+actually using <a href="http://mypy-lang.org/">mypy</a> as a static type checker. Using Boehm-Berarducci encodings certainly will avoid some difficulties
+with recursive types, but I don't think it will solve everything (specially my problems with higher kinded types
+and generic tuples). Aditionaly, I'm not certain about how efficient this implementation would be (both in space and time complexity)
+in a language without the facilities of modern and efficient functional compiler like GHC (tail-rec optimization, etc).</p>
+<p>That said, it's a lot of fun to code this, and I plan to explore this in future posts. As an appetizer, here's a simple tree type
+that typechecks correctly using <a href="http://mypy-lang.org/">mypy</a> in Python, with smart constructors for leafs and branches:</p>
+<pre><code class="language-python">
+  from typing import NamedTuple, TypeVar, Callable
+
+  A = TypeVar(&quot;A&quot;)
+  R = TypeVar(&quot;R&quot;)
+  Branch = Callable[[R, R], R]
+
+
+  class BinaryTree(NamedTuple):
+      constructor: Callable[[R, Branch[R]], R]
+
+      def __call__(self, leaf: R, branch: Branch[R]):
+          return self.constructor(leaf, branch)
+
+      @classmethod
+      def leaf(cls):
+          def leafer(leaf: R, branch: Branch[R]) -&gt; R:
+              return leaf
+
+          return cls(leafer)
+
+      @classmethod
+      def branch(cls, left, right):
+          def brancher(leaf: R, branch: Branch[R]) -&gt; R:
+              return branch(left, right)
+
+          return cls(brancher)
+</code></pre>
+<p>I'll still be checking it this is the actually usable in real code and it certainly falls short from the elegance
+and terseness of a Haskell implementation. But compared with the typical Python code it's actually not that bad.</p>
+<p>I'll be posting here any progress I have with this.</p>
+<p>[I became very frustrated]: {{&lt; relref &quot;blog/2019-01-20-frustrations-with-mypy.md&quot; &gt;}}</p>
+]]></content:encoded></item></channel></rss>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="Negative Harmony inverts brightness of modes">
+
+<meta property="og:description" content="Intro
+Recently I've been listening to a 12tone video on YouTube about negative harmony, a concept re...">
+
+
+<meta property="og:url" content="https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Agente Aleatório">
+
+<meta property="article:published_time" content=" 2021-02-20T00:00:00+00:00">
+
+
+<meta property="article:author" content="https://rcalsaverini.github.io/blog/author-Rafael S. Calsaverini.html">
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html"
+    },
+    "url": "https://rcalsaverini.github.io/blog/negative-harmony-inverts-brightness-modes.html",
+    "headline": "Negative Harmony inverts brightness of modes",
+    "description": "Intro
+Recently I've been listening to a 12tone video on YouTube about negative harmony, a concept recently popularized by musician Jacob Col...",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Rafael S. Calsaverini",
+        "url": "https://rcalsaverini.github.io/blog/author-Rafael S. Calsaverini.html",
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agente Aleatório",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://rcalsaverini.github.io/blog/"
+        }
+    },
+    "datePublished": "2021-02-20T00:00:00+00:00"
+}
+</script>
+
+
+    <title>Negative Harmony inverts brightness of modes | Agente Aleatório</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Music Theory" href="tag-music-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Haskell" href="tag-haskell.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monads" href="tag-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Negative Harmony" href="tag-negative-harmony.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Set Theory (Music)" href="tag-set-theory-music.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: welcome" href="tag-welcome.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: marmite" href="tag-marmite.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Deep Learning" href="tag-deep-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: blog" href="tag-blog.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Vector Space" href="tag-free-vector-space.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: Rafael S. Calsaverini" href="author-rafael-s-calsaverini.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2019" href="archive-2019.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2018" href="archive-2018.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2010" href="archive-2010.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2000" href="archive-2000.rss">
+    
+
+    
+    
+    
+</head>
+<body>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Agente Aleatório</a></h2>
+                             <p>Constantemente aumentando a entropia do universo.</p> 
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+                
+                <ul class="header-menu" id="header-menu">
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./about.html">About</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./pages.html">Pages</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./streams.html">Streams</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://github.com/rochacbruno/marmite" target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>Negative Harmony inverts brightness of modes</h1> 
+    
+
+
+<span class="content-date">
+    <small> Feb 20, 2021 - &#10710; 6 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
+<p>Recently I've been listening to a <a href="https://www.youtube.com/watch?v=SF8CdxcdJgw">12tone video</a> on YouTube about negative harmony, a concept recently popularized by musician Jacob Collier. On the related links I found a bunch of videos from <a href="https://www.youtube.com/channel/UCurOAVtqb7kM1siNlDynzFw">this channel</a> with &quot;negative harmony&quot; versions of many popular songs.</p>
+<p>The change in sonority of those songs clearly indicated for me a change in the <em>mode</em> of the song, which kind of go against the grain of what I've been told about the action of those transformations. In this post I want to explore negative harmony as a transformation not only on chords but on scales, modes and melody.</p>
+<h3><a href="#what-is-negative-harmony-anyway" aria-hidden="true" class="anchor" id="what-is-negative-harmony-anyway"></a>What is Negative Harmony anyway?</h3>
+<p>There are many ways to understand negative harmony and I'm not going to pretend I'm able to give a full historical background. The video by the 12tone channel that I linked above does a much better job than I ever could. Here in this post I'm mainly interested in this as a transformation that can be applied to a particular set of notes, and that's how I'm going to describe and treat it.</p>
+<p>To understand what's the transformation being applied, consider the circle of fifths. In the key of C, the negative harmony transformation consists in swapping notes along the axis that cut the circle in half between the C and G.</p>
+<p>{{<tikz caption="The circle of fifths highlighting the negative harmony transformation in the key of C">}}</p>
+<p>\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>
+<pre><code>\def \n {12}
+\def \radius {4 cm}
+\def \margin {7}
+
+\def \notes {-5/D$\flat$, -4/A$\flat$, -3/E$\flat$, -2/B$\flat$, -1/F, 0/C, 1/G, 2/D, 3/A, 4/E, 5/B, 6/F$\sharp$}
+
+\foreach \s/\key in \notes {
+  \def \start {360 * \s / \n + 15}
+  \def \end {360 * (\s - 1) / \n + 15}
+
+  \node[block, circle, color=violet] at ({90-\start}:\radius) (a\s) {\Large\key};
+  \draw[vec] ({\end+\margin}:\radius) arc ({\end+\margin}:{\start-\margin}:\radius);
+}
+
+\draw [thick,dashed,color=violet!50] (0, -\radius) -- (0, \radius);
+
+\draw[latex-latex,color=violet!50,thick] (a0) to (a1);
+\draw[latex-latex,color=violet!50,thick] (a2) to (a-1);
+\draw[latex-latex,color=violet!50,thick] (a3) to (a-2);
+\draw[latex-latex,color=violet!50,thick] (a4) to (a-3);
+\draw[latex-latex,color=violet!50,thick] (a5) to (a-4);
+\draw[latex-latex,color=violet!50,thick] (a6) to (a-5);
+</code></pre>
+<p>\end{tikzpicture}</p>
+<p>{{</tikz>}}</p>
+<p>The arrows above indicate the notes that are to be switched. So, to apply the negative harmony transformation in the key of C, one would change C for G, D for F, etc.</p>
+<h3><a href="#parameterizing-negative-harmony" aria-hidden="true" class="anchor" id="parameterizing-negative-harmony"></a>Parameterizing Negative Harmony</h3>
+<p>One aspect that is not often discussed about this transformation is that it is actually a <strong>family of transformations</strong> parameterized by a key center. Note that the reflection axis chosen above is only one chosen from 12 possibilities. To highlight this, notice that in the diagram above the transformation in the key of C takes F to D. In the diagram below we have transformation in the key of A, showing that in this case it takes F to A♭.</p>
+<p>{{<tikz caption="The circle of fifths highlighting the negative harmony transformation in the key of A">}}</p>
+<p>\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>
+<pre><code>\def \n {12}
+\def \radius {4 cm}
+\def \margin {7}
+
+\def \notes {-5/B$\flat$, -4/F, -3/C, -2/G, -1/D, 0/A, 1/E, 2/B, 3/F$\sharp$, 4/D$\flat$, 5/A$\flat$, 6/E$\flat$}
+
+\foreach \s/\key in \notes {
+  \def \start {360 * \s / \n + 15}
+  \def \end {360 * (\s - 1) / \n + 15}
+
+  \node[block, circle,color=violet] at ({90-\start}:\radius) (a\s) {\Large\key};
+  \draw[vec] ({\end+\margin}:\radius) arc ({\end+\margin}:{\start-\margin}:\radius);
+}
+
+\draw [thick,dashed,color=violet!30] (0, -\radius) -- (0, \radius);
+
+\draw[latex-latex,color=violet!50,thick] (a0) to (a1);
+\draw[latex-latex,color=violet!50,thick] (a2) to (a-1);
+\draw[latex-latex,color=violet!50,thick] (a3) to (a-2);
+\draw[latex-latex,color=violet!50,thick] (a4) to (a-3);
+\draw[latex-latex,color=violet!50,thick] (a5) to (a-4);
+\draw[latex-latex,color=violet!50,thick] (a6) to (a-5);
+</code></pre>
+<p>\end{tikzpicture}</p>
+<p>{{</tikz>}}</p>
+<h2><a href="#transforming-modes" aria-hidden="true" class="anchor" id="transforming-modes"></a>Transforming modes</h2>
+<p>Typically negative harmony is discussed <a href="https://www.brltheory.com/resources/negative-harmony-chord-chart/">in the context of chords</a>, with an expectation that transformed chords has similar functions (having &quot;equivalent tonal gravity&quot;). I want to discuss how this transformation behaves when considering melodic elements, scales and modes.</p>
+<p>To start, let's check what happens when we transform the seven modes of the major scale. For example, let's apply the transformation over the major scale. As an ilustration, the sequence of notes [C, D, E, F, G, A, B] (the Ionian mode of C Major), transformed in the key of C, will result in [G, F, E♭, D, C, B♭, A♭].</p>
+<p>This sequence can be interpreted in a lot of different ways. Harmonically it is typical to consider the following argument. If the original harmony is in the key of C major, than the I chord is C major triad (C, E, G). This triad transforms to (G, E♭, C), which is an inversion of the C minor triad. Since this would also fit the role of the I chord in the new harmony, this should be interpreted as transforming from a C major harmony to a C minor one.</p>
+<p>That's a good argument, but if we focus on the melody, the note that would be treated as the focus and resting place of the melody in the original key would be C, which would turn into G in the new melody. So, we could interpret G as the root note of the transformed sequence, which would make it a G Phrygian melody.</p>
+<p>Let's take this second stance and see what happens with all modes. Under this interpretation this is how the modes transform:</p>
+<ul>
+<li>C Ionian transforms into G Phrygian.</li>
+<li>C Dorian trasforms into G Dorian.</li>
+<li>C Phrygian trasforms into G Ionian.</li>
+<li>C Lydian transforms into G Locrian.</li>
+<li>C Mixolydian trasforms into G Aelian.</li>
+<li>C Aeolian trasforms into G Mixolydian.</li>
+<li>C Locrian transforms into G Lydian.</li>
+</ul>
+<h3><a href="#negative-harmony-inverts-brightness" aria-hidden="true" class="anchor" id="negative-harmony-inverts-brightness"></a>Negative Harmony inverts brightness</h3>
+<p>Finally, here's the neat and interesting pattern to notice: if we ignore the roots, the quality of the modes above is transforming up and down the <a href="https://www.youtube.com/watch?v=9rEqrPwVITY">Brightness Scale</a>.</p>
+<p>{{<tikz>}}
+\usetikzlibrary{shapes,arrows,positioning,automata}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}</p>
+<p>\begin{tikzpicture}[auto,node distance=1.25cm, block/.style={rectangle, thick, fill=purple!20, align=center, minimum height=1cm, minimum width=2cm}, vec/.style={double,thick,color=purple!20}, connecto/.style={&lt;-&gt;, &gt;=latex, shorten &gt;=2pt, shorten &lt;=2pt, bend left=90, thick, dashed}]</p>
+<pre><code>\draw[thick,dashed,color=orange] (5, 0) -- (-2, 0) node[above,color=orange] at (5, 0) {reflexion axis};
+\node[block,] at (0, 0) (dor) {\normalsize Dorian};
+\node[block,above of=dor] (mix) {\normalsize Mixolydian};
+\node[block,above of=mix] (ion) {\normalsize Ionian};
+\node[block,above of=ion] (lyd) {\normalsize Lydian};
+\node[block,below of=dor] (aeo) {\normalsize Aeolian};
+\node[block,below of=aeo] (phr) {\normalsize Phrygian};
+\node[block,below of=phr] (loc) {\normalsize Locrian};
+
+\draw[vec,-&gt;] (-2, -4) -- (-2, 4)
+      node[above,sloped,color=purple] at (-2.5, 4) {high brightness}
+      node[midway,above,sloped,color=purple] at (-2.5, 0) {\textbf{Brightness Scale}}
+      node[below,sloped,color=purple] at (-2.5, -4) {low brightness};
+
+\draw[connecto] (lyd.east) to node[auto, swap] {} (loc.east);
+\draw[connecto] (ion.east) to node[auto, swap] {} (phr.east);
+\draw[connecto] (mix.east) to node[auto, swap] {} (aeo.east);
+\draw[connecto,bend left=90] (dor.30) to node[auto, swap] {} (dor.330);
+</code></pre>
+<p>\end{tikzpicture}
+{{</tikz>}}</p>
+<p>The effect of the transformation is to reflect the qualities of the modes around the center of the brightness scale, inverting the value of the brightness for the mode in question (the brightest mode becomes the darkest, the second brightest becomes the second darkest, etc).</p>
+<h2><a href="#so-what" aria-hidden="true" class="anchor" id="so-what"></a>So what?</h2>
+<p>Yes, this is just a simple neat symmetry I found. I intend to write more later on some other questions:</p>
+<ul>
+<li>What happens when you transform modes of other scales?</li>
+<li>Modes of the major scale are closed under this transformation. But this definitely won't happen always. What does it mean when it happens?</li>
+<li>What happens when you transform modes under the negative harmony centered in other keys?</li>
+<li>Is there a &quot;right&quot; key to use?</li>
+</ul>
+<p>Stay tuned.</p>
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+<div class="content-authors">
+    <ul>
+        
+            
+            
+            <li >
+                <a class="secondary" href="author-Rafael S. Calsaverini.html">
+                    <img src="static/avatar-placeholder.png" alt="Rafael S. Calsaverini" class="avatar">
+                    Rafael S. Calsaverini
+                </a>
+            </li>
+            
+        
+    </ul>
+</div>
+
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Feb 20, 2021 - &#10710; 6 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+          <li><a href="./tag-music-theory.html">Music Theory</a></li>
+          
+          <li><a href="./tag-negative-harmony.html">Negative Harmony</a></li>
+          
+          <li><a href="./tag-set-theory-music.html">Set Theory (Music)</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+  
+  
+  
+  
+  <article>
+    Related Music Theory content
+    <ul>
+      
+      
+      <li><a href="./preserve-harmonies-swapping-3rds-7ths.html">Does swapping 3rds and 7ths preserve harmonic feel?</a></li>
+      
+      
+      <li><a href="./transforming-modes.html">Transforming modes</a></li>
+      
+      
+      
+    </ul>
+  </article>
+  
+
+
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+</html>

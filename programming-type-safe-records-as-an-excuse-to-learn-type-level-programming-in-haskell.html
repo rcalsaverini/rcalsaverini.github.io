@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="Type safe records as an excuse to learn type level programming in Haskell">
+
+<meta property="og:description" content="I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy...">
+
+
+<meta property="og:url" content="https://rcalsaverini.github.io/blog/programming-type-safe-records-as-an-excuse-to-learn-type-level-programming-in-haskell.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Agente Aleatório">
+
+<meta property="article:published_time" content=" 2018-02-12T22:00:00+00:00">
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rcalsaverini.github.io/blog/programming-type-safe-records-as-an-excuse-to-learn-type-level-programming-in-haskell.html"
+    },
+    "url": "https://rcalsaverini.github.io/blog/programming-type-safe-records-as-an-excuse-to-learn-type-level-programming-in-haskell.html",
+    "headline": "Type safe records as an excuse to learn type level programming in Haskell",
+    "description": "I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find this amazing talk by Prof. Step...",
+    
+    
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agente Aleatório",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://rcalsaverini.github.io/blog/"
+        }
+    },
+    "datePublished": "2018-02-12T22:00:00+00:00"
+}
+</script>
+
+
+    <title>Type safe records as an excuse to learn type level programming in Haskell | Agente Aleatório</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="machine-learning" href="machine-learning.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="music-theory" href="music-theory.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="programming" href="programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Haskell" href="tag-haskell.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Music Theory" href="tag-music-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monads" href="tag-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Negative Harmony" href="tag-negative-harmony.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Set Theory (Music)" href="tag-set-theory-music.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Vector Space" href="tag-free-vector-space.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Deep Learning" href="tag-deep-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: Rafael S. Calsaverini" href="author-rafael-s-calsaverini.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2019" href="archive-2019.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2018" href="archive-2018.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2010" href="archive-2010.rss">
+    
+
+    
+    
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+        integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+        integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                // customised options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                ],
+                // • rendering keys, e.g.:
+                throwOnError: false,
+            });
+        });
+    </script>
+</head>
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+<body>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Agente Aleatório</a></h2>
+                             <p>Constantemente aumentando a entropia do universo.</p> 
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+
+                <ul class="header-menu" id="header-menu">
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./about.html" >About</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./pages.html" >Pages</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html" >Tags</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./streams.html" >Streams</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://github.com/rcalsaverini/"
+                            target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>Type safe records as an excuse to learn type level programming in Haskell</h1> 
+    
+
+
+<span class="content-date">
+    <small> Feb 12, 2018 - &#10710; 12 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><p>I've been recently trying to learn more advanced type-level constructs in Haskell and was very happy to find <a href="https://www.youtube.com/watch?v=wNa3MMbhwS4">this amazing talk</a> by <a href="http://www.seas.upenn.edu/~sweirich/">Prof. Stephanie Weirich</a> about Dependent Types in haskell. This talk helped me to understand deeper a few more recent concepts introduced by some of GHC's extensions and how to use them. In this post I want to focus a little bit in a simplified version of one of the data structures Prof. Weirich uses in her talk. She does a lot more than this, in the talk, but I'm going slowly to understand every bit of it.</p>
+<h3><a href="#type-safe-records" aria-hidden="true" class="anchor" id="type-safe-records"></a>Type Safe Records</h3>
+<p>The <em>record problem</em> is an old problem in Haskell. Succintly, Haskell's traditional native records have lots of problems -- you couldn't reuse record names, updating record fields lead to dull boilerplate code, etc. Many of those problems <a href="http://www.parsonsmatt.org/overcoming-records/#/">are attacked</a> by the idea of <a href="https://hackage.haskell.org/package/lens">lenses</a> (see this <a href="https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation">talk by Simon Peyton Jones</a> to get the basics of it) and many <a href="http://hackage.haskell.org/packages/#cat:Records">other libraries</a> as well as the <a href="https://hackage.haskell.org/package/base-4.10.1.0/docs/GHC-Records.html">OverloadedRecordFields</a> extension.</p>
+<p>Though there are many solutions attacking parts of the record problem, there's one particular aspect of it which offers a nice opportunity to learn type level programming techniques in Haskel and are worth working out from scratch: how to create records whose type's are aware of the fields contained in the records and their types?</p>
+<p>That means, how to create a record type such that the when we try to access a non-existing field:</p>
+<pre><code class="language-haskell">&gt; getField &quot;nonExistentFieldName&quot; record
+</code></pre>
+<p>we get an actual type error in compile time. This allows us to completely rule out a whole class of bugs from our programs: we don't need to worry about users acessing unexisting fields type of errors because this code wouldn't even compile.</p>
+<h3><a href="#first-attempt-a-list-of-named-entries" aria-hidden="true" class="anchor" id="first-attempt-a-list-of-named-entries"></a>First attempt: a list of named entries</h3>
+<p>Our first attempt will be to model our records as lists of named-entries:</p>
+<pre><code class="language-haskell">data Entry a = Entry String a
+data Dict a = Nil | Cons (Entry a) (Dict a)
+
+getField :: String -&gt; Dict a -&gt; Maybe a
+getField _ Nil = Nothing
+getField name (Cons (Entry name' x) dict') =  case (name == name') of
+    True  -&gt; Just x
+    False -&gt; getField name dict'
+</code></pre>
+<p>This compiles alright, but it's not a solution to our problem. First of all, it has no information about the entry field names in the type. The type of <code>Dict a</code> only carries information about the type of the values. Second, all fields must be of the same type. If you try to build something like: ''</p>
+<pre><code class="language-haskell">-- this raises a type error
+myRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) (Cons (Entry &quot;age&quot; (35::Int)) Nil)
+</code></pre>
+<p>You'll get an obvious type error since <code>Cons (Entry &quot;age&quot; 35::Int) Nil</code> is a <code>Dict Int</code> and <code>Entry &quot;name&quot; &quot;Rafael&quot;</code> is an <code>Entry String</code>, and <code>Cons</code> type signature is <code>Entry a -&gt; Dict a -&gt; Dict a</code>.</p>
+<p>So, it seems that this is not a very useful record (:P).</p>
+<p>Let's try to solve the second problem first and make the type of each entry more flexible. For that we need GADTs and existential types.</p>
+<h3><a href="#using-gadts-and-existential-types" aria-hidden="true" class="anchor" id="using-gadts-and-existential-types"></a>Using GADTs and existential types</h3>
+<p>The second problem is caused by the fact the we have a explicit reference to the type of the entry in the <code>Dict</code> type constructor. We could try to make it more flexible like this:</p>
+<pre><code class="language-haskell">data Dict a = Nil | Cons (Entry a) (Dict b)
+</code></pre>
+<p>But of course this doesn't work because the type variable <code>b</code> is not defined in this scope. There is no way for the type checker to fix it:</p>
+<pre><code class="language-ghci">/.../Post.hs:5:42: error:
+    Not in scope: type variable ‘b’
+  |
+5 | data Dict a = Nil | Cons (Entry a) (Dict b)
+</code></pre>
+<p>For this to work, we need to put <code>b</code> in scope, without adding it as argument to the type constructor or else we'd get an infinite regress of types (I'll get back to this later). For that we need two GHC extensions: <code>GADTs</code> and <code>Rank2Types</code> (or <code>RankNTypes</code>, or other extension providing the <code>forall</code> keyword).</p>
+<p><code>GADTs</code> is an extension that allows us to give more generic types to the data constructors of an algebraic data type. It also allows a nicer syntax for data constructors with a long type signature. With <code>GADTs</code> and <code>RankNTypes</code> enabled we can do this:</p>
+<pre><code class="language-haskell">{-# LANGUAGE GADTs, RankNTypes  #-}
+
+data Entry a = Entry String a
+data Dict a = Nil | forall b . Cons (Entry a) (Dict b)
+</code></pre>
+<p>This compiles correctly and we can try to use it! Now our previous record is well typed:</p>
+<pre><code class="language-haskell">myRecord :: Dict String
+myRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) (Cons (Entry &quot;age&quot; (35::Int)) Nil)
+</code></pre>
+<p>But look what happened. The information that there's an <code>Int</code> somewhere inside the structure of the record is gone! Yep. We enclosed it in a <code>forall</code> and all the information <code>Cons</code> have now is that its second argument is some kind of <code>Dict b</code>, whatever <code>b</code> is. This doesn't look like a good sign.</p>
+<p>Let's try to write a <code>getField</code> function. We still didn't solve the problem of letting the type know what fields are possible, so we still need to guard ourselves against the possibility that the user will try to fetch the data from a field that doesn't exist. So the signature of <code>getField</code> still is <code>String -&gt; Dict a -&gt; Maybe</code>... wait a minute! What's the return type?</p>
+<p>In the record above, if the field name is <code>&quot;name&quot;</code> it should return a <code>String</code>, but if the field name is <code>&quot;age&quot;</code> it should return an <code>Int</code>. But the compiler wouldn't know that because there's no information in the type of the record about the value of the fields in is tail. We only have information about the type of the head entry.</p>
+<p>So, the return type of <code>getField</code> is something like <code>(forall b . Maybe b)</code>? That doesn't look very useful. I can retrieve the value but I loose all the information about its type! This doesn't seem to be working...</p>
+<h3><a href="#keeping-track-of-the-field-types" aria-hidden="true" class="anchor" id="keeping-track-of-the-field-types"></a>Keeping track of the field types</h3>
+<p>I want to get back to &quot;infinite regress of types&quot; I refered above. Why couldn't we put the <code>b</code> type variable above as an argument for the type constructor? Well, let's try and see. We could create a data type <code>Dict a b</code> where <code>a</code> is the value of the head <code>Entry</code> and <code>b</code> is the type of the head of the next <code>Dict</code> down the <code>Cons</code> data constructor. So:</p>
+<pre><code class="language-haskell">data Dict a b = Nil | Cons (Entry a) (Dict b ???)
+</code></pre>
+<p>Oops. Damn, what about the type of the entry after the next entry? Well... Let's put it in the constructor too:</p>
+<pre><code class="language-haskell">data Dict a b c = Nil | Cons (Entry a) (Dict b c ???)
+</code></pre>
+<p>You get it, right? There's always a new type to keep track of. The type of the record must know not only the type of the head entry, but also all the types of all entries in its tail. This looks a hell like a linked list of types, doesn't it? If we had a way to create <strong>a type level list</strong> we could have the following GADT:</p>
+<pre><code class="language-haskell">data Dict (types :: (TypeLevelList Type)) where
+    Nil :: Dict TypeLevelEmptyList
+    Cons :: (Entry a) -&gt; Dict (tail :: TypeLevelList) -&gt; Dict (a `TypeLevelCons` tail)
+</code></pre>
+<p>Wait, what the hell is this? First of all, what are those type signatures in the wrong place? Those are <em>kind signatures</em>. Kind is the &quot;type of a type constructor&quot;. For example, type constructors that have no parameters, like <code>Bool</code> or <code>String</code> have kind <code>Type</code> (or <code>*</code>). Type constructors that take a single parameter, like <code>Maybe</code> have kind <code>Type -&gt; Type</code>. Single parameter Typeclasses like <code>Functor</code> or <code>Monad</code> have kind <code>Type -&gt; Constraint</code>, etc.</p>
+<p>Here I'm supposing that there exists a kind called <code>TypeLevelList</code>, and that there exists two type constructors:</p>
+<ul>
+<li><code>TypeLevelEmptyList</code> with kind <code>TypeLevelList</code>,</li>
+<li><code>TypeLevelCons</code> with kind <code>Type -&gt; TypeLevelList -&gt; TypeLevelList</code>.</li>
+</ul>
+<p>When I write <code>data Dict (types :: TypeLevelList)</code> I'm declaring a type constructor <code>Dict</code>with kind <code>TypeLevelList -&gt; Type</code>. This type has two data constructors:</p>
+<ul>
+<li><code>Nil</code> which is just an empty record with type <code>Dict TypeLevelEmptyList</code></li>
+<li><code>Cons</code> which takes an <code>Entry a</code> and a <code>Dict TypeLevelList</code> and return another <code>Dict TypeLevelList</code> putting <code>a</code> on the head of that <code>TypeLevelList</code> it received.</li>
+</ul>
+<p>In practice we'd have something like this:</p>
+<pre><code class="language-haskell">emptyRecord :: Dict TypeLevelEmptyList
+emptyRecord = Nil
+
+agedRecord :: Dict (Int `TypeLevelCons` TypeLevelEmptyList)
+agedRecord = Cons (Entry &quot;age&quot; 35) emptyRecord
+
+recordWithAStringAndAnInt :: Dict (String `TypeLevelCons` Int `TypeLevelCons` TypeLevelEmptyList)
+namedAndAgedRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) agedRecord
+</code></pre>
+<p>This is sweet! We can keep track to the types of all fields! But how do we create those type level lists? :O</p>
+<h3><a href="#type-level-lists" aria-hidden="true" class="anchor" id="type-level-lists"></a>Type Level Lists</h3>
+<p>To create those type level lists we have to use a GHC extension called <code>DataKinds</code>. To understand what <code>DataKinds</code> do lets consider this simple type declaration:</p>
+<pre><code class="language-haskell">data Nat = Zero | Succ Nat
+</code></pre>
+<p>What this does is to create a type constructor called <code>Nat</code>, whose kind is <code>Type</code>, and two data constructors:</p>
+<ul>
+<li><code>Zero</code>, whose type is <code>Nat</code></li>
+<li><code>Succ</code>, whose type is <code>Nat -&gt; Nat</code></li>
+</ul>
+<p>When you use the <code>DataKinds</code> extension this declaration creates, besides the three objects described above, three more objects:</p>
+<ul>
+<li>a <strong>&quot;kind constructor&quot;</strong> <code>'Nat</code> (the tick is not a typo)</li>
+<li>a <strong>type constructor</strong> <code>'Zero</code> whose <strong>kind</strong> is <code>'Nat</code></li>
+<li>a <strong>type constructor</strong> <code>'Succ</code> whose <strong>kind</strong> is <code>'Nat -&gt; 'Nat</code></li>
+</ul>
+<p>Those types constructed with those type constructors are not inhabited by values, but they are very useful for <strong>type computation</strong>. So, how do we create the &quot;kind constructor&quot; <code>TypeLevelList</code> with type constructor <code>TypeLevelEmptyList</code> and <code>TypeLevelCons</code>? Exactly with the same code that we would use to create a type constructor <code>List</code> with data constructor <code>EmptyList</code> and <code>Cons</code>, but we use the <code>DataKinds</code> extension to lift those objects from the <code>value :: type</code> world to the <code>type :: kind</code> world. We can do:</p>
+<pre><code class="language-haskell">{-# LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures #-}
+
+module Post where
+
+import Data.Kind (Type)
+
+data Entry a = Entry String a
+
+data List a  = EmptyList | ListCons a (List a)
+
+data Dict (a :: (List Type)) where
+    Nil :: Dict 'EmptyList
+    Cons :: Entry a -&gt; Dict t -&gt; Dict ('ListCons a t)
+</code></pre>
+<p>So, what's happening here? First of all we have the declaration <code>data List a = EmptyList | ListCons a (List a)</code>. This is a simple <em>list type</em>, but since we used the <code>Data.Kinds</code> extension, we get a new <strong>list kind</strong> for free:</p>
+<ul>
+<li><code>'List</code> is a &quot;kind constructor&quot; which takes a kind and return another kind (<code>* -&gt; *</code>)</li>
+<li><code>'EmptyList :: forall a . List a</code> is a type constructor</li>
+<li><code>'ListCons :: forall a . a -&gt; List a -&gt; List a</code> is another type constructor</li>
+</ul>
+<p>So, when applied to the kind <code>Type</code>, the &quot;kind constructor&quot; <code>'List</code> creates the kind <code>'List Type</code> which is a list of types! We can have the following types which have this kind:</p>
+<pre><code class="language-haskell">'EmptyList
+'ListCons Int 'EmptyList
+'ListCons String (Cons Int 'EmptyList)
+</code></pre>
+<p>etc. All those types have kind <code>'List Type</code>. Those types are not inhabited (that is, we can't construct values that have those types), but we can used them to provide compile time information that helps us to avoid bugs, because we can build type constructors that build inhabited types out of them! For example, we can build <code>Dict</code>. Let's check the kind of <code>Dict</code> on GHCi:</p>
+<pre><code class="language-haskell">&gt; :k Dict
+Dict :: List Type -&gt; Type
+-- the actual GHCi output is Dict :: List * -&gt; *, but Type is a nice synonym for *
+</code></pre>
+<p>This is what's happening with the declaration <code>data Dict (a :: (List Type))</code>. We used the extension <code>KindSignatures</code> to inform the compiler that the <code>Dict</code> type constructor has a kind which takes an argument of kind <code>List Type</code> and returns a regular <code>Type</code>.</p>
+<p>Now to the data constructors - which are the things that allows us to actually build values of type <code>Dict a</code>. The simples one is <code>Nil</code> which builds a value of type <code>Dict 'EmptyList</code>. This is an empty record, with no values stored and thus no types stored in the type level list.</p>
+<p>Also we have <code>Cons</code>, which takes a parameter of type <code>Entry a</code> and a parameter of type <code>Dict t</code> (remember, here <code>t</code> is a type of kind <code>'List Type</code>) and builds a value of type <code>Dict ('ListCons a t)</code>. So, <code>Cons</code> does two things:</p>
+<ul>
+<li>it concatenates a new entry with an existing record,</li>
+<li>it also concatenates the <em>type</em> of the value stored in this entry into an <em>existing list of types</em> that describes the types of the entries in the existing record.</li>
+</ul>
+<p>Wow. If that's too much to grasp, let's see this in action:</p>
+<pre><code class="language-haskell">namedRecord ::Dict ('ListCons String 'EmptyList)
+namedRecord = (Entry &quot;name&quot; &quot;Rafael&quot;) Nil
+
+namedAndAgedRecord :: Dict ('ListCons Int ('ListCons String 'EmptyList))
+namedAndAgedRecord = Cons (Entry &quot;age&quot; (35::Int)) namedRecord
+</code></pre>
+<p>See how the types of the fields we're creating are concatenated in the type of the record? This allows us to know precisely the types of all the fields in a record!</p>
+<h3><a href="#making-it-prettier" aria-hidden="true" class="anchor" id="making-it-prettier"></a>Making it prettier</h3>
+<p>We didn't have to code our own list type, Haskell already provides one for us and fortunately <code>Data.Kinds</code> works with the built-in types too. So we could have written simply:</p>
+<pre><code class="language-haskell">{-# LANGUAGE  GADTs, RankNTypes, DataKinds, KindSignatures, TypeInType, TypeOperators #-}
+
+module Post where
+
+import Data.Kind (Type)
+
+infixr 6 :&gt;
+
+data Entry a = Entry String a
+
+data Dict (a :: [Type]) where
+    Nil :: Dict '[]
+    (:&gt;) :: Entry a -&gt; Dict t -&gt; Dict (a:t)
+</code></pre>
+<p>We made a few changes to make the types nicer:</p>
+<ul>
+<li>
+<p>We are now using Haskel's built-in lists:</p>
+<pre><code class="language-haskell">&gt; :k Dict
+Dict :: [Type] -&gt; Type
+</code></pre>
+<p>This is completely equivalent to the previous signature <code>List Type -&gt; Type</code> the only difference is that we're using the built-in type instead of our custom list type.</p>
+</li>
+<li>
+<p>We're using the <code>TypeInType</code> extension to allow for the syntax <code>[Type]</code></p>
+</li>
+<li>
+<p>We're using the <code>TypeOperators</code> extension to allow for two things:</p>
+<ol>
+<li>using the promoted type constructor <code>(:) :: a -&gt; [a] -&gt; [a]</code> which concatenates a type on the head of a type level list;</li>
+<li>renaming the ugly <code>Cons</code> data constructor to a nicer <code>(:&gt;)</code> infix type operator so that the expressions are nicer looking.</li>
+</ol>
+</li>
+</ul>
+<p>With this modifications, instead of this ugly monster:</p>
+<pre><code class="language-haskell">myRecord :: Dict ('ListCons String ('ListCons Int 'EmptyList))
+myRecord = Cons (Entry &quot;name&quot; &quot;Rafael&quot;) (Cons (Entry &quot;age&quot; 35) Nil)
+</code></pre>
+<p>we can write this:</p>
+<pre><code class="language-haskell">myRecord :: Dict '[String, Int]
+myRecord = Entry &quot;name&quot; &quot;Rafael&quot; :&gt; Entry &quot;age&quot; 35 :&gt; Nil
+</code></pre>
+<p>Much better, right?</p>
+<h3><a href="#this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised" aria-hidden="true" class="anchor" id="this-is-already-too-long-and-you-didnt-get-to-the-point-you-promised"></a>This is already too long and you didn't get to the point you promised</h3>
+<p>Well, yep. This post is already big and we still don't know:</p>
+<ul>
+<li>how to write <code>getField</code></li>
+<li>how to enhance the type <code>Dict</code> to allow for information about field names to be statically checked by the compiler.</li>
+</ul>
+<p>So it looks like a perfect point to stop and start planning to write Part 2!</p>
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Feb 12, 2018 - &#10710; 12 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+          <li><a href="./tag-haskell.html">Haskell</a></li>
+          
+          <li><a href="./tag-type-safety.html">Type safety</a></li>
+          
+          <li><a href="./tag-records.html">Records</a></li>
+          
+          <li><a href="./tag-type-level-programming.html">Type-level programming</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+  
+  
+  
+  
+  <article>
+    Related Haskell content
+    <ul>
+      
+      
+      
+      
+      <li><a href="./programming-operational-semantics-for-monads.html">Operational Semantics for Monads</a></li>
+      
+      
+      <li><a href="./programming-stochastic-processes-as-monad-transformers.html">Stochastic Processes as Monad Transformers</a></li>
+      
+    </ul>
+  </article>
+  
+
+
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Wed, 25 Aug 2010 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 14:18:21 GMT</lastBuildDate><generator>marmite</generator><item><title>Operational Semantics for Monads]</title><link>https://rcalsaverini.github.io/blog/programming-operational-semantics-for-monads.html</link><author>Rafael S. Calsaverini</author><category>Haskell</category><category>Monads</category><category>Operational Monads</category><category>Free Monads</category><category>Free Vector Space</category><category>Category Theory</category><guid>https://rcalsaverini.github.io/blog/programming-operational-semantics-for-monads.html</guid><pubDate>Wed, 25 Aug 2010 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-free-vector-space</source><content:encoded><![CDATA[<p><strong>Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.</strong></p>
+<p>While randomly browsing around on <a href="http://planet.haskell.org/">Planet Haskell</a> I've found <a href="http://apfelmus.nfshost.com/articles/operational-monad.html#concatenation-and-thoughts-on-the-interface">a post</a> on <a href="http://apfelmus.nfshost.com/">Heinrich Apfelmus' blog</a> about something called &quot;operational semantics&quot; for monads. Found it very iluminating. Basically it's a form to implement monads focusing not on defining the bind and return operators, but on what the monad is really supposed to do. It's a view where a monad define a Domain Specific Language, that must be interpreted in order to cause it's effects. It seems to me it's exactly what is implemented in the <a href="http://hackage.haskell.org/packages/archive/MonadPrompt/1.0.0.2/doc/html/Control-Monad-Prompt.html">monadprompt (Control.Monad.Prompt)</a> package, although I'm not sure.</p>
+<h1><a href="#the-operational-monad" aria-hidden="true" class="anchor" id="the-operational-monad"></a>The Operational Monad</h1>
+<pre><code class="language-haskell">{-# LANGUAGE GADTs #-}
+import Control.Monad
+import Data.Map (Map, fromList, unionWith)
+</code></pre>
+<p>The definition of a monad on this approach starts with a common interface given by the following data type and a singleton function:</p>
+<pre><code class="language-haskell">data Program m a where
+    Then :: m a -&gt; (a -&gt; Program m b) -&gt; Program m b
+    Return :: a -&gt; Program m a
+
+singleton :: m a -&gt; Program m a
+singleton i = i `Then` Return
+</code></pre>
+<p>Note that the types of the data constructors Then and Return are very similar (but not equal...) to the types of the monadic operations (&gt;&gt;=) and return. This identification of class functions with data constructors is recurring throughout this post. This data type is instanciated as a traditional monad as follows:</p>
+<pre><code class="language-haskell">instance Monad (Program m) where
+    return = Return
+    (Return a)    &gt;&gt;= f  = f a
+    (i `Then` is) &gt;&gt;= f  = i `Then` (\ x -&gt; is x &gt;&gt;= f)
+</code></pre>
+<p>This is all we need! As an example let's describe the implementation of the State Monad within this approach. This is exactly the first example given by Apfelmus on his post, disguised as a stack machine.</p>
+<h1><a href="#example-implementing-the-state-monad" aria-hidden="true" class="anchor" id="example-implementing-the-state-monad"></a>Example: implementing the State Monad</h1>
+<p>The operational approach to monads begins with recognizing what operations you want your monad to perform. A State Monad have a state, a return value and two function: one that allows us to retrieve the state as the return value, and one that allows us to insert a new state. Let's represent this in the following GADT:</p>
+<pre><code class="language-haskell">data StateOp st retVal where
+    Get :: StateOp st st  -- retrieve current state as a returned value
+    Put :: st -&gt; StateOp st ()  -- insert a new state
+</code></pre>
+<p>This are the operations needed on the <code>State</code> Monad, but the monad itself is a sequence of compositions of such operations:</p>
+<pre><code class="language-haskell">type State st retVal = Program (StateOp st) retVal
+</code></pre>
+<p>Note that the type synonym State st is a monad already and satisfy all the monad laws by construction. We don't need to worry about implementing return and <code>(&gt;&gt;=)</code> correctly: they are already defined.</p>
+<p>So far, so good but... how do we use this monad in practice? This types define a kind of Domain Specific Language: we have operations represented by Get and Put and we can compose them in little programs by using Then and Return. Now we need to write an interpreter for this language. I find this is greatly simplified if you notice that the construct</p>
+<pre><code class="language-haskell">do x &lt;- singleton foo
+   bar x
+</code></pre>
+<p>can be translated as <em>foo <code>Then</code> bar</em> in this context. Thus, to define how you'll interpret the later, just think what's the effect you want to have when you write the former.</p>
+<p>Our interpreter will take a <code>State st retVal</code> and a state st as input and return a pair: the next state and the returned value <code>(st, retVal)</code>:</p>
+<pre><code class="language-haskell">interpret :: State st retVal -&gt; st -&gt; (st, retVal)
+</code></pre>
+<p>First of all, how should we interpret the program <code>Return val</code> ? This program just takes any state input and return it unaltered, with val as it's returned value:</p>
+<pre><code class="language-haskell">interpret (Return val) st = (st, val)
+</code></pre>
+<p>The next step is to interpret the program <em>foo <code>Then</code> bar</em>. Looking at the type of things always helps: Then, in this context, have type <code>StateOp st a -&gt; (a -&gt; State st b) -&gt; State st b</code>. So, in the expression <em>foo <code>Then</code> bar</em>, foo is of type <code>StateOp st a</code>, that is, it's a stateful computation with state of type <code>st</code> and returned value of type <code>a</code>. The rest of the expression, <code>bar</code>, is of type <code>a -&gt; State st b</code>, that is, it expects to receive something of the type of the returned value of foo and return the next computation to be executed. We have two options for <code>foo</code>: <code>Get</code> and <code>Put x</code>.</p>
+<p>When executing <em>Get <code>Then</code> bar</em>, we want this program to return the current state as the returned value. But we also want it to call the execution of <code>bar val</code>, the rest of the code. And if <code>val</code> is the value returned by the last computation, <code>Get</code>, it must be the current state:</p>
+<pre><code class="language-haskell">interpret (Get `Then` bar) st = interpret (bar st) st
+</code></pre>
+<p>The program <em>Put x <code>Then</code> bar</em> is suposed to just insert <code>x</code> as the new state and call <code>bar val</code>. But if you look at the type of <code>Put x</code>, it's returned value is empty: <code>()</code>. So we must call <code>bar ()</code>. The current state is then discarded and substituted by <code>x</code>.</p>
+<pre><code class="language-haskell">interpret (Put x `Then` bar) _  = interpret (bar ()) x
+</code></pre>
+<p>We have our interpreter (which, you guessed right, is just the function <code>runState</code> from `Control.Monad.State) and now it's time to write programs in this language. Let's then define some helper functions:</p>
+<pre><code class="language-haskell">get :: State st st
+get = singleton Get
+
+put :: st -&gt; State st ()
+put = singleton . Put
+</code></pre>
+<p>and write some code to be interpreted:</p>
+<pre><code class="language-haskell">example :: Num a =&gt; State a a
+example = do x &lt;- get
+          put (x + 1)
+          return x
+
+test1 = interpret example 0
+test2 = interpret (replicateM 10 example) 0
+</code></pre>
+<p>This can be run in ghci to give exactly what you would expect from the state monad:</p>
+<pre><code class="language-haskell">*Main&gt; test1
+(1,0)
+
+*Main&gt; test2
+(10,[0,1,2,3,4,5,6,7,8,9])
+</code></pre>
+<h1><a href="#vector-spaces" aria-hidden="true" class="anchor" id="vector-spaces"></a>Vector Spaces</h1>
+<p>The approach seems very convenient from the point of view of developing applications, as it's focused on what are actions the code must implement and how the code should be executed. But it seems to me that the focus on the operations the monad will implement is also very convenient to think about mathematical structures. To give an example, I'd like to implement a monad for Vector Spaces, in the spirit of Dan Piponi (Sigfpe)'s ideas <a href="http://blog.sigfpe.com/2007/02/monads-for-vector-spaces-probability.html">here</a>, <a href="http://blog.sigfpe.com/2007/03/monads-vector-spaces-and-quantum.html">here</a> and <a href="http://blog.sigfpe.com/2009/05/trace-diagrams-with-monads.html">here</a>.</p>
+<p>A vector space $\mathbb{V_F}$ is a set of elements $\mathbf{x}\in\mathbb{V_F}$ that can be summed ($\mathbf{x} + \mathbf{y} \in\mathbb{V_F}$ if $\mathbf{x},\mathbf{y} \in \mathbb{V_F}$) and multiplied elements of a field ($\alpha\mathbf{x}$ if $\alpha\in \mathcal{F}$ and $\mathbf{x}\in\mathbb{V_F}$). If we want this to be implemented as a monad then, we should, in analogy with what we did for the State Monad, write a GADT with data constructors that implement the sum and product by a scalar:</p>
+<pre><code class="language-haskell">data VectorOp field label where
+
+    Sum :: Vector field label
+        -&gt; Vector field label
+        -&gt; VectorOp field label
+
+    Mul :: field
+        -&gt; Vector field label
+        -&gt; VectorOp field label
+
+type Vector field label = Program (VectorOp field) label
+</code></pre>
+<p>and then we must implement a interpreter:</p>
+<pre><code class="language-haskell">runVector :: (Num field, Ord label) =&gt; Vector field label -&gt; Map label field
+runVector (Return a) = fromList [(a, 1)]
+runVector (Sum u v `Then` foo) = let uVec = (runVector (u &gt;&gt;= foo))
+                                     vVec = (runVector (v &gt;&gt;= foo))
+                                 in unionWith (+) uVec vVec
+runVector (Mul x u `Then` foo) = fmap (x*) (runVector (u &gt;&gt;= foo))
+</code></pre>
+<p>The interpreter <code>runVector</code> takes a vector and returns it's representation as a <code>Map</code>. As an example, we could do the following:</p>
+<pre><code class="language-haskell">infixr 3 &lt;*&gt;
+infixr 2 &lt;+&gt;
+
+u &lt;+&gt; v = singleton $ Sum u v
+x &lt;*&gt; u = singleton $ Mul x u
+
+data Base = X | Y | Z deriving(Ord, Eq, Show)
+
+x, y, z :: Vector Double Base
+x = return X
+y = return Y
+z = return Z
+
+reflectXY :: Vector Double Base -&gt; Vector Double Base
+reflectXY vecU = do cp &lt;- vecU
+                    return (transf cp)
+                        where transf X = Y
+                              transf Y = X
+                              transf Z = Z
+</code></pre>
+<p>and test this on ghci:</p>
+<pre><code class="language-ghci">*Main&gt; runVector $ x &lt;+&gt; y
+fromList [(X,1.0),(Y,1.0)]
+
+*Main&gt; runVector $ reflectXY $ x &lt;+&gt; z
+fromList [(Y,1.0),(Z,1.0)]
+</code></pre>
+<p>As Dan Piponi points out in his talk, any function acting on the base <code>f :: Base -&gt; Base</code> is lifted to a linear map on the vector space Space field Base by doing (because this is the Free Vector Space over <code>Base</code>):</p>
+<pre><code class="language-haskell">linearTrans f u = do vec &lt;- u
+                  return (f vec)
+</code></pre>
+<p>More on this later. :)</p>
+]]></content:encoded></item></channel></rss>

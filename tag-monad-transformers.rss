@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Agente Aleatório</title><link>https://rcalsaverini.github.io/blog</link><description>Constantemente aumentando a entropia do universo.</description><pubDate>Tue, 03 Aug 2010 00:00:00 GMT</pubDate><lastBuildDate>Wed, 22 Jan 2025 14:18:21 GMT</lastBuildDate><generator>marmite</generator><item><title>Stochastic Processes as Monad Transformers</title><link>https://rcalsaverini.github.io/blog/programming-stochastic-processes-as-monad-transformers.html</link><author>Rafael S. Calsaverini</author><category>Haskell</category><category>Monad Transformers</category><category>Monads</category><category>Stochastic Processes</category><category>Probability Monad</category><guid>https://rcalsaverini.github.io/blog/programming-stochastic-processes-as-monad-transformers.html</guid><pubDate>Tue, 03 Aug 2010 00:00:00 GMT</pubDate><source url="https://rcalsaverini.github.io/blog">tag-monad-transformers</source><content:encoded><![CDATA[<p><strong>Disclaimer: this is an old blog post from a very old wordpress blog and may contain inacuracies. I reproduced it as is for sentimental reasons. I may revisit this theme later.</strong></p>
+<p>I have a difficulty to understand functional programming concepts that I can’t put to some very simple and natural use (natural for me, of course). I need to find the perfect simple example to implement to finally understand something. And I’m not a computer scientist, so things like parsers and compilers have very little appeal to me (probably because I don’t understand them…). I’m a physicist, so this drives me to look for physical problems that can be implemented in Haskell so I can understand some concepts.</p>
+<p>Monad transformers still eludes me. But I think I finally got the perfect subject were I can understand them: stochastic processes! First some book keeping:</p>
+<pre><code class="language-haskell">import Control.Monad.State
+import Control.Monad
+import Control.Monad.Rand
+</code></pre>
+<p>Now, stochastic processes have characteristics related to two different monads. In one hand, they are dynamical processes, and the way to implement dynamics in Haskell is with state monads. For example, if I want to iterate the logistic map:</p>
+<p>$$x_{t+1} = \alpha x_t\left(1-x_t\right)$$</p>
+<p>$$ teste = teste $$</p>
+<p>I could do the following:</p>
+<pre><code class="language-haskell">  f :: Double -&gt; Double
+  f x = 4*x*(1-x)
+
+  logistic :: State Double Double
+  logistic = do x0 &lt;- get
+        let x1 = f x
+        put x1
+        return x1
+  runLogistic :: State Double [Double]
+  runLogistic n x0= evalState (replicateM n logistic) x0
+</code></pre>
+<p>Running this on ghci would give you, for example:</p>
+<pre><code class="language-haskell">  *Main&gt; runLogistic 5 0.2
+  [0.6400000000000001,0.9215999999999999,0.28901376000000045, 0.8219392261226504,0.5854205387341]
+</code></pre>
+<p>So we can make the loose correspondence: dynamical system ↔ state monad.</p>
+<p>On the other hand, stochastic processes are compositions of random variables, and this is done with the Rand monad (found in <code>Control.Monad.Random</code>). As an example, the Box-Muller formula tells us that, if I have two inpendent random variables $x$ and $y$, distributed uniformly between in the \([0, 1]\) interval, then, the expression:</p>
+<p>$$\sqrt{-2\log(x)}\cos(2\pi y)$$</p>
+<p>will be normally distributed. We can write then:</p>
+<pre><code class="language-haskell">boxmuller :: Double -&gt; Double -&gt; Double
+boxmuller x y = sqrt(-2*log x)*cos(2*pi*y)
+
+normal :: Rand StdGen Double  -- normally distributed
+normal = do x &lt;- getRandom
+            y &lt;- getRandom
+            return $ boxmuller x y
+
+normals n = replicateM n normal -- n independent samples from normal
+</code></pre>
+<p>Running this function we get what we need:</p>
+<pre><code class="language-haskell">*Main&gt; (evalRand $ normals 5) (mkStdGen 0) =
+[0.1600255836730147,0.1575360140445035,-1.595627933129274,
+-0.18196791439834512,-1.082222285056746]
+</code></pre>
+<p>So what is a stochastic process? In very rough terms: is a dynamical system with random variables. So we need a way to make the <code>Rand</code> monad to talk nicely with the <code>State</code> monad. The way to do this is to use a monad transformer, in this case, the <code>StateT</code> transformer. Monad transformers allows you to combine the functionalities of two different monads. In the case of the <code>StateT</code> monads, they allow you to add a state to any other monad you want. In our case, we want to wrap the <code>Rand</code> monad inside a <code>StateT</code> transformer and work with things of type:</p>
+<pre><code class="language-haskell">foo ::  StateT s (Rand StdGen) r
+</code></pre>
+<p>This type represent a monad that can store a state with type s, like the state monad, and can generate random variables of type r, like the rand monad. In general we would have a type</p>
+<pre><code class="language-haskell">foo2 ::(MonadTrans t, Monad m) =&gt; t m a
+</code></pre>
+<p>In this case, <code>t = StateT s</code> and <code>m = Rand StdGen</code>. The class <code>MonadTrans</code> is defined in <code>Control.Monad.Trans</code>, and provides the function:</p>
+<pre><code class="language-haskell">lift :: (MonadTrans t, Monad m) =&gt; m a -&gt; t m a
+</code></pre>
+<p>In this case, <code>t</code> is itself a monad, and can be treated like one through the code. It works like this: inside a do expression you can use the <code>lift</code> function to access the inner monad. Things called with lift will operate in the inner monad. Things called without <code>lift</code> will operate in the outer monad.</p>
+<p>So, suppose we want to simulate this very simple process:</p>
+<p>$$x_{t+1} = x_t + \eta_t$$</p>
+<p>where \(\eta_t\) is drawn from a normal distribution. We would do:</p>
+<pre><code class="language-haskell">randomWalk :: StateT Double (Rand StdGen) Double
+randomWalk = do eta &lt;- lift normal
+                x &lt;- get
+                let x' = x + eta
+                put x'
+                return x'
+runWalk :: Int -&gt; Double -&gt; StdGen -&gt; [Double]
+runWalk n x0 gen = evalRand (replicateM n $ evalStateT randomWalk x0) gen
+</code></pre>
+<p>The <code>evalStateT</code> function is just evalState adapted to run a StateT monad. Running this on ghci we get:</p>
+<pre><code class="language-haskell"> *Main&gt; runWalk 5 0.0 gen
+[0.1600255836730147,0.1575360140445035,-1.595627933129274,
+-0.18196791439834512,-1.082222285056746]
+</code></pre>
+<p>This is what we can accomplish: we can easily operate simultaneously with functions that expect a state monad, like put and get, we can unwrap things with <code>&lt;-</code> from the inner <code>Rand</code> monad by using <code>lift</code> , and we can return things to the state monad. We could have any monad inside the <code>StateT</code> transformer. For example, we could have another <code>State</code> monad. Here is a fancy implementation of the Fibonacci sequence using a <code>State</code> monad (that stores the last but one value in the sequence as its internal state) inside a <code>StateT</code> transfomer (that stores the last value of the sequence):</p>
+<pre><code class="language-haskell">fancyFib :: StateT Int (State Int) Int
+fancyFib = do old &lt;- lift get
+              new &lt;- get
+              let new' = new + old
+                  old' = new
+              lift $ put old'
+              put new'
+              return new
+
+fancyFibs :: Int -&gt; StateT Int (State Int) [Int]
+fancyFibs n = replicateM n fancyFibs
+</code></pre>
+<p>And we can run this to get:</p>
+<pre><code class="language-haskell">*Main&gt; evalState (evalStateT (fancyFibs 10) 1) 0
+[1,1,2,3,5,8,13,21,34,55]
+</code></pre>
+]]></content:encoded></item></channel></rss>

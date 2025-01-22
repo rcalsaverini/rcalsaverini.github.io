@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="Transforming modes">
+
+<meta property="og:description" content="Intro
+I want to continue the discussion in the last post about transformations of modes and sets of ...">
+
+
+<meta property="og:url" content="https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Agente Aleatório">
+
+<meta property="article:published_time" content=" 2021-02-22T00:00:00+00:00">
+
+
+<meta property="article:author" content="https://rcalsaverini.github.io/blog/author-Rafael S. Calsaverini.html">
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html"
+    },
+    "url": "https://rcalsaverini.github.io/blog/music-theory-transforming-modes.html",
+    "headline": "Transforming modes",
+    "description": "Intro
+I want to continue the discussion in the last post about transformations of modes and sets of tones. I want to explore the following q...",
+    
+    "author": {
+        "@type": "Person",
+        "name": "Rafael S. Calsaverini",
+        "url": "https://rcalsaverini.github.io/blog/author-Rafael S. Calsaverini.html",
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Agente Aleatório",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://rcalsaverini.github.io/blog/"
+        }
+    },
+    "datePublished": "2021-02-22T00:00:00+00:00"
+}
+</script>
+
+
+    <title>Transforming modes | Agente Aleatório</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="machine-learning" href="machine-learning.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="music-theory" href="music-theory.rss">
+    
+    <link rel="alternate" type="application/rss+xml" title="programming" href="programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Haskell" href="tag-haskell.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Music Theory" href="tag-music-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Python" href="tag-python.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monads" href="tag-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Negative Harmony" href="tag-negative-harmony.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Set Theory (Music)" href="tag-set-theory-music.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Chord transformations" href="tag-chord-transformations.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type safety" href="tag-type-safety.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Category Theory" href="tag-category-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Probability Monad" href="tag-probability-monad.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Records" href="tag-records.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type-level programming" href="tag-type-level-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neural Networks" href="tag-neural-networks.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Symbolic Optimization" href="tag-symbolic-optimization.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Type encodings" href="tag-type-encodings.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Vector Space" href="tag-free-vector-space.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Monad Transformers" href="tag-monad-transformers.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Stochastic Processes" href="tag-stochastic-processes.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Mypy" href="tag-mypy.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Deep Learning" href="tag-deep-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Functional programming" href="tag-functional-programming.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Neo-Riemannian Theory" href="tag-neo-riemannian-theory.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Operational Monads" href="tag-operational-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Free Monads" href="tag-free-monads.rss">
+    <link rel="alternate" type="application/rss+xml" title="tag: Machine Learning" href="tag-machine-learning.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: Rafael S. Calsaverini" href="author-rafael-s-calsaverini.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2019" href="archive-2019.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2018" href="archive-2018.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2010" href="archive-2010.rss">
+    
+
+    
+    
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+        integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"
+        integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                // customised options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                ],
+                // • rendering keys, e.g.:
+                throwOnError: false,
+            });
+        });
+    </script>
+</head>
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+<body>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Agente Aleatório</a></h2>
+                             <p>Constantemente aumentando a entropia do universo.</p> 
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+
+                <ul class="header-menu" id="header-menu">
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./about.html" >About</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./pages.html" >Pages</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html" >Tags</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./streams.html" >Streams</a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://github.com/rcalsaverini/"
+                            target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>Transforming modes</h1> 
+    
+
+
+<span class="content-date">
+    <small> Feb 22, 2021 - &#10710; 2 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><h2><a href="#intro" aria-hidden="true" class="anchor" id="intro"></a>Intro</h2>
+<p>I want to continue the discussion in the <a href="blog-negative-harmony-inverts-brightness-modes.html">last post</a> about transformations of modes and sets of tones. I want to explore the following question: what are transformations that make sense and what are they effect on scales, tone sets and modes.</p>
+<h3><a href="#the-transformations" aria-hidden="true" class="anchor" id="the-transformations"></a>The Transformations</h3>
+<p>I want to get back to the circle of fifths and define a few transformations and analise their implications. The transformations that I'm interested in are based in the idea of the negative harmony. As defined in the previous post, the negative harmony in a given key is obtained by reflecting the circle of fifths along an axis midway between the key and the its fifth. For example, here's a diagram of the negative harmony in the key of C:</p>
+<p>{{<tikz>}}
+\begin{tikzpicture}[auto,node distance=2.5cm, block/.style={color=black, align=center, minimum height=1cm, minimum width=1.5cm}, vec/.style={thick,color=black!50}]</p>
+<pre><code>\def \n {12}
+\def \radius {4 cm}
+\def \margin {7}
+
+\def \notes {1,...,12}
+
+\foreach \s in \notes {
+  \def \start {360 * \s / \n + 15}
+  \def \end {360 * (\s - 1) / \n + 15}
+
+  \node[block, circle, color=violet] at ({90-\start}:\radius) (a\s) {\Large $X_{\s}$};
+  \draw[vec] ({\end+\margin}:\radius) arc ({\end+\margin}:{\start-\margin}:\radius);
+}
+
+
+\foreach \x in {1, 2, ..., 6} {
+    \def \a {\x * 30 - 30}
+    \draw [thick,dashed,color=violet!50] (\a:-\radius-20) -- (\a:\radius + 20)
+        node[above,sloped,color=purple] at (\a:\radius + 20) {$\mathcal{N}_{\x}$};
+}
+</code></pre>
+<p>\end{tikzpicture}</p>
+<p>{{</tikz>}}</p>
+<p>We will identify those transformations by $N_{x}$ where $x \in {C, D\flat, \ldots, B\flat, B}$</p>
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+<div class="content-authors">
+    <ul>
+        
+            
+            
+            <li >
+                <a class="secondary" href="author-Rafael S. Calsaverini.html">
+                    <img src="static/avatar-placeholder.png" alt="Rafael S. Calsaverini" class="avatar">
+                    Rafael S. Calsaverini
+                </a>
+            </li>
+            
+        
+    </ul>
+</div>
+
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Feb 22, 2021 - &#10710; 2 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+          <li><a href="./tag-music-theory.html">Music Theory</a></li>
+          
+          <li><a href="./tag-negative-harmony.html">Negative Harmony</a></li>
+          
+          <li><a href="./tag-set-theory-music.html">Set Theory (Music)</a></li>
+          
+          <li><a href="./tag-neo-riemannian-theory.html">Neo-Riemannian Theory</a></li>
+          
+          <li><a href="./tag-chord-transformations.html">Chord transformations</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+  
+  
+  
+  
+  <article>
+    Related Music Theory content
+    <ul>
+      
+      
+      <li><a href="./music-theory-preserve-harmonies-swapping-3rds-7ths.html">Does swapping 3rds and 7ths preserve harmonic feel?</a></li>
+      
+      
+      
+      
+      <li><a href="./music-theory-negative-harmony-inverts-brightness-modes.html">Negative Harmony inverts brightness of modes</a></li>
+      
+    </ul>
+  </article>
+  
+
+
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+
+</html>
