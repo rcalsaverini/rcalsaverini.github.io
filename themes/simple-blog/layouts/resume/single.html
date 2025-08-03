@@ -14,6 +14,7 @@
     <section class="resume-section summary-section">
         <h2>Professional Summary</h2>
         <div class="summary-content">
+            <img src="{{ "images/me.jpeg" | relURL }}" alt="{{ .Site.Params.author | default "Profile Photo" }}" class="profile-photo">
             {{ .Params.summary | markdownify }}
         </div>
     </section>
