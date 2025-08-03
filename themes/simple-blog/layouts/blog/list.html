@@ -10,14 +10,16 @@
   </header>
 
   <div class="posts-list">
-    {{ range .RegularPages }}
+    <!-- Blog-specific template -->
+    {{ $pages := where site.RegularPages "Section" "blog" }}
+    {{ range $pages }}
     <article class="post-preview">
       <h2 class="post-title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h2>
 
       <div class="post-meta">
-        <time datetime="{{ .Date.Format " 2006-01-02" }}">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
           {{ .Date.Format "January 2, 2006" }}
         </time>
 

@@ -10,7 +10,6 @@ tags:
   - Symbolic Optimization
 author: Rafael S. Calsaverini
 draft: false
-slug: neural-nets-for-symbolic-optimization
 ---
 
 ### What's Symbolic Optimization

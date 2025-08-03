@@ -568,6 +568,157 @@ a:hover {
     font-size: 1.1rem;
 }
 
+/* Publications styling */
+.publication-preview, .publication-single {
+    margin-bottom: 2.5rem;
+}
+
+.publication-type {
+    margin-bottom: 1rem;
+}
+
+.pub-type {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pub-type.thesis {
+    background-color: #e8f5e8;
+    color: #2d5a2d;
+    border: 1px solid #4a8a4a;
+}
+
+.pub-type.paper {
+    background-color: #e8f4fd;
+    color: #2d4a5a;
+    border: 1px solid #4a7a8a;
+}
+
+.pub-type.other {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #888;
+}
+
+.publication-details {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.publication-details .authors {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.publication-details .venue {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.publication-details .publication-year {
+    font-weight: 500;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+}
+
+.publication-links {
+    margin-top: 1rem;
+}
+
+.external-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.external-link:hover {
+    background-color: #2980b9;
+    text-decoration: none;
+}
+
+.external-link.button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* Publication single page */
+.publication-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+}
+
+.publication-meta-detailed .meta-item {
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+}
+
+.publication-meta-detailed .meta-item strong {
+    color: #2c3e50;
+    margin-right: 0.5rem;
+}
+
+.committee-list {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.committee-list li {
+    margin-bottom: 0.3rem;
+}
+
+.publication-abstract {
+    margin-bottom: 3rem;
+}
+
+.publication-abstract h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.abstract-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.publication-nav {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.back-to-list {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: #95a5a6;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-list:hover {
+    background-color: #7f8c8d;
+    text-decoration: none;
+}
+
 .contact-item a {
     color: #3498db;
 }

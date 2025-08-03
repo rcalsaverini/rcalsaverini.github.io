@@ -1,7 +1,6 @@
 ---
 title: A few frustrations with Python's type annotation system
 date: 2019-01-20 22:00:00 -02:00
-permalink: "/posts/2019/01/frustrations-with-python-types"
 categories:
 - programming
 tags:

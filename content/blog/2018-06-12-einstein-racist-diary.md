@@ -1,7 +1,6 @@
 ---
 title: Einstein's racist diaries
 date: 2018-06-12 21:00:00 -03:00
-permalink: "/posts/2010/08/einstein-racist-diary"
 categories:
   - politics
 tags:

@@ -1,0 +1,104 @@
+{{ define "main" }}
+<article class="publication-single">
+  <header class="publication-header">
+    <h1 class="publication-title">{{ .Title }}</h1>
+
+    <div class="publication-meta-detailed">
+      <div class="publication-type">
+        {{ if eq .Params.pubtype "thesis" }}
+          <span class="pub-type thesis">{{ .Params.degree | default "Thesis" }}</span>
+        {{ else if eq .Params.pubtype "paper" }}
+          <span class="pub-type paper">Journal Article</span>
+        {{ else }}
+          <span class="pub-type other">{{ .Params.pubtype | title }}</span>
+        {{ end }}
+      </div>
+
+      <div class="publication-details">
+        {{ if .Params.authors }}
+          <div class="meta-item">
+            <strong>Authors:</strong> {{ delimit .Params.authors ", " " and " }}
+          </div>
+        {{ else if .Params.author }}
+          <div class="meta-item">
+            <strong>Author:</strong> {{ .Params.author }}
+          </div>
+        {{ end }}
+
+        {{ if .Params.journal }}
+          <div class="meta-item">
+            <strong>Published in:</strong> {{ .Params.journal }}
+            {{ if .Params.volume }}, vol. {{ .Params.volume }}{{ end }}
+            {{ if .Params.issue }}({{ .Params.issue }}){{ end }}
+            {{ if .Params.pages }}, pp. {{ .Params.pages }}{{ end }}
+          </div>
+        {{ end }}
+
+        {{ if .Params.school }}
+          <div class="meta-item">
+            <strong>Institution:</strong> {{ .Params.school }}
+          </div>
+        {{ end }}
+
+        {{ if .Params.publisher }}
+          <div class="meta-item">
+            <strong>Publisher:</strong> {{ .Params.publisher }}
+          </div>
+        {{ end }}
+
+        <div class="meta-item">
+          <strong>Date:</strong> 
+          {{ if .Params.month }}{{ .Params.month }} {{ end }}{{ .Params.year | default (.Date.Format "2006") }}
+        </div>
+
+        {{ if .Params.doi }}
+          <div class="meta-item">
+            <strong>DOI:</strong> 
+            <a href="https://doi.org/{{ strings.TrimPrefix "doi:" .Params.doi }}" target="_blank" rel="noopener">
+              {{ .Params.doi }}
+            </a>
+          </div>
+        {{ end }}
+
+        {{ if .Params.commitee }}
+          <div class="meta-item">
+            <strong>Committee:</strong>
+            <ul class="committee-list">
+              {{ range .Params.commitee }}
+              <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+
+        {{ if .Params.link }}
+          <div class="meta-item publication-links">
+            <a href="{{ .Params.link }}" target="_blank" rel="noopener" class="external-link button">
+              View Full Publication
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </header>
+
+  {{ if .Params.description }}
+  <section class="publication-abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-content">
+      {{ .Params.description | markdownify }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ if .Content }}
+  <section class="publication-content">
+    {{ .Content }}
+  </section>
+  {{ end }}
+
+  <nav class="publication-nav">
+    <a href="{{ "publications" | relURL }}" class="back-to-list">← Back to Publications</a>
+  </nav>
+</article>
+{{ end }}

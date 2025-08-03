@@ -1,7 +1,6 @@
 ---
 title: Operational Semantics for Monads
 date: 2010-08-25 21:00:00 -03:00
-permalink: "/posts/2010/08/operational-semantics-for-monads"
 categories:
 - programming
 tags:

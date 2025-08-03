@@ -9,7 +9,6 @@ tags:
   - Set Theory (Music)
 author: Rafael S. Calsaverini
 draft: false
-slug: negative-harmony-inverts-brightness-modes
 ---
 
 ## Intro

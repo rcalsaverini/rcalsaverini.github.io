@@ -1,0 +1,75 @@
+{{ define "main" }}
+<div class="list-page">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}
+    <div class="page-description">
+      {{ .Content }}
+    </div>
+    {{ end }}
+  </header>
+
+  <div class="publications-list">
+    <!-- Publications-specific template -->
+    {{ $pages := where site.RegularPages "Section" "publications" }}
+    {{ range $pages }}
+    <article class="publication-preview">
+      <h2 class="publication-title">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </h2>
+
+      <div class="publication-meta">
+        <div class="publication-type">
+          {{ if eq .Params.pubtype "thesis" }}
+            <span class="pub-type thesis">{{ .Params.degree | default "Thesis" }}</span>
+          {{ else if eq .Params.pubtype "paper" }}
+            <span class="pub-type paper">Journal Article</span>
+          {{ else }}
+            <span class="pub-type other">{{ .Params.pubtype | title }}</span>
+          {{ end }}
+        </div>
+
+        <div class="publication-details">
+          {{ if .Params.authors }}
+            <div class="authors">{{ delimit .Params.authors ", " " and " }}</div>
+          {{ else if .Params.author }}
+            <div class="authors">{{ .Params.author }}</div>
+          {{ end }}
+
+          {{ if .Params.journal }}
+            <div class="venue">
+              <strong>{{ .Params.journal }}</strong>
+              {{ if .Params.volume }}, vol. {{ .Params.volume }}{{ end }}
+              {{ if .Params.issue }}({{ .Params.issue }}){{ end }}
+              {{ if .Params.pages }}, pp. {{ .Params.pages }}{{ end }}
+            </div>
+          {{ else if .Params.school }}
+            <div class="venue">{{ .Params.school }}</div>
+          {{ end }}
+
+          <div class="publication-year">
+            {{ if .Params.month }}{{ .Params.month }} {{ end }}{{ .Params.year | default (.Date.Format "2006") }}
+          </div>
+        </div>
+
+        {{ if .Params.link }}
+        <div class="publication-links">
+          <a href="{{ .Params.link }}" target="_blank" rel="noopener" class="external-link">View Publication</a>
+        </div>
+        {{ end }}
+      </div>
+
+      {{ if .Params.description }}
+      <div class="publication-summary">
+        {{ .Params.description | truncate 300 }}
+        <a href="{{ .Permalink }}" class="read-more">Read more →</a>
+      </div>
+      {{ end }}
+    </article>
+    {{ end }}
+  </div>
+
+  <!-- Pagination -->
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

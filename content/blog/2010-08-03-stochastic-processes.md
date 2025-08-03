@@ -1,7 +1,6 @@
 ---
 title: Stochastic Processes as Monad Transformers
 date: 2010-08-03 00:00:00 -03:00
-permalink: "/posts/2010/08/stochastic-processes-as-monad-transformers"
 categories:
   - programming
 tags:

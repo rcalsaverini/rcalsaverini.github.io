@@ -10,7 +10,6 @@ tags:
   - modes of limited transposition
 author: Rafael S. Calsaverini
 draft: true
-slug: conceptualize-messiaen-mode-3-composition
 lastmod: 2022-03-13T17:33:18.495Z
 ---
 
