@@ -1,0 +1,12 @@
+name = "Simple Blog"
+license = "MIT"
+licenselink = "https://github.com/rcalsaverini/simple-blog/blob/main/LICENSE"
+description = "A clean, minimal theme for technical blogs"
+homepage = "https://github.com/rcalsaverini/simple-blog"
+tags = ["blog", "minimal", "clean", "simple", "technical"]
+features = ["blog", "responsive", "syntax highlighting"]
+min_version = "0.100.0"
+
+[author]
+  name = "Rafael S. Calsaverini"
+  homepage = "https://rcalsaverini.github.io"

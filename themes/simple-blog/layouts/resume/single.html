@@ -1,0 +1,97 @@
+{{ define "main" }}
+<div class="resume-page">
+    <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{ if .Content }}
+        <div class="page-description">
+            {{ .Content }}
+        </div>
+        {{ end }}
+    </header>
+
+    <!-- Professional Summary -->
+    {{ if .Params.summary }}
+    <section class="resume-section summary-section">
+        <h2>Professional Summary</h2>
+        <div class="summary-content">
+            {{ .Params.summary | markdownify }}
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- Experience Section -->
+    {{ if .Site.Data.experience }}
+    <section class="resume-section experience-section">
+        <h2>Professional Experience</h2>
+        <div class="experience-list">
+            {{ range .Site.Data.experience }}
+            <article class="experience-item">
+                <div class="experience-header">
+                    <h3 class="role">{{ .role }}</h3>
+                    <div class="company">{{ .company }}</div>
+                    <div class="date-range">{{ .range }}</div>
+                </div>
+                {{ if .summary }}
+                <div class="experience-summary">
+                    {{ .summary | markdownify }}
+                </div>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- Education Section -->
+    {{ if .Site.Data.education }}
+    <section class="resume-section education-section">
+        <h2>Education</h2>
+        <div class="education-list">
+            {{ range .Site.Data.education }}
+            <article class="education-item">
+                <div class="education-header">
+                    <h3 class="degree">{{ .degree }} in {{ .major }}</h3>
+                    <div class="school">{{ .school }}</div>
+                    <div class="date-range">{{ .range }}</div>
+                </div>
+                {{ if .thesis }}
+                <div class="thesis-info">
+                    <strong>Thesis:</strong> 
+                    {{ if .thesis.url }}
+                    <a href="{{ .thesis.url }}" target="_blank" rel="noopener">{{ .thesis.title }}</a>
+                    {{ else if .thesis.link }}
+                    <a href="{{ .thesis.link }}" target="_blank" rel="noopener">{{ .thesis.title }}</a>
+                    {{ else }}
+                    {{ .thesis.title }}
+                    {{ end }}
+                </div>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- Contact Information (if provided) -->
+    {{ if or .Site.Params.email .Site.Params.handles }}
+    <section class="resume-section contact-section">
+        <h2>Contact</h2>
+        <div class="contact-info">
+            {{ if .Site.Params.email }}
+            <div class="contact-item">
+                <strong>Email:</strong> 
+                <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+            </div>
+            {{ end }}
+            {{ if .Site.Params.handles }}
+            <div class="contact-links">
+                {{ range .Site.Params.handles }}
+                <a href="{{ .link }}" target="_blank" rel="noopener" class="contact-link">{{ .name }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+</div>
+{{ end }}

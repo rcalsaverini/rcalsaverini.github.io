@@ -1,18 +1,14 @@
 baseURL = "https://rcalsaverini.github.io"
 languageCode = "en-us"
-title = "Blog s"
-theme = "hugo-resume"
+title = "Rafael S. Calsaverini"
+theme = "simple-blog"
 
 [params]
-firstName = "Rafael"
-lastName = "S. Calsaverini"
-address = "São Paulo, Brazil"
-phone = "+55 11 97525 6222"
-contactNote = "Father, Physicist and Data Scientist"        #used in QR code only
-profileImage = "images/me.jpeg"
-email = "rafael.calsaverini+blog@gmail.com"
+author = "Rafael S. Calsaverini"
 description = "Random ramblings from an entropy maximizer."
 favicon = "images/favicon.ico"
+highlight = true
+email = "rafael.calsaverini+blog@gmail.com"
 
 # what sections to display.  Setting to false disables navigation and section.
 showSkills = true

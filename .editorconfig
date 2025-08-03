@@ -1,0 +1,36 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Hugo template files - disable auto-formatting to preserve template syntax
+[{layouts/**/*.html,themes/**/*.html,*.html}]
+indent_style = space
+indent_size = 4
+# Don't auto-format these files to prevent breaking Hugo template syntax
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+
+# TOML files (config)
+[*.toml]
+indent_style = space
+indent_size = 2
+
+# CSS files
+[*.css]
+indent_style = space
+indent_size = 2
+
+# JavaScript files
+[*.js]
+indent_style = space
+indent_size = 2

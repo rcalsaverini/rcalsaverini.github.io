@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en" }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Summary }}{{ end }}">
+  <meta name="author" content="{{ .Site.Params.author | default .Site.Author.name }}">
+
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+  <!-- Favicon -->
+  {{ if .Site.Params.favicon }}
+  <link rel="icon" type="image/x-icon" href="{{ .Site.Params.favicon | relURL }}">
+  {{ end }}
+
+  <!-- RSS -->
+  {{ range .AlternativeOutputFormats -}}
+  {{ printf `
+  <link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+
+  <!-- Syntax highlighting -->
+  {{ if or .Params.highlight (.Site.Params.highlight) }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  {{ end }}
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="site-header">
+      <h1 class="site-title">
+        <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+      </h1>
+      {{ if .Site.Params.description }}
+      <p class="site-description">{{ .Site.Params.description }}</p>
+      {{ end }}
+
+      <!-- Navigation -->
+      <nav class="site-nav">
+        <ul>
+          <li><a href="{{ .Site.BaseURL }}">Home</a></li>
+          <li><a href="{{ "blog" | relURL }}">Blog</a></li>
+          <li><a href="{{ "resume" | relURL }}">Resume</a></li>
+          {{ if .Site.Params.showPublications }}
+          <li><a href="{{ "publications" | relURL }}">Publications</a></li>
+          {{ end }}
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.author | default .Site.Author.name }}. All rights reserved.
+        </p>
+
+        <!-- Social links -->
+        {{ if .Site.Params.handles }}
+        <div class="social-links">
+          {{ range .Site.Params.handles }}
+          <a href="{{ .link }}" target="_blank" rel="noopener">{{ .name }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+
+        <!-- Git commit link -->
+        {{ if .Site.Params.gitCommitPrefix }}
+        <p class="git-info">
+          <a href="{{ .Site.Params.gitCommitPrefix }}{{ .GitInfo.Hash }}" target="_blank" rel="noopener">
+            {{ .GitInfo.AbbreviatedHash }}
+          </a>
+        </p>
+        {{ end }}
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -1,50 +1,68 @@
 [
     {
-        "role":"Data Science Manager",
-        "company":"Nubank",
-        "summary":"",
-        "range":"Dec 2019 - Present"
+        "role": "AI Engineer",
+        "company": "TRM Labs",
+        "summary": "Developing AI applications for blockchain intelligence.",
+        "range": "May 2025 - Present"
     },
     {
-        "role":"Senior R&D Engineer",
-        "company":"Dafiti",
-        "summary":"",
-        "range":"Oct 2018 - Nov 2019"
+        "role": "Data & AI Senior Manager",
+        "company": "EBANX",
+        "summary": "Leading the Data & AI area at EBANX, including Data Engineering, Analytics, Data Science and AI teams.",
+        "range": "Sep 2024 - May 2025"
     },
     {
-        "role":"Data Science Manager",
-        "company":"SEEK",
-        "summary":"Managed teams of data scientists and software engineers developing Machine Learning software. Responsible for people management, communicating with upper management and clients, reporting results, influencing good technical practices and technical excelence, discussing new projects with business and product teams, generating and evaluating new opportunities.",
-        "range":"Sep 2017 - Sep 2018"
+        "role": "Staff AI Engineer",
+        "company": "Nubank",
+        "summary": "Tech lead in a team designing foundation models to turn massive event datasets into insights into the financial lives of Nubank customers. We're pioneering the application of modern AI in the banking space, applying techniques that allow the creation of LLMs to model financial behavior and help scale the access to the best financial advice to hundreds of millions of customers.",
+        "range": "Mar 2023 - Sep 2024"
     },
     {
-        "role":"Senior Data Scientist",
-        "company":"Serasa Experian",
-        "summary":"Engaged with new technologies and research in Machine Learning to evaluate applicability in innovative projects. Applied bleeding-edge research algorithms into transactional datasets, credit modelling, marketing. Provided tech leadership to a distinguished team of top tier data scientists.",
-        "range":"Nov 2015 - Aug 2017"
+        "role": "Data Science Manager",
+        "company": "Nubank",
+        "summary": "Leading data science initiatives at Latin America's largest fintech, managing cross-functional teams to deliver ML solutions for risk assessment, fraud detection, and customer experience optimization. Responsible for strategic planning, technical leadership, and driving innovation in financial services.",
+        "range": "Dec 2019 - Mar 2023"
     },
     {
-        "role":"Senior Data Scientist",
-        "company":"GuiaBolso",
-        "summary":"Head of both data science and business inteligence initiatives. Lead a team of interns on BI tasks serving other teams, while developing algorithms for transaction classification and credit scoring from transactional data.",
-        "range":"Apr 2015 - Oct 2015"
+        "role": "Senior R&D Engineer",
+        "company": "Dafiti",
+        "summary": "Led R&D initiatives in e-commerce optimization, developing recommendation systems and personalization algorithms. Worked on inventory optimization, demand forecasting, and customer behavior analytics to improve business metrics and user experience.",
+        "range": "Oct 2018 - Nov 2019"
     },
     {
-        "role":"Senior Data Scientist",
-        "company":"Catho Online",
-        "summary":"Tech Lead of recommender system team. Developed and improved a contextual recommender engine on two research fronts and built a bayesian contextual bandit algorithm to select recommendation strategies.",
-        "range":"Jul 2013 - Apr 2015"
+        "role": "Data Science Manager",
+        "company": "SEEK",
+        "summary": "Managed teams of data scientists and software engineers developing Machine Learning software. Responsible for people management, communicating with upper management and clients, reporting results, influencing good technical practices and technical excelence, discussing new projects with business and product teams, generating and evaluating new opportunities.",
+        "range": "Sep 2017 - Sep 2018"
     },
     {
-        "role":"Data Scientist",
-        "company":"Apontador & Maplink",
-        "summary":"Developed methods for improving geolocated search, a proof-of-concept recommender engine and several techniques for record linkage.",
-        "range":"Apr 2012 - Jul 2013"
+        "role": "Senior Data Scientist",
+        "company": "Serasa Experian",
+        "summary": "Engaged with new technologies and research in Machine Learning to evaluate applicability in innovative projects. Applied bleeding-edge research algorithms into transactional datasets, credit modelling, marketing. Provided tech leadership to a distinguished team of top tier data scientists.",
+        "range": "Nov 2015 - Aug 2017"
     },
     {
-        "role":"PhD Candidate",
-        "company":"Universidade de São Paulo",
-        "summary":"Did my Ph.D. Research in Statistical Mechanics of Complex Systems",
-        "range":"Feb 2008 - Apr 2013"
+        "role": "Senior Data Scientist",
+        "company": "GuiaBolso",
+        "summary": "Head of both data science and business inteligence initiatives. Lead a team of interns on BI tasks serving other teams, while developing algorithms for transaction classification and credit scoring from transactional data.",
+        "range": "Apr 2015 - Oct 2015"
+    },
+    {
+        "role": "Senior Data Scientist",
+        "company": "Catho Online",
+        "summary": "Tech Lead of recommender system team. Developed and improved a contextual recommender engine on two research fronts and built a bayesian contextual bandit algorithm to select recommendation strategies.",
+        "range": "Jul 2013 - Apr 2015"
+    },
+    {
+        "role": "Data Scientist",
+        "company": "Apontador & Maplink",
+        "summary": "Developed methods for improving geolocated search, a proof-of-concept recommender engine and several techniques for record linkage.",
+        "range": "Apr 2012 - Jul 2013"
+    },
+    {
+        "role": "PhD Candidate",
+        "company": "Universidade de São Paulo",
+        "summary": "Did my Ph.D. Research in Statistical Mechanics of Complex Systems",
+        "range": "Feb 2008 - Apr 2013"
     }
 ]

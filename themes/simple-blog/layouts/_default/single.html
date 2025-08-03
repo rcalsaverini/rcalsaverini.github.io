@@ -1,0 +1,73 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format " 2006-01-02" }}">
+        {{ .Date.Format "January 2, 2006" }}
+      </time>
+
+      {{ if .Params.author }}
+      <span class="post-author">by {{ .Params.author }}</span>
+      {{ end }}
+
+      {{ if .ReadingTime }}
+      <span class="reading-time">{{ .ReadingTime }} min read</span>
+      {{ end }}
+    </div>
+
+    {{ if or .Params.categories .Params.tags }}
+    <div class="post-taxonomy">
+      {{ if .Params.categories }}
+      <div class="post-categories">
+        <strong>Categories:</strong>
+        {{ range .Params.categories }}
+        <span class="category">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      {{ if .Params.tags }}
+      <div class="post-tags">
+        <strong>Tags:</strong>
+        {{ range .Params.tags }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-footer">
+    <!-- Navigation to next/previous posts -->
+    <nav class="post-nav">
+      {{ if .NextInSection }}
+      <div class="post-nav-prev">
+        <a href="{{ .NextInSection.Permalink }}" rel="prev">
+          ← {{ .NextInSection.Title }}
+        </a>
+      </div>
+      {{ end }}
+
+      {{ if .PrevInSection }}
+      <div class="post-nav-next">
+        <a href="{{ .PrevInSection.Permalink }}" rel="next">
+          {{ .PrevInSection.Title }} →
+        </a>
+      </div>
+      {{ end }}
+    </nav>
+
+    <!-- Back to list -->
+    <div class="back-to-list">
+      <a href="{{ .Section | relURL }}">← Back to {{ .Section | title }}</a>
+    </div>
+  </footer>
+</article>
+{{ end }}
