@@ -1,0 +1,28 @@
+<div class="paper">
+    <div class="paper-reference">
+        <span>Full Reference: </span>
+        <span class="paper-author">
+            {{if gt (len .Params.authors) 3 }}
+            {{ index .Params.authors 0 }} <i>et al.</i>
+            {{ else }}
+            {{ delimit .Params.authors ", "}}
+            {{ end }}
+        </span>.
+        <span class="paper-title">"{{ .Params.title }}"</span>.
+        <span class="paper-journal">{{ .Params.journal }}</span>
+        {{ with .Params.volume }}
+        <span class="paper-volume">{{ . }}</span>.
+        {{ end }}
+        {{ with .Params.year }}
+        <span class="paper-year"> ({{ . }})</span>
+        {{ end }}
+        {{ with .Params.pages }}
+        :<span class="paper-pages">{{ . }}</span>
+        {{ end }}.
+    </div>
+
+    <div>
+        <h3> Abstract: </h3>
+        {{ .Params.description }}
+    </div>
+</div>

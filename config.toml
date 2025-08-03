@@ -1,0 +1,72 @@
+baseURL = "https://rcalsaverini.github.io"
+languageCode = "en-us"
+title = "Blog s"
+theme = "hugo-resume"
+
+[params]
+firstName = "Rafael"
+lastName = "S. Calsaverini"
+address = "São Paulo, Brazil"
+phone = "+55 11 97525 6222"
+contactNote = "Father, Physicist and Data Scientist"        #used in QR code only
+profileImage = "images/me.jpeg"
+email = "rafael.calsaverini+blog@gmail.com"
+description = "Random ramblings from an entropy maximizer."
+favicon = "images/favicon.ico"
+
+# what sections to display.  Setting to false disables navigation and section.
+showSkills = true
+showBlog = true
+showProjects = false
+showOpenSource = false
+showPublications = true
+showExperience = true
+showEducation = true
+showQr = true
+
+# do you want to show git hash on page footer and link to repo? Add commit URl for repo here.
+gitCommitPrefix = "https://github.com/rcalsaverini/rcalsaverini.github.io/commit/"
+
+
+[[params.handles]]
+name = "LinkedIn"
+link = "https://www.linkedin.com/in/rafael-s-calsaverini/"
+
+[[params.handles]]
+name = "GitHub"
+link = "https://github.com/rcalsaverini/"
+
+[[params.handles]]
+name = "Bitbucket"
+link = "https://bitbucket.org/rafael_calsaverini/"
+
+[[params.handles]]
+name = "Stack Overflow"
+link = "https://stackoverflow.com/users/114388/rafael-s-calsaverini"
+icon = "stack-overflow"                                              #optional icon attribute used for Font Awesome icons, otherwise the name is lowercased.
+
+[params.google.analytics]
+trackerID = "UA-53013610-1"
+
+[outputs] #only required for search
+home = ["HTML", "JSON"]
+
+[markup]
+[markup.highlight]
+codeFences = true
+guessSyntax = false
+lineNoStart = 1
+lineNos = false
+lineNumbersInTable = true
+noClasses = true
+style = "emacs"
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+
+ignoreFiles = ["\\.qmd$", "\\.ipynb$"]

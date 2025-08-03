@@ -1,0 +1,28 @@
+[
+    {
+        "school":"Universidade de São Paulo, Instituto de Física",
+        "degree":"PhD",
+        "major":"Physics",
+        "thesis": {
+            "title": "Topics in statistical physics of complex systems.",
+            "url": "http://www.teses.usp.br/teses/disponiveis/43/43134/tde-23092014-155823/pt-br.php"
+        },
+        "range":"2008 - 2013"
+    },
+    {
+        "school":"Universidade de São Paulo, Instituto de Física de São Carlos",
+        "degree":"MSc",
+        "major":"Physics",
+        "range":"2005 - 2007",
+        "thesis": {
+            "title": "Inter-subband spin-orbit coupling in semiconductor heterostructures.",
+            "link": "http://www.teses.usp.br/teses/disponiveis/76/76131/tde-05122007-160519/pt-br.php"
+        }
+    },
+    {
+        "school":"Universidade de São Paulo, Instituto de Física de São Carlos",
+        "degree":"BS",
+        "major":"Physics",
+        "range":"2000 - 2004"
+    }
+]

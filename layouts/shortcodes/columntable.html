@@ -1,0 +1,30 @@
+{{ $caption := .Get "caption" }}
+{{ $tag := .Get "tag" }}
+{{ $data := .Inner | transform.Unmarshal }}
+
+<table class="table">
+  <tr>
+    {{ range $data.headers }}
+    <th class="table-dark">{{ . }}</th>
+    {{ end }}
+  </tr>
+  {{ range $data.rows }}
+  <tr>
+    {{ range . }}
+        {{ if eq $tag "code" }}
+          {{ if (findRE "^(.|\\s)+\\/(\\d+)$" .) }}
+            <td style="vertical-align : middle;text-align:center;" rowspan={{ replaceRE "(\\w+)\\/" "" . }}><code>{{ replaceRE "\\/(\\d+)" "" . }}</code></td>
+          {{ else }}
+            <td style="vertical-align : middle;text-align:center;"><code>{{ . }}</code></td>
+          {{ end }}
+        {{ else }}
+          {{ if (findRE "^(.|\\s)+\\/(\\d+)$" .) }}
+            <td style="vertical-align : middle;text-align:center;" rowspan={{ replaceRE "(\\w+)\\/" "" . }}>{{ replaceRE "\\/(\\d+)" "" . }}</td>
+          {{ else }}
+            <td style="vertical-align : middle;text-align:center;">{{ . }}</td>
+          {{ end }}
+        {{ end }}
+    {{ end }}
+  </tr>
+  {{ end }}
+</table>

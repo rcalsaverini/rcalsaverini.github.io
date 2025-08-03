@@ -1,0 +1,36 @@
+[
+    {
+        "grouping": "Data Science",
+        "skills": [
+            "Data Wrangling",
+            "Bayesian and Probabilistic Models",
+            "Machine Learning",
+            "Deep Learning",
+            "Deep Generative Models"
+        ]
+    },
+    {
+        "grouping": "Languages, Operating Systems & Tools",
+        "skills": [
+            "Python",
+            "Haskell",
+            "Scala",
+            "SQL",
+            "git",
+            "linux",
+            "Apache Spark"
+        ]
+    },
+    {
+        "grouping": "Libraries & Frameworks",
+        "skills": [
+            "Scikit Learn",
+            "Pandas",
+            "Tensorflow",
+            "Keras",
+            "Pytorch",
+            "numpy",
+            "scipy"
+        ]
+    }
+]

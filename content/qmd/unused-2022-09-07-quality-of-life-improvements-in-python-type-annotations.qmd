@@ -1,0 +1,75 @@
+---
+title: Revisiting the Python type annotation system.
+description: ""
+date: 2022-09-07T16:06:54.219Z
+preview: True
+draft: False
+categories: 
+  - Matplotlib
+  - Coordinates
+format: hugo
+jupyter: python3
+lastmod: 2022-09-07T16:07:23.659Z
+---
+
+Years ago I made a [post]() complaining about the python type annotation system. I want to revisit it now that the system is more mature and has some new interesting features.
+
+## The syntax is slowly improving
+
+In my original post I co's undeniable that writing `Callable[[float, float], float]` sucks a lot and it's not very transparent. But honestly I don't see how it could be different and still compatible with Python's overall syntax. 
+
+
+There's a few improvements in the syntax though:
+
+- As of Python 3.9, the raw python collections types (like `list`, `dict`, `tuple`) can be used in type annotations with generics without need to use the special classes from the `typing` module. So, instead of:
+
+```{python}
+from typing import Dict, List
+
+def find(haystack: Dict[str, List[int]]) -> int:
+  pass
+```
+
+one can now write:
+```{python}
+def find(haystack: dict[str, list[int]]) -> int:
+  pass
+```
+
+-  which is representing union types like `A | B` instead of `Union[A, B]`. Perhaps similar simplifications could be done to `Callable` in the future.
+
+## Adoption increased substantially, usability too
+
+A lot of the libraries I use have adopted facilities for type annotations in the last three years. It's still ubiquitous as to be 100% seamless, but today it's not a pain anymore. Even numerical libraries such as `numpy` have adopted ways of providing annotations, which is super nice.
+
+I still think that annotating arrays or dataframes with types that don't provide introspection about their dimensionality or the type they contain inside them is not super useful.
+
+For example, this:
+```{python}
+from numpy.typing import NDArray
+
+def my_function(x: NDArray) -> NDArray:
+  return x.sum(axis=1)
+
+```
+would prevent me from mistakingly calling this function with a string or a list, but it wouldn't prevent me from calling it with a 1D array and getting a runtime error.
+
+But there are many libraries providing better type abstractions for arrays. For example, with [`nptyping`](https://github.com/ramonhagenaars/nptyping/blob/master/USERDOCS.md) we could do:
+
+```{python}
+from nptyping import NDArray, Shape, Float
+
+FloatArray2D = NDArray[Shape["N, D"], Float]
+IntArray1D = NDArray[Shape["N"], Float]
+
+def my_function(x: FloatArray2D) -> IntArray1D:
+  "Should typecheck"
+  return x.sum(axis=1).astype(int)
+
+def my_function_error(x: FloatArray2D) -> IntArray1D:
+  "Should NOT typecheck"
+  return x.sum(axis=1)
+```
+
+
+

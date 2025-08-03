@@ -1,0 +1,14 @@
+
+[submodule "public"]
+	path = public
+	url = git@github.com:rcalsaverini/rcalsaverini.github.io.git
+	branch = master
+[submodule "themes/hugo-notepadium"]
+	path = themes/hugo-notepadium
+	url = https://github.com/cntrump/hugo-notepadium.git
+[submodule "themes/osprey-delight"]
+	path = themes/osprey-delight
+	url = https://github.com/kdevo/osprey-delight.git
+[submodule "themes/zzo"]
+	path = themes/zzo
+	url = https://github.com/zzossig/hugo-theme-zzo.git

@@ -1,0 +1,18 @@
+<div class="thesis">
+    <div class="thesis-reference">
+        <span>Full Reference: </span>
+        <span class="thesis-author">
+            {{ .Params.author }}
+        </span>
+        <span class="thesis-year"> ({{ .Params.year }})</span>.
+        <span class="thesis-title">"{{ .Params.title }}"</span>.
+        <span class="thesis-degree">{{ .Params.degree }}</span>,
+        <span class="thesis-school">{{ .Params.school }}</span>.
+    </div>
+
+    <div>
+        <h3> Abstract: </h3>
+        {{ .Params.description }}
+    </div>
+</div>
+

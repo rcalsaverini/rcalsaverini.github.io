@@ -1,0 +1,31 @@
+{{ $root := .Get "root" }} {{$accidental := .Get "accidental" }} {{ $quality :=
+.Get "quality" }} {{ $tension := .Get "tension" }}{{ $bass := .Get "bass" }}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap");
+</style>
+<span style="position: relative; font-family: 'Just Another Hand', cursive">
+  {{ $root }} {{ if .Get "accidental"}}
+  <sup style="font-size: 0.6em; top: -0.9em; left: -0.45em"
+    >{{ $accidental }}</sup
+  >
+  {{if .Get "quality"}}
+  <span style="position: relative; left: -0.5em">{{ $quality }}</span>
+  {{if .Get "tension"}}
+  <sup style="font-size: 0.85em; left: -0.75em; top: -0.75em"
+    >{{ $tension }}</sup
+  >
+  {{end}} {{else}} {{if .Get "tension"}}
+  <sup style="font-size: 0.85em; left: -0.5em; top: -0.75em"
+    >{{ $tension }}</sup
+  >
+  {{end}} {{end}} {{else}} {{if .Get "quality"}}
+  <span style="left: -0.25em">{{ $quality }}</span>
+  {{if .Get "tension"}}
+  <sup style="font-size: 0.85em; left: -0.15em; top: -0.75em"
+    >{{ $tension }}</sup
+  >
+  {{end}} {{else}} {{if .Get "tension"}}
+  <sup style="font-size: 0.85em; left: 0em; top: -0.75em">{{ $tension }}</sup>
+  {{end}} {{end}} {{end}} {{if .Get "bass"}}/{{ $bass }} {{end}}
+</span>
